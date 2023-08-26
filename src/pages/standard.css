@@ -1,0 +1,270 @@
+.inputLabel {
+    font-size: small !important; /* adjust as necessary */
+    color: lightblue !important;
+    order: 1;
+}
+
+.inputWrapper:focus-within .inputLabel {
+    color: white !important;
+}
+
+.hidden, .hiddenSecrets {
+    display: none;
+}
+
+.inputText {
+    padding-left: 1% !important;
+    padding-right: 50px; /* provide space for the button */
+    order: 2;
+}
+
+.inputTextarea{
+    padding-left: 1% !important;
+    padding-right: 50px; /* provide space for the button */
+    padding-top: 2% !important;
+    order: 2;
+}
+.inputSelect {
+    padding-left: 1% !important;
+    padding-right: 50px; /* provide space for the button */
+    padding-top: 5% !important;
+    order: 2;
+}
+
+.inputWrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* for all pages */
+.inputRow {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.inputRow ion-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* for edit pages */
+.rowContainer {
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+  }
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between; 
+  }
+
+.editButton {
+    height: 30px; 
+    width: 60px;
+}
+
+.editWindow {
+    padding: 1% 2% 0 2%;
+}
+
+.datePickerModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+  
+.modalButtons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 12% 0 12%;
+}
+
+.inputLabelContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.rowContainer {
+    display: flex;
+    width: 100%;
+}
+
+.dateTimeButton, setlistPlayButton {
+    margin-top: 15px;
+    height: 55%;
+    width: 35%;
+}
+
+.lowercase-button {
+    text-transform: none !important;
+}
+
+.inputRating {
+    margin: 10% !important;
+    width: 100%;
+    padding-top: 0 !important;
+    color: gold;
+}
+
+.selectItem {
+    width: 100% !important;
+}
+
+.fullWidthItem {
+    width: 100%;
+  }
+  
+.removeButton {
+    margin-right: 15px;
+    min-width: 60px;
+    height: 65%;
+}
+
+.playButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playIcon {
+    font-size: 30px; /* Adjust the size as needed */
+}
+
+.newButton {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newIcon {
+    font-size: 30px; /* Adjust the size as needed */
+}
+
+.playerPlaintext {
+    color: yellow;
+}
+
+.playerBit {
+    color: white;
+}
+
+.timerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: none; 
+ }
+
+.timerContainer h3 {
+    padding-top: 30px;
+}
+
+.timerActive {
+    color: yellow;
+  }
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    padding: 5% 2% 0 2%;    
+    justify-content: top;
+    height: 100%;
+}
+
+.settingsButtons {
+    width: 35%;
+}
+
+.filenameDescription {
+    padding-left: 5%;
+    font-style: italic;
+}
+
+.yellowButton {
+  --background: yellow;
+  --background-activated: #d4d400; /* slightly darker yellow when pressed */
+}
+
+.toggleArchiveButton {
+    margin: 0 3% 0 3%;
+}
+
+.archiveLabel {
+    padding-right: 15px;
+}
+
+.bitCardContentParagraph {
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.bitCardContentParagraph + .cardContainer {
+    padding-top: 15px;
+}
+
+.setlistTextItem {
+    font-style: italic;
+}
+
+.loader {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    height: 100%; /* Take up the full height of the container */
+    width: 100%; /* Take up the full width of the container */
+    border: none !important;
+  }
+
+.homeSplashtext {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    border: none !important;
+    text-align: center;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.floating-button {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.mainList {
+    margin-bottom: 50px;
+}
+
+.statusLine{
+    font-style: italic;
+    padding: 0 0 0 2%;
+}

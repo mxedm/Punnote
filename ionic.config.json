@@ -1,0 +1,7 @@
+{
+  "name": "punnote",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
