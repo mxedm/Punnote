@@ -269,8 +269,6 @@
     padding: 0 0 0 2%;
 }
 
-
-
 .inputWrapper {
     padding: 16px;
     border-bottom: 1px solid #ccc;
@@ -280,18 +278,21 @@
   .customItem {
     display: flex;
     flex-direction: column;
+    background-color: #202020;
   }
   
   .inputLabel {
     font-size: 14px;
     color: #999;
     padding-bottom: 8px;
+    background-color: #202020;
   }
   
   .inputText {
     font-size: 16px;
     padding: 8px;
     border: 1px solid #202020;
+    background-color: #202020;
     border-radius: 4px;
     width: 80%;
   }
