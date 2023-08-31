@@ -86,18 +86,21 @@ const setlistList: React.FC = () => {
       <IonContent fullscreen>
   
         <div className="inputRow">
+
           <div className="inputWrapper">
-          <IonItem>
-            <IonLabel className="inputLabel" position='floating'>Setlist Name</IonLabel>
-            <IonInput
-              aria-label="Setlist Name"
-              className="inputText"
-              placeholder="Enter Setlist Name Here"
-              value={setlistTitle} 
-              onIonChange={e => setSetlistTitle(e.detail.value!)}
-            />
-          </IonItem>
+            <div className="customItem">
+              <label className="inputLabel">Setlist Name</label>
+              <input
+                aria-label="Setlist Name"
+                className="inputText"
+                placeholder="Enter Setlist Name Here"
+                value={setlistTitle}
+                onChange={e => setSetlistTitle(e.target.value)}
+              />
+            </div>
           </div>
+
+
           <IonButton
             type="submit"
             className="addButton"

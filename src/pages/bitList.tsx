@@ -117,18 +117,23 @@ const bitList: React.FC = () => {
 
       </IonItem>
       <div className="inputRow">
-        <div className="inputWrapper">
-          <IonItem>
-            <IonLabel className="inputLabel" position='floating'>Bit Name</IonLabel>
-            <IonInput
-              aria-label="Bit Name"
-              className="inputText"
-              placeholder="Enter Bit Name Here"
-              value={bitTitle}
-              onIonChange={e => setBitTitle(e.detail.value!)} 
-            />
-          </IonItem>
+
+
+      <div className="inputWrapper">
+        <div className="customItem">
+          <label className="inputLabel">Bit Name</label>
+          <input
+            aria-label="Bit Name"
+            className="inputText"
+            placeholder="Enter Bit Name Here"
+            value={bitTitle}
+            onChange={e => setBitTitle(e.target.value)}
+          />
         </div>
+      </div>
+
+
+
         <IonButton
           type="submit"
           className="addButton"

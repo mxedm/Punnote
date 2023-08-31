@@ -93,18 +93,21 @@ const showList: React.FC = () => {
       <IonContent fullscreen>
 
         <div className="inputRow">
+
           <div className="inputWrapper">
-            <IonItem>
-              <IonLabel className="inputLabel" position='floating'>Show Name</IonLabel>
-              <IonInput
+            <div className="customItem">
+              <label className="inputLabel">Show Name</label>
+              <input
                 aria-label="Show Name"
                 className="inputText"
                 placeholder="Enter Show Name Here"
                 value={showTitle}
-                onIonChange={e => setShowTitle(e.detail.value!)} 
+                onChange={e => setShowTitle(e.target.value)}
               />
-            </IonItem>
+            </div>
           </div>
+
+
           <IonButton
             type="submit"
             className="addButton"
