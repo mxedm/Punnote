@@ -150,6 +150,42 @@ const ShowEdit: React.FC = () => {
                 />
               </div>
             </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Set Length:</label>
+                <input
+                  aria-label="Set Length"
+                  className="inputText"
+                  type="text"
+                  value={setlength}
+                  onChange={e => setSetLength(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Compensation:</label>
+                <input
+                  aria-label="Compensation"
+                  className="inputText"
+                  type="text"
+                  value={compensation}
+                  onChange={e => setCompensation(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">URL:</label>
+                <input
+                  aria-label="Show URL"
+                  className="inputText"
+                  type="text"
+                  value={mediaurl}
+                  onChange={e => setMediaURL(e.target.value)}
+                />
+              </div>
+            </div>
             <div className="rowContainer">
               <IonItem className="inputWrapper">
                 <IonLabel className="inputLabel" position="floating">Date</IonLabel>
@@ -176,30 +212,6 @@ const ShowEdit: React.FC = () => {
                   <IonIcon icon={calendar} />
                 </IonButton>
               </IonItem>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Set Length:</label>
-                <input
-                  aria-label="Set Length"
-                  className="inputText"
-                  type="text"
-                  value={setlength}
-                  onChange={e => setSetLength(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Compensation:</label>
-                <input
-                  aria-label="Compensation"
-                  className="inputText"
-                  type="text"
-                  value={compensation}
-                  onChange={e => setCompensation(e.target.value)}
-                />
-              </div>
             </div>
             <IonItem className="inputWrapper">
               <IonLabel className="inputLabel" position="floating">Show Type:</IonLabel>
@@ -248,18 +260,7 @@ const ShowEdit: React.FC = () => {
               <div className='inputText inputRating'>{renderRating()}</div>
             </IonItem>
 
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">URL:</label>
-                <input
-                  aria-label="Show URL"
-                  className="inputText"
-                  type="text"
-                  value={mediaurl}
-                  onChange={e => setMediaURL(e.target.value)}
-                />
-              </div>
-            </div>
+
 
             <IonItem className="inputWrapper">
               <IonLabel className="inputLabel" position="">

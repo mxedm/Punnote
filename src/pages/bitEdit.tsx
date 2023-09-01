@@ -81,60 +81,60 @@ const bitEdit: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
       <div className='editWindow'>
-        {bit && (
+      {bit && (
           <>
             <div>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Title</IonLabel>
-              <IonInput
-                aria-label="Title"
-                className="inputText"
-                type="text"
-                value={title}
-                // onBlur={updateBit}
-                onIonChange={e => setTitle(e.detail.value)}
-              />
-            </IonItem>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Title</label>
+                  <input
+                    aria-label="Title"
+                    className="inputText"
+                    type="text"
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                  />
+                </div>
+              </div>
 
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Content</IonLabel>
-              <IonTextarea
-                aria-label="Content"
-                className="inputTextarea"
-                type="text"
-                rows="6"
-                value={content}
-                // onBlur={updateBit}
-                onIonChange={e => setContent(e.detail.value)}
-              />
-            </IonItem>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Content</label>
+                  <textarea
+                    aria-label="Content"
+                    className="inputTextarea"
+                    rows="6"
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                  />
+                </div>
+              </div>
 
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Notes</IonLabel>
-              <IonInput
-                aria-label="Bit Notes"
-                className="inputText"
-                type="text"
-                value={notes}
-                // onBlur={updateBit}
-                onIonChange={e => setNotes(e.detail.value)}
-              />
-            </IonItem>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Notes</label>
+                  <input
+                    aria-label="Bit Notes"
+                    className="inputText"
+                    type="text"
+                    value={notes}
+                    onChange={e => setNotes(e.target.value)}
+                  />
+                </div>
+              </div>
 
-
-
-
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Length (seconds)</IonLabel>
-              <IonInput
-                aria-label="Length"
-                className="inputText"
-                type="text"
-                value={length}
-                // onBlur={updateBit}
-                onIonChange={e => setLength(e.detail.value)}
-              />
-            </IonItem>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Length (seconds)</label>
+                  <input
+                    aria-label="Length"
+                    className="inputText"
+                    type="text"
+                    value={length}
+                    onChange={e => setLength(Number(e.target.value))}
+                  />
+                </div>
+              </div>
          
               <IonItem className="inputWrapper">
                 <IonLabel className="inputLabel" position="floating">Rating</IonLabel>
