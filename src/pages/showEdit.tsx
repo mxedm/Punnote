@@ -114,36 +114,42 @@ const ShowEdit: React.FC = () => {
         {show && (
           <>
           <div>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Title:</IonLabel>
-              <IonInput
-                aria-label="Show Title"
-                className="inputText"
-                type="text"
-                value={title}
-                onIonChange={e => setTitle(e.detail.value)}
-              />
-            </IonItem>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Venue:</IonLabel>
-              <IonInput
-                aria-label="Show Venue"
-                className="inputText"
-                type="text"
-                value={venue}
-                onIonChange={e => setVenue(e.detail.value)}
-              />
-            </IonItem>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Notes:</IonLabel>
-              <IonInput
-                aria-label="Show Notes"
-                className="inputText"
-                type="text"
-                value={notes}
-                onIonChange={e => setNotes(e.detail.value)}
-              />
-            </IonItem>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Title:</label>
+                <input
+                  aria-label="Show Title"
+                  className="inputText"
+                  type="text"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Venue:</label>
+                <input
+                  aria-label="Show Venue"
+                  className="inputText"
+                  type="text"
+                  value={venue}
+                  onChange={e => setVenue(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Notes:</label>
+                <input
+                  aria-label="Show Notes"
+                  className="inputText"
+                  type="text"
+                  value={notes}
+                  onChange={e => setNotes(e.target.value)}
+                />
+              </div>
+            </div>
             <div className="rowContainer">
               <IonItem className="inputWrapper">
                 <IonLabel className="inputLabel" position="floating">Date</IonLabel>
@@ -171,27 +177,30 @@ const ShowEdit: React.FC = () => {
                 </IonButton>
               </IonItem>
             </div>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Set length</IonLabel>
-              <IonInput
-                aria-label="Set Length:"
-                className="inputText"
-                type="text"
-                value={setlength}
-                // onBlur={updateShow}
-                onIonChange={e => setSetLength(e.detail.value)}
-              />
-            </IonItem>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Compensation:</IonLabel>
-              <IonInput
-                aria-label="Compensation:"
-                className="inputText"
-                type="text"
-                value={compensation}
-                onIonChange={e => setCompensation(e.detail.value)}
-              />
-            </IonItem>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Set Length:</label>
+                <input
+                  aria-label="Set Length"
+                  className="inputText"
+                  type="text"
+                  value={setlength}
+                  onChange={e => setSetLength(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Compensation:</label>
+                <input
+                  aria-label="Compensation"
+                  className="inputText"
+                  type="text"
+                  value={compensation}
+                  onChange={e => setCompensation(e.target.value)}
+                />
+              </div>
+            </div>
             <IonItem className="inputWrapper">
               <IonLabel className="inputLabel" position="floating">Show Type:</IonLabel>
               <IonSelect
@@ -238,17 +247,19 @@ const ShowEdit: React.FC = () => {
               <IonLabel className="inputLabel" position="floating">Rating:</IonLabel>
               <div className='inputText inputRating'>{renderRating()}</div>
             </IonItem>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Show Media:</IonLabel>
-              <IonInput
-                aria-label="Show Media:"
-                className="inputText"
-                type="text"
-                value={mediaurl}
-                // onBlur={updateShow}
-                onIonChange={e => setMediaURL(e.detail.value)}
-              />
-            </IonItem>
+
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">URL:</label>
+                <input
+                  aria-label="Show URL"
+                  className="inputText"
+                  type="text"
+                  value={mediaurl}
+                  onChange={e => setMediaURL(e.target.value)}
+                />
+              </div>
+            </div>
 
             <IonItem className="inputWrapper">
               <IonLabel className="inputLabel" position="">

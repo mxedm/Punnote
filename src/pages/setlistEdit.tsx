@@ -20,6 +20,7 @@ const SetlistEdit: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [bits, setBits] = useState<Bit[]>([]);
   const [showBitList, setShowBitList] = useState(false);
+  const [title, setTitle] = useState('');
   const [setlist, setSetlist] = useState<Setlist | null>(null);
   const [presentToast] = useIonToast();
 
@@ -132,6 +133,20 @@ const SetlistEdit: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className='editWindow'>
+
+          <div className="inputWrapper">
+            <div className="customItem">
+              <label className="inputLabel">Title:</label>
+              <input
+                aria-label="Title"
+                className="inputText"
+                type="text"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+              />
+            </div>
+          </div>
+
           <IonList>
             <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
             {setlistItems.sort((a, b) => a.order - b.order).map((item, index) => {

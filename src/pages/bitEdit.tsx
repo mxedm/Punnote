@@ -121,6 +121,9 @@ const bitEdit: React.FC = () => {
               />
             </IonItem>
 
+
+
+
             <IonItem className="inputWrapper">
               <IonLabel className="inputLabel" position="floating">Length (seconds)</IonLabel>
               <IonInput
@@ -152,6 +155,13 @@ const bitEdit: React.FC = () => {
                   />
                 </IonButtons>
               </IonItem>
+
+
+
+
+
+
+
 
               <div className='buttonContainer'>
                 <IonButton shape="round" color="success" onClick={updateBit}>Save</IonButton> {/* Save button */}
