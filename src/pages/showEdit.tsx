@@ -186,14 +186,13 @@ const ShowEdit: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="rowContainer">
-              <IonItem className="inputWrapper">
-                <IonLabel className="inputLabel" position="floating">Date</IonLabel>
-                <IonInput
-                  aria-label='Date'
-                  className='inputText'
-                  position='floating'
-                  type=''
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Date</label>
+                <input
+                  aria-label="Date"
+                  className="inputText"
+                  type="text"
                   value={
                     showdate
                       ? new Intl.DateTimeFormat('en-US', {
@@ -206,75 +205,72 @@ const ShowEdit: React.FC = () => {
                         }).format(new Date(showdate))
                       : "N/A" 
                   }
-                  readonly
+                  readOnly
                 />
-                <IonButton className="dateTimeButton" shape='round' color="primary" slot="end" onClick={() => setShowModal(true)}>
-                  <IonIcon icon={calendar} />
-                </IonButton>
-              </IonItem>
+              </div>
             </div>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Show Type:</IonLabel>
-              <IonSelect
-                aria-label="Show Type:"
-                className="inputText inputSelect"
-                value={type}
-                onIonChange={e => setType(e.detail.value)}
-              >
-                <IonSelectOption value="Mic">Mic</IonSelectOption>
-                <IonSelectOption value="Showcase">Showcase</IonSelectOption>
-                <IonSelectOption value="Regular">Regular</IonSelectOption>
-                <IonSelectOption value="Drop In">Drop In</IonSelectOption>
-                <IonSelectOption value="Other">Other</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Setlist:</IonLabel>
-              <IonSelect
-                aria-label="Setlist:"
-                className="inputText inputSelect"
-                value={setlist}
-                // onBlur={updateShow}
-                onIonChange={e => setSetlist(e.detail.value)}
-              >
-                {setlists.map(setlist => (
-                  <IonSelectOption key={setlist.id} value={setlist}>
-                    {setlist.title}
-                  </IonSelectOption>
-                ))}
-              </IonSelect>
-              <IonButton
-                className="setlistPlayButton"
-                slot="end"
-                size="default"
-                shape="round"
-                onClick={() => setlist && handlePlay(setlist.id)}
-                disabled={!setlist || !setlist.id} 
-              >
-                <IonIcon icon={playCircle} />
-              </IonButton>
-            </IonItem>
+      
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Show Type:</label>
+                <select
+                  aria-label="Show Type:"
+                  className="inputText inputSelect"
+                  value={type}
+                  onChange={e => setType(e.target.value)}
+                >
+                  <option value="Mic">Mic</option>
+                  <option value="Showcase">Showcase</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Drop In">Drop In</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Setlist:</label>
+                <select
+                  aria-label="Setlist:"
+                  className="inputText"
+                  value={setlist}
+                  onChange={e => setSetlist(e.target.value)}
+                >
+                  {setlists.map(setlist => (
+                    <option key={setlist.id} value={setlist}>
+                      {setlist.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
               
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="floating">Rating:</IonLabel>
-              <div className='inputText inputRating'>{renderRating()}</div>
-            </IonItem>
+            <div className="inputWrapper">
+              <div className='customItem'>
+                <IonLabel className="inputLabel">Rating:</IonLabel>
+                <div className='inputText inputRating'>
+                  {renderRating()}
+                </div>
+              </div>
+            </div>
 
 
-
-            <IonItem className="inputWrapper">
-              <IonLabel className="inputLabel" position="">
-                <span className="archiveLabel">Show Archived</span>
-              </IonLabel>
-              <IonButtons className="toggleArchiveButton" slot="">
-                <IonToggle 
-                  labelPlacement="start"
-                  label="Archive Show"
-                  checked={archive} 
-                  onIonChange={e => setArchive(e.detail.checked)} 
-                />
-              </IonButtons>
-            </IonItem>
+            <div className="inputWrapper">
+              <div className='customItem'>              
+                <IonLabel className="inputLabel">
+                  Archive:
+                </IonLabel>
+                <IonButtons className="toggleArchiveButton" slot="">
+                  <IonToggle 
+                    labelPlacement="start"
+                    label="Archive Show"
+                    checked={archive} 
+                    onIonChange={e => setArchive(e.detail.checked)} 
+                  />
+                </IonButtons>
+              </div>
+            </div>
             <div className='buttonContainer'>
               <IonButton shape="round" color="success" onClick={updateShow}>Save</IonButton>
               <IonButton shape="round" color="warning" onClick={() => history.push('/showList')}>Close</IonButton>

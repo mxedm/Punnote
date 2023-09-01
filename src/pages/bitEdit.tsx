@@ -136,14 +136,19 @@ const bitEdit: React.FC = () => {
                 </div>
               </div>
          
-              <IonItem className="inputWrapper">
-                <IonLabel className="inputLabel" position="floating">Rating</IonLabel>
-                <div className='inputText inputRating'>{renderRating()}</div>
-              </IonItem>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <IonLabel className="inputLabel">
+                    Rating
+                  </IonLabel>
+                  <div className='inputText inputRating'>{renderRating()}</div>
+                </div>
+              </div>
 
-              <IonItem className="inputWrapper">
-                <IonLabel className="inputLabel" position="">
-                    <span className="archiveLabel">Bit Archived</span>
+              <div className="inputWrapper">
+                <div className="customItem">
+                <IonLabel className="inputLabel">
+                    <span className="archiveLabel">Archived</span>
                 </IonLabel>
                 <IonButtons className="toggleArchiveButton" slot="">
                   <IonToggle 
@@ -154,7 +159,8 @@ const bitEdit: React.FC = () => {
                     onIonChange={e => setArchive(e.detail.checked)} 
                   />
                 </IonButtons>
-              </IonItem>
+              </div>
+              </div>
 
 
 
