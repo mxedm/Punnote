@@ -1,8 +1,10 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
 import './settings.css';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import DatabaseService from './DatabaseService';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver';
+
 
 const Settings: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -11,9 +13,26 @@ const Settings: React.FC = () => {
 
   const downloadBackup = async () => {
     const csv = await DatabaseService.exportDataToCSV();
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    saveAs(blob, 'backup.csv');
+    if (window.Capacitor && window.Capacitor.isNative) {
+      // Native device
+      try {
+        await Filesystem.writeFile({
+          path: 'backup.csv',
+          data: csv,
+          directory: Directory.Documents,
+          encoding: Encoding.UTF8,
+        });
+        alert('Backup completed successfully!');
+      } catch (e) {
+        alert(`Unable to complete backup: ${e.message}`);
+      }
+    } else {
+      // Web browser
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      saveAs(blob, 'backup.csv');
+    }
   };
+  
 
   const handleRestore = async () => {
     const file = fileInputRef.current?.files?.[0];
