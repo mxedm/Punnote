@@ -1,5 +1,5 @@
 import {  IonContent, IonIcon, IonSelect, IonSelectOption, IonHeader, IonPage, 
-          IonTitle, IonToolbar, IonInput, IonButton, IonLabel, IonItem, 
+          IonTitle, IonToolbar, IonInput, IonButton, label, IonItem, 
           IonDatetime, IonModal, IonButtons, IonToggle } from '@ionic/react';
 import { starOutline, star, playCircle, calendar } from 'ionicons/icons';
 import './showEdit.css';
@@ -227,6 +227,7 @@ const ShowEdit: React.FC = () => {
                 </select>
               </div>
             </div>
+
             <div className="inputWrapper">
               <div className="customItem">
                 <label className="inputLabel">Setlist:</label>
@@ -245,22 +246,20 @@ const ShowEdit: React.FC = () => {
               </div>
             </div>
 
-              
             <div className="inputWrapper">
               <div className='customItem'>
-                <IonLabel className="inputLabel">Rating:</IonLabel>
+                <label className="inputLabel">Rating:</label>
                 <div className='inputText inputRating'>
                   {renderRating()}
                 </div>
               </div>
             </div>
 
-
             <div className="inputWrapper">
               <div className='customItem'>              
-                <IonLabel className="inputLabel">
+                <label className="inputLabel">
                   Archive:
-                </IonLabel>
+                </label>
                 <IonButtons className="toggleArchiveButton" slot="">
                   <IonToggle 
                     labelPlacement="start"

@@ -12,18 +12,32 @@
     display: none;
 }
 
-.inputText {
-    padding-left: 1% !important;
-    padding-right: 50px; /* provide space for the button */
-    order: 2;
-}
-
 .inputTextarea{
     padding-left: 1% !important;
     padding-right: 50px; /* provide space for the button */
     padding-top: 2% !important;
+    border: 1px solid #202020;
+    background-color: #202020;
     order: 2;
 }
+
+.inputText {
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #202020;
+    background-color: #202020;
+    width: 100%;
+    padding-left: 1%;
+    padding-right: 50px; /* provide space for the button */
+    order: 2;
+}
+
+.toggleArchiveButton {
+    order: 2;
+
+}
+
+
 .inputSelect {
     padding-left: 1% !important;
     padding-right: 50px; /* provide space for the button */
@@ -36,7 +50,6 @@
     display: flex;
     flex-direction: column;
 }
-
 
 /* for all pages */
 .inputRow {
@@ -273,26 +286,19 @@
     padding: 16px;
     border-bottom: 1px solid #ccc;
     background-color: #202020;
-  }
-  
-  .customItem {
+}
+
+.customItem {
     display: flex;
     flex-direction: column;
     background-color: #202020;
-  }
-  
-  .inputLabel {
+}
+
+.inputLabel {
     font-size: 14px;
     color: #999;
     padding-bottom: 8px;
     background-color: #202020;
-  }
-  
-  .inputText {
-    font-size: 16px;
-    padding: 8px;
-    border: 1px solid #202020;
-    background-color: #202020;
-    border-radius: 4px;
-    width: 80%;
-  }
+}
+
+

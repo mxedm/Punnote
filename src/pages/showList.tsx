@@ -1,4 +1,4 @@
-import {  IonContent, IonHeader, IonItem, IonLabel, 
+import {  IonContent, IonHeader, IonItem, label, 
   IonInput, IonPage, IonTitle, IonList, IonToolbar, 
   IonButton, IonToast, IonButtons, IonToggle,
   IonCard, IonCardContent, IonCardHeader, 

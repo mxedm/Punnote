@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {
           IonContent, IonHeader, IonIcon, IonPage, IonTitle,
-          IonToolbar, IonInput, IonButton, IonLabel, IonItem,
+          IonToolbar, IonInput, IonButton, label, IonItem,
           IonButtons, IonToggle, IonTextarea
 } from '@ionic/react';
 import { starOutline, star } from 'ionicons/icons';
@@ -138,18 +138,18 @@ const bitEdit: React.FC = () => {
          
               <div className="inputWrapper">
                 <div className="customItem">
-                  <IonLabel className="inputLabel">
+                  <label className="inputLabel">
                     Rating
-                  </IonLabel>
+                  </label>
                   <div className='inputText inputRating'>{renderRating()}</div>
                 </div>
               </div>
 
               <div className="inputWrapper">
                 <div className="customItem">
-                <IonLabel className="inputLabel">
+                <label className="inputLabel">
                     <span className="archiveLabel">Archived</span>
-                </IonLabel>
+                </label>
                 <IonButtons className="toggleArchiveButton" slot="">
                   <IonToggle 
                     labelPlacement="start"
