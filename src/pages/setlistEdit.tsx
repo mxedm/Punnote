@@ -50,6 +50,7 @@ const SetlistEdit: React.FC = () => {
   const fetchSetlist = async () => {
     const fetchedSetlist = await DatabaseService.getSetlist(Number(id));
     setSetlist(fetchedSetlist);
+    setTitle(fetchedSetlist?.title || '');  // Update the title state here
   };
 
   const handleReorder = async (event: CustomEvent<ItemReorderEventDetail>) => {
@@ -124,6 +125,19 @@ const SetlistEdit: React.FC = () => {
     history.push(`/SetlistPlay/${id}`);
   };
 
+
+  const updateSetlist = async () => {
+    if (setlist) {
+      const updatedSetlist = {
+        ...setlist,
+        title
+      };
+      await DatabaseService.editSetlist(updatedSetlist);
+      setSetlist(updatedSetlist); // Update the state
+    }
+  };
+  
+
   return (
     <IonPage>
       <IonHeader>
@@ -133,17 +147,26 @@ const SetlistEdit: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className='editWindow'>
-
-          <div className="inputWrapper">
-            <div className="customItem">
-              <label className="inputLabel">Title:</label>
-              <input
-                aria-label="Title"
-                className="inputText"
-                type="text"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-              />
+          <div className="inputRow">
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Title:</label>
+                <input
+                  aria-label="Title"
+                  className="inputText inputTextListing"
+                  type="text"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <IonButton
+                shape='round'
+                onClick={updateSetlist}
+                >
+                Update
+              </IonButton>
             </div>
           </div>
 
