@@ -99,7 +99,7 @@ const showList: React.FC = () => {
               <label className="inputLabel">Show Name</label>
               <input
                 aria-label="Show Name"
-                className="inputText"
+                className="inputText inputTextListing"
                 placeholder="Enter Show Name Here"
                 value={showTitle}
                 onChange={e => setShowTitle(e.target.value)}

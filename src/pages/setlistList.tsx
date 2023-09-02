@@ -92,7 +92,7 @@ const setlistList: React.FC = () => {
               <label className="inputLabel">Setlist Name</label>
               <input
                 aria-label="Setlist Name"
-                className="inputText"
+                className="inputText inputTextListing"
                 placeholder="Enter Setlist Name Here"
                 value={setlistTitle}
                 onChange={e => setSetlistTitle(e.target.value)}
