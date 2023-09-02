@@ -1,7 +1,6 @@
-import {  IonContent, IonHeader, IonItem, label, 
-  IonInput, IonPage, IonTitle, IonList, IonToolbar, 
-  IonButton, IonToast, IonButtons, IonToggle,
-  IonCard, IonCardContent, IonCardHeader, 
+import {  IonContent, IonHeader, IonPage, IonTitle,
+  IonList, IonToolbar, IonButton, IonToast, IonButtons, 
+  IonToggle, IonCard, IonCardContent, IonCardHeader, 
   IonCardTitle, IonAlert, IonIcon } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Show } from './DatabaseService';

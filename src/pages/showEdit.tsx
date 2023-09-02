@@ -1,7 +1,7 @@
-import {  IonContent, IonIcon, IonSelect, IonSelectOption, IonHeader, IonPage, 
-          IonTitle, IonToolbar, IonInput, IonButton, label, IonItem, 
+import {  IonContent, IonIcon, IonHeader, IonPage, 
+          IonTitle, IonToolbar, IonButton, 
           IonDatetime, IonModal, IonButtons, IonToggle } from '@ionic/react';
-import { starOutline, star, playCircle, calendar } from 'ionicons/icons';
+import { starOutline, star } from 'ionicons/icons';
 import './showEdit.css';
 import { useParams, useHistory } from 'react-router-dom';
 import DatabaseService from './DatabaseService';

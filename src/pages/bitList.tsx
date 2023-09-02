@@ -1,5 +1,5 @@
 import {  IonContent, IonHeader, IonItem, IonIcon, 
-          label, IonInput, IonPage, IonTitle, 
+          IonInput, IonPage, IonTitle, 
           IonList, IonToolbar, IonButton, IonToast, 
           IonButtons, IonToggle, IonCard, IonCardContent, 
           IonCardHeader, IonCardTitle, 

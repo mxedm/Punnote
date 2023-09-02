@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {
           IonContent, IonHeader, IonIcon, IonPage, IonTitle,
-          IonToolbar, IonInput, IonButton, label, IonItem,
-          IonButtons, IonToggle, IonTextarea
+          IonToolbar, IonButton, IonButtons, IonToggle
 } from '@ionic/react';
 import { starOutline, star } from 'ionicons/icons';
 import './bitEdit.css';

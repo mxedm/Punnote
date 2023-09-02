@@ -1,4 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
+import { 
+          IonContent, IonHeader, IonPage, IonTitle, 
+          IonToolbar, IonButton } from '@ionic/react';
 import './settings.css';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import DatabaseService from './DatabaseService';
@@ -32,7 +34,6 @@ const Settings: React.FC = () => {
       saveAs(blob, 'backup.csv');
     }
   };
-  
 
   const handleRestore = async () => {
     const file = fileInputRef.current?.files?.[0];
@@ -52,7 +53,6 @@ const Settings: React.FC = () => {
       reader.readAsText(file);
     }
   };
-  
 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
@@ -76,7 +76,12 @@ const Settings: React.FC = () => {
         <div className="container">
           <h2>Backup and Restore (IN PROGRESS)</h2>
             <p>Export your data to a CSV file.</p>
-            <IonButton onClick={downloadBackup} className='settingsButtons'>Backup Data</IonButton>
+              <IonButton 
+                onClick={downloadBackup} 
+                className='settingsButtons'
+                >
+                  Backup Data
+                </IonButton>
             <p>Restore your data from a CSV file.</p>
           <input 
             type="file" 
@@ -94,7 +99,10 @@ const Settings: React.FC = () => {
             onChange={handleFileChange}
           />
           <div className='rowContainer'>
-            <IonButton onClick={triggerFileInput} className='settingsButtons'>
+            <IonButton 
+              onClick={triggerFileInput} 
+              className='settingsButtons'
+            >
               {selectedFileName || 'Select File'}
             </IonButton>
             <IonButton 
@@ -112,9 +120,9 @@ const Settings: React.FC = () => {
         </div>
 
         <h3>Stats!</h3>
-          <p>To Do</p>
+          <p>To Do</p>          
         <h3>About</h3>
-          <p>Punnote is an app. Duh.</p>
+          <p>Punnote is an app. Duh. Use it for any performance. IDC. Do what you want.</p>
 
         </div>
       </IonContent>

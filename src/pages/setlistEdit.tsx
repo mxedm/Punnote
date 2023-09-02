@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  IonContent, IonHeader, useIonToast, useIonViewWillEnter,
-  IonPage, IonModal, IonTitle, IonToolbar, IonList,
-  IonReorderGroup, IonReorder, ItemReorderEventDetail,
-  IonItem, IonInput, IonButton, IonIcon
-} from '@ionic/react';
+        IonContent, IonHeader, useIonToast, useIonViewWillEnter,
+        IonPage, IonModal, IonTitle, IonToolbar, IonList,
+        IonReorderGroup, IonReorder, ItemReorderEventDetail,
+        IonItem, IonInput, IonButton, IonIcon
+      } from '@ionic/react';
 import { closeCircle } from 'ionicons/icons';
 import './setlistEdit.css';
 import './standard.css';

@@ -1,6 +1,5 @@
-import {  IonContent, IonHeader, IonItem, label, 
-          IonInput, IonPage, IonTitle, IonList, IonToolbar, 
-          IonButton, IonToast, IonCard, IonCardHeader, 
+import {  IonContent, IonHeader, IonPage, IonTitle, IonList, 
+          IonToolbar, IonButton, IonToast, IonCard, IonCardHeader, 
           IonCardTitle, IonCardContent, IonAlert, IonIcon } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Setlist } from './DatabaseService';
@@ -35,7 +34,7 @@ const setlistList: React.FC = () => {
     setSetlistToDelete(id);
     setShowDeleteAlert(true);
   };
-  
+
   const handleDeleteSetlist = async () => {
     if (setlistToDelete !== null) {
       await DatabaseService.removeSetlist(setlistToDelete);
@@ -43,7 +42,7 @@ const setlistList: React.FC = () => {
     }
     setShowDeleteAlert(false);
   };
-  
+
   const handleAddSetlist = (title: string) => {
     if (isAddingSetlist) return;
     setIsAddingSetlist(true); 
@@ -84,9 +83,8 @@ const setlistList: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-  
-        <div className="inputRow">
 
+        <div className="inputRow">
           <div className="inputWrapper">
             <div className="customItem">
               <label className="inputLabel">Setlist Name</label>
@@ -99,7 +97,6 @@ const setlistList: React.FC = () => {
               />
             </div>
           </div>
-
 
           <IonButton
             type="submit"
