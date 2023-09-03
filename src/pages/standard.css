@@ -30,6 +30,10 @@
     padding-left: 1%;
     padding-right: 50px; /* provide space for the button */
     order: 2;
+
+    white-space: nowrap;
+    overflow: hidden;
+    
 }
 
 
@@ -44,6 +48,8 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-height: 95px;
 }
 
 /* for all pages */
@@ -339,3 +345,18 @@
      placeholder 
 }
 */
+
+.flexParent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+.archiveItem {
+    align-items: center;
+}
+
+.goldenStar {
+    color: gold;
+  }
+  

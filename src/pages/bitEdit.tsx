@@ -62,6 +62,7 @@ const bitEdit: React.FC = () => {
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <IonIcon
+          className="goldenStar"  // Apply the CSS class
           key={i}
           icon={i <= rating ? star : starOutline}
           onClick={() => setRating(i)}
@@ -70,6 +71,7 @@ const bitEdit: React.FC = () => {
     }
     return stars;
   };
+  
 
   return (
     <IonPage>
@@ -122,45 +124,46 @@ const bitEdit: React.FC = () => {
                 </div>
               </div>
 
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Length (seconds)</label>
-                  <input
-                    aria-label="Length"
-                    className="inputText"
-                    type="text"
-                    value={length}
-                    onChange={e => setLength(Number(e.target.value))}
-                  />
+              <div className="flexParent">
+                <div className="inputWrapper">
+                  <div className="customItem">
+                    <label className="inputLabel">Length (seconds)</label>
+                    <input
+                      aria-label="Length"
+                      className="inputText"
+                      type="text"
+                      value={length}
+                      onChange={e => setLength(Number(e.target.value))}
+                    />
+                  </div>
+                </div>
+          
+                <div className="inputWrapper">
+                  <div className="customItem">
+                    <label className="inputLabel">
+                      Rating
+                    </label>
+                    <div className='inputText'>{renderRating()}</div>
+                  </div>
+                </div>
+
+                <div className="inputWrapper">
+                  <div className="customItem">
+                    <label className="inputLabel">
+                      Archived
+                    </label>
+                    <IonButtons className="inputText archiveItem" slot="">
+                      <IonToggle 
+                        labelPlacement="start"
+                        aria-label="Archive Bit"
+                        checked={archive} 
+                        // onBlur={updateBit}
+                        onIonChange={e => setArchive(e.detail.checked)} 
+                      />
+                    </IonButtons>
+                  </div>
                 </div>
               </div>
-         
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">
-                    Rating
-                  </label>
-                  <div className='inputText inputRating'>{renderRating()}</div>
-                </div>
-              </div>
-
-              <div className="inputWrapper">
-                <div className="customItem">
-                <label className="inputLabel">
-                    <span className="archiveLabel">Archived</span>
-                </label>
-                <IonButtons className="toggleArchiveButton" slot="">
-                  <IonToggle 
-                    labelPlacement="start"
-                    aria-label="Archive Bit"
-                    checked={archive} 
-                    // onBlur={updateBit}
-                    onIonChange={e => setArchive(e.detail.checked)} 
-                  />
-                </IonButtons>
-              </div>
-              </div>
-
 
 
 
