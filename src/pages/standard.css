@@ -87,11 +87,13 @@
     padding: 1% 2% 0 2%;
 }
 
+
 .datePickerModal {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    vertical-align: middle;
     height: 100%;
 }
   
@@ -305,3 +307,16 @@
     width: 85%;
 }
 
+.playElapsedTime {
+    text-align: right;
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding-right: 10px;
+}
+
+.playWindow {
+    --background: black;
+}

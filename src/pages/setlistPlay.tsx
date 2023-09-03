@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { IonContent, useIonViewWillLeave, IonIcon, IonHeader, IonButton, useIonViewWillEnter, IonPage, IonTitle, IonToolbar, IonItem } from '@ionic/react';
+import { 
+          IonContent, IonFab, IonFabButton, useIonViewWillLeave, IonIcon, 
+          IonHeader, IonButton, useIonViewWillEnter, IonPage, IonTitle, 
+          IonToolbar, IonItem } from '@ionic/react';
 import { play, pause, refresh } from 'ionicons/icons';
 import './setlistPlay.css';
 import './standard.css';
@@ -111,7 +114,7 @@ const SetlistPlay: React.FC = () => {
   }
 
   return (
-    <IonPage>
+    <IonPage className='playWindow'>
       <IonHeader>
         <IonToolbar>
           <IonTitle>
@@ -119,9 +122,7 @@ const SetlistPlay: React.FC = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <div className='editWindow'>
-        <IonContent fullscreen>
+      <IonContent fullscreen className='playWindow'>
           {setlistItems
             .sort((a, b) => a.order - b.order)
             .map((item, index) => (
@@ -133,19 +134,27 @@ const SetlistPlay: React.FC = () => {
                 </h2>
               </IonItem>
             ))}
-          </IonContent>
-        </div>
 
+
+      <IonFab vertical="bottom" horizontal="center" slot="fixed">
+        <IonFabButton color={playing ? 'warning' : 'primary'} onClick={startTimer}>
+          <IonIcon icon={playing ? pause : play} />
+        </IonFabButton>
+      </IonFab>
+      <IonFab vertical="bottom" horizontal="start" slot="fixed">
+        <IonFabButton color="secondary" onClick={resetTimer}>
+          <IonIcon icon={refresh} />
+        </IonFabButton>
+      </IonFab>
+
+      <div className="playElapsedTime">
+        <h3>Timer <br /> {formatTime(seconds)}</h3>
+      </div>
       </IonContent>
-        <div className={`timerContainer ${playing ? 'timerActive' : ''}`}>
-          <IonButton color={playing ? 'warning' : 'primary'} onClick={startTimer}>
-            <IonIcon icon={playing ? pause : play} />
-          </IonButton>
-          <IonButton color="secondary" onClick={resetTimer}>
-            <IonIcon icon={refresh} />
-          </IonButton>
-          <h3>Elapsed Time: {formatTime(seconds)}</h3>
-        </div>
+
+
+
+
     </IonPage>
   );
 };
