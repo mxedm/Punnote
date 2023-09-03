@@ -79,20 +79,20 @@ const showList: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Shows</IonTitle>
-          <IonButtons className="toggleArchiveButton" slot="end">
-            <span className="archiveLabel">List Archived</span> 
+          <IonTitle slot="start" className="titleText">Shows</IonTitle>
+          <IonButtons slot="end" className="toggleArchiveButton">
+            <span className="archiveLabel">List Archived</span>
             <IonToggle 
               checked={showArchived} 
               onIonChange={e => setShowArchived(e.detail.checked)} 
-            /> 
+            />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
+
+
       <IonContent fullscreen>
-
         <div className="inputRow">
-
           <div className="inputWrapper">
             <div className="customItem">
               <label className="inputLabel">Show Name</label>
@@ -105,7 +105,6 @@ const showList: React.FC = () => {
               />
             </div>
           </div>
-
 
           <IonButton
             type="submit"

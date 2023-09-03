@@ -32,11 +32,6 @@
     order: 2;
 }
 
-.toggleArchiveButton {
-    order: 2;
-
-}
-
 
 .inputSelect {
     padding-left: 1% !important;
@@ -227,10 +222,6 @@
   --background-activated: #d4d400; /* slightly darker yellow when pressed */
 }
 
-.toggleArchiveButton {
-    margin: 0 3% 0 3%;
-}
-
 .archiveLabel {
     padding-right: 15px;
 }
@@ -320,3 +311,31 @@
 .playWindow {
     --background: black;
 }
+
+.alignRight {
+    display: flex;
+    text-align: right;
+    order: 2;
+}
+
+.alignLeft {
+    display: flex;
+    text-align: left;
+    order: 1;
+}
+
+.toolbarText {
+    display: flex;
+    justify-content: space-between;
+}
+
+.toggleArchiveButton {
+    padding: 0 3% 0 3%;
+    align-items: right;
+}
+
+/*
+.titleText {
+     placeholder 
+}
+*/

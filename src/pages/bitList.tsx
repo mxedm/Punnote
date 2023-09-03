@@ -94,18 +94,20 @@ const bitList: React.FC = () => {
 
   return (
   <IonPage>
+
     <IonHeader>
       <IonToolbar>
-        <IonTitle>Bits</IonTitle>
-        <IonButtons className="toggleArchiveButton" slot="end">
-        <span className="archiveLabel">List Archived</span>
-        <IonToggle
-          checked={bitArchived}
-          onIonChange={e => setBitArchived(e.detail.checked)}
-        /> 
+        <IonTitle slot="start">Bits</IonTitle>
+        <IonButtons slot="end" className="toggleArchiveButton">
+          <span className="archiveLabel">List Archived</span>
+          <IonToggle 
+            checked={bitArchived} 
+            onIonChange={e => setBitArchived(e.detail.checked)} 
+          />
         </IonButtons>
       </IonToolbar>
     </IonHeader>
+
     <IonContent fullscreen>
       <IonItem>
       <IonInput
