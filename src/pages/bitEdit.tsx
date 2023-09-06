@@ -62,7 +62,7 @@ const bitEdit: React.FC = () => {
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <IonIcon
-          className="goldenStar"  // Apply the CSS class
+          className="goldenStar"
           key={i}
           icon={i <= rating ? star : starOutline}
           onClick={() => setRating(i)}
@@ -103,8 +103,8 @@ const bitEdit: React.FC = () => {
                   <label className="inputLabel">Content</label>
                   <textarea
                     aria-label="Content"
-                    className="inputTextarea"
-                    rows="6"
+                    className="inputTextarea" 
+                    rows="15"
                     value={content}
                     onChange={e => setContent(e.target.value)}
                   />
@@ -125,6 +125,7 @@ const bitEdit: React.FC = () => {
               </div>
 
               <div className="flexParent">
+
                 <div className="inputWrapper">
                   <div className="customItem">
                     <label className="inputLabel">Length (seconds)</label>

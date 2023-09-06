@@ -116,73 +116,13 @@ const ShowEdit: React.FC = () => {
           <div>
             <div className="inputWrapper">
               <div className="customItem">
-                <label className="inputLabel">Title:</label>
+                <label className="inputLabel">Title</label>
                 <input
                   aria-label="Show Title"
                   className="inputText"
                   type="text"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Venue:</label>
-                <input
-                  aria-label="Show Venue"
-                  className="inputText"
-                  type="text"
-                  value={venue}
-                  onChange={e => setVenue(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Notes:</label>
-                <input
-                  aria-label="Show Notes"
-                  className="inputText"
-                  type="text"
-                  value={notes}
-                  onChange={e => setNotes(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Set Length:</label>
-                <input
-                  aria-label="Set Length"
-                  className="inputText"
-                  type="text"
-                  value={setlength}
-                  onChange={e => setSetLength(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Compensation:</label>
-                <input
-                  aria-label="Compensation"
-                  className="inputText"
-                  type="text"
-                  value={compensation}
-                  onChange={e => setCompensation(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">URL:</label>
-                <input
-                  aria-label="Show URL"
-                  className="inputText"
-                  type="text"
-                  value={mediaurl}
-                  onChange={e => setMediaURL(e.target.value)}
                 />
               </div>
             </div>
@@ -209,67 +149,136 @@ const ShowEdit: React.FC = () => {
                 />
               </div>
             </div>
-      
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Show Type:</label>
-                <select
-                  aria-label="Show Type:"
-                  className="inputText inputSelect"
-                  value={type}
-                  onChange={e => setType(e.target.value)}
-                >
-                  <option value="Mic">Mic</option>
-                  <option value="Showcase">Showcase</option>
-                  <option value="Regular">Regular</option>
-                  <option value="Drop In">Drop In</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
 
             <div className="inputWrapper">
               <div className="customItem">
-                <label className="inputLabel">Setlist:</label>
-                <select
-                  aria-label="Setlist:"
+                <label className="inputLabel">Venue</label>
+                <input
+                  aria-label="Show Venue"
                   className="inputText"
-                  value={setlist}
-                  onChange={e => setSetlist(e.target.value)}
-                >
-                  {setlists.map(setlist => (
-                    <option key={setlist.id} value={setlist}>
-                      {setlist.title}
-                    </option>
-                  ))}
-                </select>
+                  type="text"
+                  value={venue}
+                  onChange={e => setVenue(e.target.value)}
+                />
               </div>
             </div>
-
             <div className="inputWrapper">
-              <div className='customItem'>
-                <label className="inputLabel">Rating:</label>
-                <div className='inputText inputRating'>
-                  {renderRating()}
+              <div className="customItem">
+                <label className="inputLabel">Notes</label>
+                <input
+                  aria-label="Show Notes"
+                  className="inputText"
+                  type="text"
+                  value={notes}
+                  onChange={e => setNotes(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="flexParent">
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Set Length</label>
+                  <input
+                    aria-label="Set Length"
+                    className="inputText"
+                    type="text"
+                    value={setlength}
+                    onChange={e => setSetLength(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Compensation</label>
+                  <input
+                    aria-label="Compensation"
+                    className="inputText"
+                    type="text"
+                    value={compensation}
+                    onChange={e => setCompensation(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="inputWrapper">
-              <div className='customItem'>              
-                <label className="inputLabel">
-                  Archive:
-                </label>
-                <IonButtons className="toggleArchiveButton" slot="">
-                  <IonToggle 
-                    labelPlacement="start"
-                    label="Archive Show"
-                    checked={archive} 
-                    onIonChange={e => setArchive(e.detail.checked)} 
-                  />
-                </IonButtons>
+
+            <div className="flexParent">
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Show Type</label>
+                  <select
+                    aria-label="Show Type"
+                    className="inputText inputSelect"
+                    value={type}
+                    onChange={e => setType(e.target.value)}
+                  >
+                    <option value="Mic">Mic</option>
+                    <option value="Showcase">Showcase</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Drop In">Drop In</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Setlist</label>
+                  <select
+                    aria-label="Setlist"
+                    className="inputText"
+                    value={setlist}
+                    onChange={e => setSetlist(e.target.value)}
+                  >
+                    {setlists.map(setlist => (
+                      <option key={setlist.id} value={setlist}>
+                        {setlist.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
+            <div className="flexParent">
+              <div className="inputWrapper">
+                <div className='customItem'>
+                  <label className="inputLabel">Rating</label>
+                  <div className='inputText goldenStar'>
+                    {renderRating()}
+                  </div>
+                </div>
+              </div>
+  
+              <div className="inputWrapper">
+                <div className='customItem'>              
+                  <label className="inputLabel">
+                    Archive
+                  </label>
+                  <IonButtons className="inputText" slot="">
+                    <IonToggle 
+                      labelPlacement="start"
+                      aria-label="Archive Show"
+                      checked={archive} 
+                      onIonChange={e => setArchive(e.detail.checked)} 
+                    />
+                  </IonButtons>
+                </div>
+              </div>
+            </div>
+        
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">URL</label>
+                <input
+                  aria-label="Show URL"
+                  className="inputText"
+                  type="text"
+                  value={mediaurl}
+                  onChange={e => setMediaURL(e.target.value)}
+                />
+              </div>
+            </div>
+
             <div className='buttonContainer'>
               <IonButton shape="round" color="success" onClick={updateShow}>Save</IonButton>
               <IonButton shape="round" color="warning" onClick={() => history.push('/showList')}>Close</IonButton>
