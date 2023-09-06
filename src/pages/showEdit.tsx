@@ -1,7 +1,9 @@
 import {  IonContent, IonIcon, IonHeader, IonPage, 
           IonTitle, IonToolbar, IonButton, 
-          IonDatetime, IonModal, IonButtons, IonToggle } from '@ionic/react';
-import { starOutline, star } from 'ionicons/icons';
+          IonDatetime, IonModal, IonSegment, 
+          IonSegmentButton, IonLabel
+         } from '@ionic/react';
+import { starOutline, star, calendar } from 'ionicons/icons';
 import './showEdit.css';
 import { useParams, useHistory } from 'react-router-dom';
 import DatabaseService from './DatabaseService';
@@ -13,7 +15,7 @@ const ShowEdit: React.FC = () => {
   const [title, setTitle] = useState('');
   const [venue, setVenue] = useState('');
   const [notes, setNotes] = useState('');
-  const [showdate, setShowDate] = useState<string>(''); 
+  const [showdate, setShowDate] = useState(Date); 
   const [setlength, setSetLength] = useState(0);
   const [compensation, setCompensation] = useState(0);
   const [mediaurl, setMediaURL] = useState('');
@@ -126,12 +128,13 @@ const ShowEdit: React.FC = () => {
                 />
               </div>
             </div>
+            <div className='inputRow'>
             <div className="inputWrapper">
               <div className="customItem">
                 <label className="inputLabel">Date</label>
                 <input
                   aria-label="Date"
-                  className="inputText"
+                  className="inputText shortInput"
                   type="text"
                   value={
                     showdate
@@ -148,6 +151,15 @@ const ShowEdit: React.FC = () => {
                   readOnly
                 />
               </div>
+                <IonButton shape="round" onClick={() => {
+                    setShowModal(true);
+                }}>
+                  <IonIcon 
+                    icon={calendar}
+                    >
+                  </IonIcon>
+                </IonButton>
+            </div>
             </div>
 
             <div className="inputWrapper">
@@ -208,7 +220,7 @@ const ShowEdit: React.FC = () => {
                   <label className="inputLabel">Show Type</label>
                   <select
                     aria-label="Show Type"
-                    className="inputText inputSelect"
+                    className="inputText"
                     value={type}
                     onChange={e => setType(e.target.value)}
                   >
@@ -248,23 +260,25 @@ const ShowEdit: React.FC = () => {
                   </div>
                 </div>
               </div>
+              </div>
   
               <div className="inputWrapper">
-                <div className='customItem'>              
-                  <label className="inputLabel">
-                    Archive
-                  </label>
-                  <IonButtons className="inputText" slot="">
-                    <IonToggle 
-                      labelPlacement="start"
-                      aria-label="Archive Show"
-                      checked={archive} 
-                      onIonChange={e => setArchive(e.detail.checked)} 
-                    />
-                  </IonButtons>
+                <div className="customItem">
+                  <IonSegment
+                    value={archive ? 'archived' : 'not-archived'}
+                    onIonChange={(e) => setArchive(e.detail.value === 'archived')}
+                  >
+                    <IonSegmentButton value="archived">
+                      <IonLabel>Archived</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="not-archived">
+                      <IonLabel>Not Archived</IonLabel>
+                    </IonSegmentButton>
+                  </IonSegment>
                 </div>
               </div>
-            </div>
+
+
         
             <div className="inputWrapper">
               <div className="customItem">
@@ -284,7 +298,8 @@ const ShowEdit: React.FC = () => {
               <IonButton shape="round" color="warning" onClick={() => history.push('/showList')}>Close</IonButton>
             </div>
 
-            <IonModal isOpen={showModal} cssClass='my-datetime-class'>
+            <IonModal isOpen={showModal} 
+                className='my-datetime-class'>
               <div className='datePickerModal'>
                 <IonDatetime
                   displayFormat="MM DD YYYY"
@@ -295,7 +310,6 @@ const ShowEdit: React.FC = () => {
                   <IonButton shape="round" onClick={() => {
                     setShowModal(false);
                   }}>Save</IonButton>
-                  <IonButton onClick={() => setShowModal(false)} shape="round">Close</IonButton>
                 </div>
               </div>
             </IonModal>

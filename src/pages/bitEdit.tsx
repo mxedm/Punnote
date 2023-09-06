@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {
           IonContent, IonHeader, IonIcon, IonPage, IonTitle,
-          IonToolbar, IonButton, IonButtons, IonToggle
+          IonToolbar, IonButton, IonSegmentButton, IonSegment,
+          IonLabel
 } from '@ionic/react';
 import { starOutline, star } from 'ionicons/icons';
 import './bitEdit.css';
@@ -147,24 +148,26 @@ const bitEdit: React.FC = () => {
                     <div className='inputText'>{renderRating()}</div>
                   </div>
                 </div>
+              </div>
 
-                <div className="inputWrapper">
-                  <div className="customItem">
-                    <label className="inputLabel">
-                      Archived
-                    </label>
-                    <IonButtons className="inputText archiveItem" slot="">
-                      <IonToggle 
-                        labelPlacement="start"
-                        aria-label="Archive Bit"
-                        checked={archive} 
-                        // onBlur={updateBit}
-                        onIonChange={e => setArchive(e.detail.checked)} 
-                      />
-                    </IonButtons>
-                  </div>
+
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <IonSegment
+                    value={archive ? 'archived' : 'not-archived'}
+                    onIonChange={(e) => setArchive(e.detail.value === 'archived')}
+                  >
+                    <IonSegmentButton value="archived">
+                      <IonLabel>Archived</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="not-archived">
+                      <IonLabel>Not Archived</IonLabel>
+                    </IonSegmentButton>
+                  </IonSegment>
                 </div>
               </div>
+
+
 
 
 
