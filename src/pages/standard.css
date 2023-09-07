@@ -147,20 +147,7 @@
     height: 65%;
 }
 
-.playButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.playIcon {
-    font-size: 30px; /* Adjust the size as needed */
-}
 
 .newButton {
     position: fixed;
@@ -362,4 +349,29 @@
 
 .shortInput {
     width: 75%;
+}
+
+.playSetlistDiv {
+    text-align: center;
+}
+
+.playSetlistButton {
+    padding: 0 auto 0 auto;
+    width:  auto;
+    margin: 10px auto;
+}
+
+.playButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playIcon {
+    font-size: 30px; /* Adjust the size as needed */
 }

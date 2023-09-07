@@ -3,7 +3,7 @@ import {  IonContent, IonIcon, IonHeader, IonPage,
           IonDatetime, IonModal, IonSegment, 
           IonSegmentButton, IonLabel
          } from '@ionic/react';
-import { starOutline, star, calendar } from 'ionicons/icons';
+import { starOutline, star, calendar, playCircle } from 'ionicons/icons';
 import './showEdit.css';
 import { useParams, useHistory } from 'react-router-dom';
 import DatabaseService from './DatabaseService';
@@ -104,6 +104,11 @@ const ShowEdit: React.FC = () => {
     }
   };  
 
+  const goToSetlistPlay = () => {
+    history.push(`/SetlistPlay/${id}`);
+  };
+
+
   return (
     <IonPage>
       <IonHeader>
@@ -151,14 +156,14 @@ const ShowEdit: React.FC = () => {
                   readOnly
                 />
               </div>
-                <IonButton shape="round" onClick={() => {
-                    setShowModal(true);
-                }}>
-                  <IonIcon 
-                    icon={calendar}
-                    >
-                  </IonIcon>
-                </IonButton>
+              <IonButton shape="round" onClick={() => {
+                  setShowModal(true);
+              }}>
+                <IonIcon 
+                  icon={calendar}
+                  >
+                </IonIcon>
+              </IonButton>
             </div>
             </div>
 
@@ -260,7 +265,17 @@ const ShowEdit: React.FC = () => {
                   </div>
                 </div>
               </div>
+              <div className="inputWrapper">
+                <div className='customItem playSetlistDiv'>
+                  <IonButton
+                    className='playSetlistButton'
+                    onClick={goToSetlistPlay}
+                    >
+                      Play Setlist
+                  </IonButton>
+                </div>
               </div>
+            </div>
   
               <div className="inputWrapper">
                 <div className="customItem">
