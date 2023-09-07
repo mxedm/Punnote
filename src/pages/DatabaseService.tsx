@@ -10,6 +10,9 @@ export interface Bit {
   length: number;
   rating: number;
   archive: boolean;
+  created: Date;
+  modified: Date;
+  revision: number;
 }
 
 export interface SetlistItem {
@@ -25,6 +28,9 @@ export interface Setlist {
   id: number;
   title: string;
   archive: boolean;
+  created: Date;
+  modified: Date;
+  revision: number;
 }
 
 export interface Show {
@@ -40,6 +46,9 @@ export interface Show {
   setlist: number;
   rating: number;
   archive: boolean;
+  created: Date;
+  modified: Date;
+  revision: number;
 }
 
 class DatabaseService {
@@ -123,6 +132,9 @@ class DatabaseService {
       bits[existingBitIndex] = bit; 
     } else {
       bit.archive = false;
+      bit.created = new Date();
+      bit.modified = new Date();
+      bit.revision = 0;
       bits.push(bit); 
     }
     await StorageService.setObject('bits', bits);
@@ -135,6 +147,9 @@ class DatabaseService {
       setlists[existingSetlistIndex] = setlist; 
     } else {
       setlist.archive = false;
+      setlist.created = new Date();
+      setlist.modified = new Date();
+      setlist.revision = 0;
       setlists.push(setlist); 
     }
     await StorageService.setObject('setlists', setlists);
@@ -147,6 +162,9 @@ class DatabaseService {
       shows[existingShowIndex] = show; 
     } else {
       show.archive = false;
+      show.created = new Date();
+      show.modified = new Date();
+      show.revision = 0;
       shows.push(show); 
     }
     await StorageService.setObject('shows', shows);
@@ -230,6 +248,9 @@ class DatabaseService {
  
   async editBit(bitToEdit: Bit): Promise<void> {
     const bits = await this.getBits();
+    bitToEdit.modified = new Date();
+    bitToEdit.revision += 1;
+
     const bitIndex = bits.findIndex(bit => bit.id === bitToEdit.id);
     if (bitIndex === -1) {
       throw new Error(`Bit with id ${bitToEdit.id} not found`);
@@ -240,6 +261,9 @@ class DatabaseService {
 
   async editSetlist(setlistToEdit: Setlist): Promise<void> {
     const setlists = await this.getSetlists();
+    setlistToEdit.modified = new Date();
+    setlistToEdit.revision += 1;
+
     const setlistIndex = setlists.findIndex(setlist => setlist.id === setlistToEdit.id);
     if (setlistIndex === -1) {
       throw new Error(`Setlist with id ${setlistToEdit.id} not found`);
@@ -249,8 +273,10 @@ class DatabaseService {
   }
 
   async editShow(showToEdit: Show): Promise<void> {
-    // console.log("editShow", showToEdit);
     const shows = await this.getShows();
+    showToEdit.modified = new Date();
+    showToEdit.revision += 1;
+
     const showIndex = shows.findIndex(show => show.id === showToEdit.id);
     if (showIndex === -1) {
       throw new Error(`Show with id ${showToEdit.id} not found`);
