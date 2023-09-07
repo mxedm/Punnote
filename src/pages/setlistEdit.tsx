@@ -173,7 +173,7 @@ const SetlistEdit: React.FC = () => {
           <IonList>
             <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
             {setlistItems.sort((a, b) => a.order - b.order).map((item, index) => {
-              if (item.isPlaintext) {
+              if (item.isPlainText) {
                 return (
                   <IonItem key={index} className='setlistTextItem'>
                     <IonButton onClick={() => removeSetlistItem(item.id)} color="danger" className='removeButton' shape='round'>
