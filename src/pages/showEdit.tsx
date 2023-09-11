@@ -1,7 +1,7 @@
 import {  IonContent, IonIcon, IonHeader, IonPage, 
           IonTitle, IonToolbar, IonButton, 
           IonDatetime, IonModal, IonSegment, 
-          IonSegmentButton, IonLabel
+          IonSegmentButton, IonLabel, IonText
          } from '@ionic/react';
 import { starOutline, star, calendar, playCircle } from 'ionicons/icons';
 import './showEdit.css';
@@ -15,7 +15,7 @@ const ShowEdit: React.FC = () => {
   const [title, setTitle] = useState('');
   const [venue, setVenue] = useState('');
   const [notes, setNotes] = useState('');
-  const [showdate, setShowDate] = useState(Date); 
+  const [showdate, setShowDate] = useState(''); 
   const [setlength, setSetLength] = useState(0);
   const [compensation, setCompensation] = useState(0);
   const [mediaurl, setMediaURL] = useState('');
@@ -24,7 +24,12 @@ const ShowEdit: React.FC = () => {
   const [rating, setRating] = useState(0);
   const [archive, setArchive] = useState(false);
   const [setlists, setSetlists] = useState([]);
+  const [modified, setModified] = useState('');
+  const [created, setCreated] = useState('');
+  const [revision, setRevision] = useState(0)
   const [showModal, setShowModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -47,6 +52,11 @@ const ShowEdit: React.FC = () => {
         setSetlist(fetchedShow.setlist);
         setRating(fetchedShow.rating);
         setArchive(fetchedShow.archive);
+        setCreated(fetchedShow.created);
+        setModified(fetchedShow.modified);
+        setRevision(fetchedShow.revision);
+
+
       }
     };
     fetchShow(); 
@@ -99,6 +109,9 @@ const ShowEdit: React.FC = () => {
         setlist,
         archive, 
         rating,
+        created,
+        modified,
+        revision
       };
       await DatabaseService.editShow(updatedShow);
     }
@@ -277,22 +290,6 @@ const ShowEdit: React.FC = () => {
               </div>
             </div>
   
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <IonSegment
-                    value={archive ? 'archived' : 'not-archived'}
-                    onIonChange={(e) => setArchive(e.detail.value === 'archived')}
-                  >
-                    <IonSegmentButton value="archived">
-                      <IonLabel>Archived</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="not-archived">
-                      <IonLabel>Not Archived</IonLabel>
-                    </IonSegmentButton>
-                  </IonSegment>
-                </div>
-              </div>
-
 
         
             <div className="inputWrapper">
@@ -310,6 +307,9 @@ const ShowEdit: React.FC = () => {
 
             <div className='buttonContainer'>
               <IonButton shape="round" color="success" onClick={updateShow}>Save</IonButton>
+              <IonButton shape="round" onClick={() => {
+                  setInfoModal(true);
+              }}>Info</IonButton>
               <IonButton shape="round" color="warning" onClick={() => history.push('/showList')}>Close</IonButton>
             </div>
 
@@ -328,6 +328,44 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
             </IonModal>
+
+
+            <IonModal isOpen={infoModal} 
+                className=''>
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <IonText>
+                  <h2>Show Info</h2>
+                    <p className='infoTextModal'>Created: {created.toLocaleString()}</p>
+                    <p className='infoTextModal'>Modified: {modified.toLocaleString()}</p>
+                    <p className='infoTextModal'>Edits: {revision}</p>
+
+                  <h2>Archive?</h2>
+                    <p className='infoTextModal'>This is a toggle for the archive function. 
+                      This will remove the item from the main list but will not delete it. Archived
+                      items are alaways available by toggling the switch at the top of the respective
+                      type of item list screen(s).
+                    </p>
+                    <IonSegment
+                      value={archive ? 'archived' : 'not-archived'}
+                      onIonChange={(e) => setArchive(e.detail.value === 'archived')}
+                    >
+                      <IonSegmentButton value="archived">
+                        <IonLabel>Archived</IonLabel>
+                      </IonSegmentButton>
+                      <IonSegmentButton value="not-archived">
+                        <IonLabel>Not Archived</IonLabel>
+                      </IonSegmentButton>
+                    </IonSegment>
+                  </IonText>
+                </div>
+              </div>
+
+              <IonButton shape="round" onClick={() => {
+                  setInfoModal(false);
+              }}>close</IonButton>
+            </IonModal>
+
           </div>
           </>
         )}

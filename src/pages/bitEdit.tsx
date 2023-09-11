@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import {
           IonContent, IonHeader, IonIcon, IonPage, IonTitle,
           IonToolbar, IonButton, IonSegmentButton, IonSegment,
-          IonLabel
+          IonLabel, IonModal, IonText
 } from '@ionic/react';
 import { starOutline, star } from 'ionicons/icons';
 import './bitEdit.css';
@@ -19,7 +19,10 @@ const bitEdit: React.FC = () => {
   const [length, setLength] = useState(0);
   const [rating, setRating] = useState(0);
   const [archive, setArchive] = useState(false);
-
+  const [modified, setModified] = useState('');
+  const [created, setCreated] = useState('');
+  const [revision, setRevision] = useState(0)
+  const [infoModal, setInfoModal] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -37,6 +40,9 @@ const bitEdit: React.FC = () => {
         setLength(fetchedBit.length);   
         setRating(fetchedBit.rating);   
         setArchive(fetchedBit.archive); 
+        setCreated(fetchedBit.created);
+        setModified(fetchedBit.modified);
+        setRevision(fetchedBit.revision);
       }
     };
     fetchBit(); // call the function
@@ -150,35 +156,54 @@ const bitEdit: React.FC = () => {
                 </div>
               </div>
 
+              <div className='buttonContainer'>
+                <IonButton shape="round" color="success" onClick={updateBit}>Save</IonButton> {/* Save button */}
+                <IonButton shape="round" onClick={() => {
+                  setInfoModal(true);
+                }}>Info</IonButton>
 
+                <IonButton shape="round" color="warning" onClick={() => history.push('/bitList')}>Close</IonButton>
+              </div>
+
+              <IonModal isOpen={infoModal} 
+                className=''>
               <div className="inputWrapper">
                 <div className="customItem">
-                  <IonSegment
-                    value={archive ? 'archived' : 'not-archived'}
-                    onIonChange={(e) => setArchive(e.detail.value === 'archived')}
-                  >
-                    <IonSegmentButton value="archived">
-                      <IonLabel>Archived</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="not-archived">
-                      <IonLabel>Not Archived</IonLabel>
-                    </IonSegmentButton>
-                  </IonSegment>
+                  <IonText>
+                  <h2>Bit Info</h2>
+                    <p className='infoTextModal'>Created: {created.toLocaleString()}</p>
+                    <p className='infoTextModal'>Modified: {modified.toLocaleString()}</p>
+                    <p className='infoTextModal'>Edits: {revision}</p>
+
+                  <h2>Archive?</h2>
+                    <p className='infoTextModal'>This is a toggle for the archive function. 
+                      This will remove the item from the main list but will not delete it. Archived
+                      items are alaways available by toggling the switch at the top of the respective
+                      type of item list screen(s).
+                    </p>
+                    <IonSegment
+                      value={archive ? 'archived' : 'not-archived'}
+                      onIonChange={(e) => setArchive(e.detail.value === 'archived')}
+                    >
+                      <IonSegmentButton value="archived">
+                        <IonLabel>Archived</IonLabel>
+                      </IonSegmentButton>
+                      <IonSegmentButton value="not-archived">
+                        <IonLabel>Not Archived</IonLabel>
+                      </IonSegmentButton>
+                    </IonSegment>
+                  </IonText>
                 </div>
               </div>
 
+              <IonButton shape="round" onClick={() => {
+                  setInfoModal(false);
+              }}>close</IonButton>
+            </IonModal>
 
 
 
 
-
-
-
-
-              <div className='buttonContainer'>
-                <IonButton shape="round" color="success" onClick={updateBit}>Save</IonButton> {/* Save button */}
-                <IonButton shape="round" color="warning" onClick={() => history.push('/bitList')}>Close</IonButton>
-              </div>
             </div>
           </>
         )}

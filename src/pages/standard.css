@@ -375,3 +375,7 @@
 .playIcon {
     font-size: 30px; /* Adjust the size as needed */
 }
+
+.infoTextModal {
+    padding-left: 20px;
+}
