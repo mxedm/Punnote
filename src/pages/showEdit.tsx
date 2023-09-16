@@ -310,7 +310,7 @@ const ShowEdit: React.FC = () => {
               <IonButton shape="round" onClick={() => {
                   setInfoModal(true);
               }}>Info</IonButton>
-              <IonButton shape="round" color="warning" onClick={() => history.push('/showList')}>Close</IonButton>
+              <IonButton shape="round" className='hidden' color="warning" onClick={() => history.push('/showList')}>Close</IonButton>
             </div>
 
             <IonModal isOpen={showModal} 

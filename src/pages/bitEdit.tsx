@@ -162,7 +162,7 @@ const bitEdit: React.FC = () => {
                   setInfoModal(true);
                 }}>Info</IonButton>
 
-                <IonButton shape="round" color="warning" onClick={() => history.push('/bitList')}>Close</IonButton>
+                <IonButton shape="round" color="warning" className='hidden' onClick={() => history.push('/bitList')}>Close</IonButton>
               </div>
 
               <IonModal isOpen={infoModal} 
