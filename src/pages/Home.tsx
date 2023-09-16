@@ -13,7 +13,14 @@ const Home: React.FC = () => {
     "I'm not sure if I can think of any more, again.",
     "OUCH! WHAT DO YOU DO?",
     "Oh no! My heel. -- Achilles",
+    "This app will save lives.",
+    "Nini. I love you.",
+    "You're funny.",
+    "No. I won't poop your pants.",
     "SHIFT UNITS!",
+    "Trust women.",
+    "Remember. Have fun out there.",
+    "UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START",
     "Sometimes the add button doesn't work...",
     "BUY BUY BUY."
   ];
