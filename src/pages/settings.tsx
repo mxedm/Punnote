@@ -24,7 +24,7 @@ const Settings: React.FC = () => {
           directory: Directory.Documents,
           encoding: Encoding.UTF8,
         });
-        alert('Backup completed successfully!');
+        alert('Backup completed. Check the download folder.');
       } catch (e) {
         alert(`Unable to complete backup: ${e.message}`);
       }
