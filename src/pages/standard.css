@@ -147,23 +147,6 @@
     height: 65%;
 }
 
-
-
-.newButton {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.newIcon {
-    font-size: 30px; /* Adjust the size as needed */
-}
-
 .playerPlaintext {
     color: yellow;
 }
@@ -362,17 +345,23 @@
 }
 
 .playButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .playIcon {
+    font-size: 30px; /* Adjust the size as needed */
+}
+
+.newButton {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newIcon {
     font-size: 30px; /* Adjust the size as needed */
 }
 

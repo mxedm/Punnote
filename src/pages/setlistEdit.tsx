@@ -76,7 +76,7 @@ const SetlistEdit: React.FC = () => {
       order: maxOrder + 1,
       bitID: bit.id,
       setlistID: Number(id),
-      isPlaintext: false,
+      isPlainText: false,
     };
     await DatabaseService.addSetlistItem(newItem);
     fetchSetlistItems();
@@ -146,6 +146,7 @@ const SetlistEdit: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <div>
         <div className='editWindow'>
           <div className="inputRow">
             <div className="inputWrapper">
@@ -173,13 +174,13 @@ const SetlistEdit: React.FC = () => {
           <IonList>
             <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
             {setlistItems.sort((a, b) => a.order - b.order).map((item, index) => {
-              if (item.isPlainText) {
+              if (item.isPlaintext) {
                 return (
                   <IonItem key={index} className='setlistTextItem'>
                     <IonButton onClick={() => removeSetlistItem(item.id)} color="danger" className='removeButton' shape='round'>
                     <IonIcon icon={closeCircle} />
                     </IonButton>
-                    [ {item.plaintext}]
+                      [ {item.plaintext} ]
                     <IonReorder slot="end" />
                   </IonItem>
                 );
@@ -197,46 +198,59 @@ const SetlistEdit: React.FC = () => {
             })}
             </IonReorderGroup>
           </IonList>
+
           <div className="rowContainer">
             <IonInput value={inputValue} placeholder="Insert freeform text" onIonChange={e => setInputValue(e.detail.value!)} />
             <IonButton onClick={addPlaintextItem} shape="round">
-              Insert
+              Add Text
             </IonButton>
           </div>
+
           <IonList>
-          <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)}>
-            <IonList>
-              <IonItem>
-                <strong>Click to Add:</strong>
-              </IonItem>
-              {bits
-                .filter(bit => !setlistItems.some(item => item.bitID === bit.id) && bit.archive !== true)
-                .map((bit, index) => {
-                  return (
-                    <IonItem key={index} onClick={() => handleBitSelection(bit)}>
-                      {bit.title}
-                    </IonItem>
-                  );
-                })
-              }
-            </IonList>
-            <IonButton onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
-          </IonModal>
+            <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)}>
+              <IonList>
+                <IonItem>
+                  <strong>Click to Add:</strong>
+                </IonItem>
+                {bits
+                  .filter(bit => !setlistItems.some(item => item.bitID === bit.id) && bit.archive !== true)
+                  .map((bit, index) => {
+                    return (
+                      <IonItem key={index} onClick={() => handleBitSelection(bit)}>
+                        {bit.title}
+                      </IonItem>
+                    );
+                  })
+                }
+              </IonList>
+              <IonButton onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
+            </IonModal>
           </IonList>
         </div>
+
+
+      <div className='buttonContainer'>
+        <IonButton 
+          shape="round" 
+          className="playButton" 
+          color={'tertiary'}
+          onClick={goToSetlistPlay}
+        >
+          play
+        </IonButton>
+        <IonButton 
+          shape="round" 
+          className="newButton" 
+
+          color={bits.every(bit => setlistItems.some(item => item.bitID === bit.id)) ? "danger" : "primary"} 
+          disabled={bits.every(bit => setlistItems.some(item => item.bitID === bit.id))}
+          onClick={() => setShowBitList(!showBitList)}
+        >
+          Add Joke
+        </IonButton>
+      </div>
+      </div>
       </IonContent>
-      <IonButton shape="round" className="playButton" onClick={goToSetlistPlay}>
-        play
-      </IonButton>
-      <IonButton 
-        shape="round" 
-        className="newButton" 
-        slot='center'
-        color={bits.every(bit => setlistItems.some(item => item.bitID === bit.id)) ? "danger" : "primary"} 
-        disabled={bits.every(bit => setlistItems.some(item => item.bitID === bit.id))}
-        onClick={() => setShowBitList(!showBitList)}>
-        insert
-      </IonButton>
     </IonPage>
   );
 };

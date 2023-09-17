@@ -1,7 +1,6 @@
 import StorageService from './StorageService';
 import Papa from "papaparse";
 
-
 export interface Bit {
   id: number;
   title: string;
@@ -18,10 +17,10 @@ export interface Bit {
 export interface SetlistItem {
   id: number;
   order: number;
-  bitId?: number;
+  bitID?: number;
   plaintext: string;
   setlistID: number;
-  isPlainText: boolean;
+  isPlaintext: boolean;
 }
 
 export interface Setlist {

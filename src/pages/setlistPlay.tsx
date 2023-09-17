@@ -128,7 +128,9 @@ const SetlistPlay: React.FC = () => {
             .map((item, index) => (
               <IonItem key={item.id} className={item.isPlaintext ? "playerPlaintext" : "playerBit"}>
                 <h2>{ item.order }:&nbsp; 
-                  {item.isPlaintext ? item.plaintext : 
+                  {item.isPlaintext ? 
+                    item.plaintext 
+                    : 
                     bits.find(bit => bit.id === item.bitID)?.title
                   }
                 </h2>
