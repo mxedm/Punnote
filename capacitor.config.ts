@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'con.queercoded.punnote',
+  appId: 'com.queercoded.punnote',
   appName: 'punnote',
   webDir: 'dist',
   server: {
