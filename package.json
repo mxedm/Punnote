@@ -1,7 +1,7 @@
 {
   "name": "punnote",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.7.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -56,5 +56,5 @@
     "vite": "^4.3.9",
     "vitest": "^0.32.2"
   },
-  "description": "An Ionic project"
+  "description": "Ionic project to create a performer's notebook."
 }
