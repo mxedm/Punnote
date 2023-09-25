@@ -368,3 +368,7 @@
 .infoTextModal {
     padding-left: 20px;
 }
+
+.flip-vertical {
+    transform: scaleY(-1);
+  }
