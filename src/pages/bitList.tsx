@@ -10,7 +10,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'lodash';
 import './bitList.css';
 import './standard.css';
-import { timeOutline } from 'ionicons/icons';
+import { timeOutline, filterCircleOutline } from 'ionicons/icons';
 
 const bitList: React.FC = () => {
   const [bits, setBits] = useState<Bit[]>([]);
@@ -22,6 +22,9 @@ const bitList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [sortField, setSortField] = useState<string>("created"); 
+  const [sortOrder, setSortOrder] = useState<string>("asc"); 
+
   const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
 
   const history = useHistory();
@@ -92,6 +95,30 @@ const bitList: React.FC = () => {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  const handleSort = (field: string) => {
+    if (sortField === field) {
+      // Toggle the sort order if the same field is clicked again
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      // If a different field is clicked, set it as the new sorting field
+      setSortField(field);
+      setSortOrder("asc"); // Default to ascending order
+    }
+  };
+
+  const sortedBits = filteredBits.slice().sort((a, b) => {
+    const fieldA = a[sortField];
+    const fieldB = b[sortField];
+
+    if (fieldA === fieldB) return 0;
+
+    if (sortOrder === "asc") {
+      return fieldA < fieldB ? -1 : 1;
+    } else {
+      return fieldA > fieldB ? -1 : 1;
+    }
+  });
+
   return (
   <IonPage>
 
@@ -109,15 +136,8 @@ const bitList: React.FC = () => {
     </IonHeader>
 
     <IonContent fullscreen>
-      <IonItem>
-      <IonInput
-        type="text"
-        placeholder="Search Bits..."
-        value={searchTerm}
-        onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
-      />
 
-      </IonItem>
+      
       <div className="inputRow">
         <div className="inputWrapper">
           <div className="customItem">
@@ -131,9 +151,6 @@ const bitList: React.FC = () => {
             />
           </div>
         </div>
-
-
-
         <IonButton
           type="submit"
           className="addButton"
@@ -144,8 +161,20 @@ const bitList: React.FC = () => {
         </IonButton>
       </div>
 
+      <IonItem>
+        <IonInput
+          type="text"
+          placeholder="Search Bits..."
+          value={searchTerm}
+          onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
+        />
+        <IonItem>
+          <IonIcon icon={filterCircleOutline}></IonIcon>
+        </IonItem>
+      </IonItem>
+
       <IonList className='mainList'>
-        {filteredBits.filter(bit => bitArchived || !bit.archive).slice().reverse().map(bit => (
+        {sortedBits.map(bit => (
           <IonCard key={bit.id}>
             <IonCardHeader>
               <IonCardTitle>{bit.title} {bit.length > 0 ? "(" + formatLength(bit.length) + ")" : ""   }</IonCardTitle>
@@ -177,6 +206,7 @@ const bitList: React.FC = () => {
           </IonCard>
         ))}
       </IonList>
+
 
       <IonAlert
         isOpen={bitToDelete !== null}
