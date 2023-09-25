@@ -169,7 +169,9 @@ const bitList: React.FC = () => {
           onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
         />
         <IonItem>
-          <IonIcon icon={filterCircleOutline}></IonIcon>
+          <IonIcon 
+            className=""
+            icon={filterCircleOutline}></IonIcon>
         </IonItem>
       </IonItem>
 
