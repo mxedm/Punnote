@@ -1,12 +1,13 @@
 import {  IonContent, IonHeader, IonPage, IonTitle, IonList, 
           IonToolbar, IonButton, IonToast, IonCard, IonCardHeader, 
-          IonCardTitle, IonCardContent, IonAlert, IonIcon } from '@ionic/react';
+          IonCardTitle, IonCardContent, IonAlert, IonIcon,
+          IonButtons, IonToggle } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Setlist } from './DatabaseService';
 import { useHistory, useLocation } from 'react-router-dom';
 import './setlistList.css';
 import './standard.css';
-import { timeOutline } from 'ionicons/icons';
+import { timeOutline, refreshCircleOutline, arrowUpOutline } from 'ionicons/icons';
 
 const setlistList: React.FC = () => {
 
@@ -18,6 +19,8 @@ const setlistList: React.FC = () => {
   const [showToast, setShowToast] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
   const [isAddingSetlist, setIsAddingSetlist] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false); 
+
 
   const history = useHistory();
   const location = useLocation();
@@ -28,6 +31,17 @@ const setlistList: React.FC = () => {
       setSetlists(fetchedSetlists);
     };
     fetchSetlists();
+  }, [location.pathname]);
+
+
+  useEffect(() => {
+    const fetchShows = async () => {
+      setIsRefreshing(true); // Set the refreshing state to true
+      const fetchedSetlists = await DatabaseService.getSetlists();
+      setSetlists(fetchedSetlists);
+      setIsRefreshing(false); // Reset the refreshing state when data is fetched
+    };
+    fetchShows();
   }, [location.pathname]);
 
   const deleteSetlist = (id: number) => {
@@ -78,8 +92,23 @@ const setlistList: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Setlists</IonTitle>
+      <IonToolbar>
+
+        <IonButtons slot="start">
+        <IonButton color="secondary" onClick={() => {
+            if (!isRefreshing) fetchSetlists(); // Only trigger refresh if not already refreshing
+          }}>
+            <IonIcon icon={refreshCircleOutline}></IonIcon>
+          </IonButton>
+          <IonButton color="secondary">
+            <IonIcon icon={arrowUpOutline}></IonIcon>
+          </IonButton>
+        </IonButtons>
+
+        <IonTitle className="titleText">Setlists</IonTitle>
+
+
+
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

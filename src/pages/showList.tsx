@@ -18,12 +18,23 @@ const showList: React.FC = () => {
   const [isAddingShow, setIsAddingShow] = useState(false);
   const [showToast, setShowToast] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false); 
   const history = useHistory();
 
   useEffect(() => {
     const fetchShows = async () => {
       const fetchedShows = await DatabaseService.getShows();
       setShows(fetchedShows);
+    };
+    fetchShows();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchShows = async () => {
+      setIsRefreshing(true); // Set the refreshing state to true
+      const fetchedShows = await DatabaseService.getShows();
+      setShows(fetchedShows);
+      setIsRefreshing(false); // Reset the refreshing state when data is fetched
     };
     fetchShows();
   }, [location.pathname]);
@@ -81,7 +92,9 @@ const showList: React.FC = () => {
         <IonToolbar>
 
           <IonButtons slot="start">
-            <IonButton color="secondary">
+          <IonButton color="secondary" onClick={() => {
+              if (!isRefreshing) fetchShows(); // Only trigger refresh if not already refreshing
+            }}>
               <IonIcon icon={refreshCircleOutline}></IonIcon>
             </IonButton>
             <IonButton color="secondary">
