@@ -310,11 +310,10 @@
     align-items: right;
 }
 
-/*
 .titleText {
-     placeholder 
+    text-align: center;    
 }
-*/
+
 
 .flexParent {
     display: flex;

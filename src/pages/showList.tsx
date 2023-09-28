@@ -7,7 +7,7 @@ import DatabaseService, { Show } from './DatabaseService';
 import { useHistory } from 'react-router-dom';
 import './showList.css';
 import './standard.css';
-import { timeOutline } from 'ionicons/icons';
+import { arrowUpOutline, refreshCircleOutline, timeOutline } from 'ionicons/icons';
 
 const showList: React.FC = () => {
   const [shows, setShows] = useState<Show[]>([]);;
@@ -79,17 +79,28 @@ const showList: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle slot="start" className="titleText">Shows</IonTitle>
+
+          <IonButtons slot="start">
+            <IonButton color="secondary">
+              <IonIcon icon={refreshCircleOutline}></IonIcon>
+            </IonButton>
+            <IonButton color="secondary">
+              <IonIcon icon={arrowUpOutline}></IonIcon>
+            </IonButton>
+          </IonButtons>
+
+          <IonTitle className="titleText">Shows</IonTitle>
+
           <IonButtons slot="end" className="toggleArchiveButton">
-            <span className="archiveLabel">List Archived</span>
+            <span className="archiveLabel">Archives</span>
             <IonToggle 
               checked={showArchived} 
               onIonChange={e => setShowArchived(e.detail.checked)} 
             />
           </IonButtons>
+
         </IonToolbar>
       </IonHeader>
-
 
       <IonContent fullscreen>
         <div className="inputRow">
