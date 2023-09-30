@@ -44,12 +44,19 @@
     order: 2;
 }
 
-.inputWrapper {
+.inputWrapper, .searchBox {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     flex: 1;
+    border-bottom: 1px solid #ccc;
+    background-color: #202020;
+}
+
+.inputWrapper {
     min-height: 95px;
+    padding: 16px;
+
 }
 
 /* for all pages */
@@ -251,11 +258,7 @@
     padding: 0 0 0 2%;
 }
 
-.inputWrapper {
-    padding: 16px;
-    border-bottom: 1px solid #ccc;
-    background-color: #202020;
-}
+
 
 .customItem {
     display: flex;
