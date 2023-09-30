@@ -20,7 +20,7 @@ const ShowEdit: React.FC = () => {
   const [compensation, setCompensation] = useState(0);
   const [mediaurl, setMediaURL] = useState('');
   const [type, setType] = useState('');
-  const [setlist, setSetlist] = useState(0);
+  const [setlistID, setSetlistID] = useState(0);
   const [rating, setRating] = useState(0);
   const [archive, setArchive] = useState(false);
   const [setlists, setSetlists] = useState([]);
@@ -49,7 +49,7 @@ const ShowEdit: React.FC = () => {
         setCompensation(fetchedShow.compensation);
         setMediaURL(fetchedShow.mediaurl);
         setType(fetchedShow.type);
-        setSetlist(fetchedShow.setlist);
+        setSetlistID(fetchedShow.setlistID);
         setRating(fetchedShow.rating);
         setArchive(fetchedShow.archive);
         setCreated(fetchedShow.created);
@@ -68,13 +68,13 @@ const ShowEdit: React.FC = () => {
       const fetchedSetlists = await DatabaseService.getSetlists();
       const fetchedShow = fetchedShows.find(show => show.id === Number(id));
       if (fetchedShow) {
-        const fetchedSetlist = fetchedSetlists.find(setlist => setlist.id === fetchedShow.setlist);
         setSetlists(fetchedSetlists);
-        setSetlist(fetchedSetlist);
+        setSetlistID(fetchedShow.setlistID); // set this to the fetchedShow.setlistID, not the fetchedSetlist object
       }
     };
     fetchData();
   }, [id]);
+  
 
   const renderRating = () => {
     let stars = [];
@@ -106,7 +106,7 @@ const ShowEdit: React.FC = () => {
         compensation,
         mediaurl,
         type,
-        setlist,
+        setlistID,
         archive, 
         rating,
         created,
@@ -251,25 +251,7 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
 
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Setlist</label>
-                  <select
-                    aria-label="Setlist"
-                    className="inputText"
-                    value={setlist}
-                    onChange={e => setSetlist(e.target.value)}
-                  >
-                    {setlists.map(setlist => (
-                      <option key={setlist.id} value={setlist}>
-                        {setlist.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="flexParent">
+
               <div className="inputWrapper">
                 <div className='customItem'>
                   <label className="inputLabel">Rating</label>
@@ -278,6 +260,31 @@ const ShowEdit: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="flexParent">
+
+              <div className="inputWrapper">
+                <div className="customItem">
+                  <label className="inputLabel">Setlist</label>
+                  <select
+                    aria-label="Setlist"
+                    className="inputText"
+                    value={setlistID}
+                    onChange={e => setSetlistID(Number(e.target.value))}
+                  >
+                    <option value={0}>
+                      None
+                    </option>
+                    {setlists.map(setlist => (
+                      <option key={setlist.id} value={setlist.id}>
+                        {setlist.title}
+                      </option>
+                    ))}
+                  </select>
+
+                </div>
+              </div>
+
               <div className="inputWrapper">
                 <div className='customItem playSetlistDiv'>
                   <IonButton

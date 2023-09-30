@@ -42,7 +42,7 @@ export interface Show {
   compensation: number;
   mediaurl: string;
   type: string;
-  setlist: number;
+  setlistID: number;
   rating: number;
   archive: boolean;
   created: Date;

@@ -73,7 +73,7 @@ const showList: React.FC = () => {
       compensation: 0,
       mediaurl: "",
       type: "",
-      setlist: 0,
+      setlistID: 0,
       rating: 0, 
       archive: false,
     };
