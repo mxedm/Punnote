@@ -145,7 +145,7 @@ const bitList: React.FC = () => {
             <input
               aria-label="Bit Name"
               className="inputText inputTextListing"
-              placeholder="Enter Bit Name Here"
+              placeholder="Enter New Bit Name Here"
               value={bitTitle}
               onChange={e => setBitTitle(e.target.value)}
             />
@@ -161,10 +161,10 @@ const bitList: React.FC = () => {
         </IonButton>
       </div>
 
-      <IonItem>
+      <IonItem className='searchBox'>
         <IonInput
           type="text"
-          placeholder="Search Bits..."
+          placeholder="Search..."
           value={searchTerm}
           onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
         />
