@@ -37,19 +37,12 @@ const SetlistPlay: React.FC = () => {
     };
   }, [timer]);
 
-  useIonViewWillEnter(() => {
-    fetchBits();
-    fetchSetlistItems();
-    fetchSetlist();
+  useIonViewWillEnter(async () => {  
+    await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);  
   });
 
   useIonViewWillLeave(() => {
     allowSleep();
-  });
-
-  useIonViewWillEnter(() => {
-    fetchBits();
-    fetchSetlistItems();
   });
 
   const keepAwake = async () => {
@@ -118,7 +111,7 @@ const SetlistPlay: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-              Play: {setlist?.title || 'Setlist Play' } ({formatTime(totalLength)})
+              Play: {setlist ? setlist.title : 'Loading...'} ({formatTime(totalLength)})
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -137,7 +130,6 @@ const SetlistPlay: React.FC = () => {
               </IonItem>
             ))}
 
-
       <IonFab vertical="bottom" horizontal="center" slot="fixed">
         <IonFabButton color={playing ? 'warning' : 'primary'} onClick={startTimer}>
           <IonIcon icon={playing ? pause : play} />
@@ -153,9 +145,6 @@ const SetlistPlay: React.FC = () => {
         <h3>Timer <br /> {formatTime(seconds)}</h3>
       </div>
       </IonContent>
-
-
-
 
     </IonPage>
   );

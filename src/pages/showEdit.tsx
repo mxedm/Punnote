@@ -118,7 +118,7 @@ const ShowEdit: React.FC = () => {
   };  
 
   const goToSetlistPlay = () => {
-    history.push(`/SetlistPlay/${id}`);
+    history.push(`/SetlistPlay/${setlistID}`);
   };
 
 
