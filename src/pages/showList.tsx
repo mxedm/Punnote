@@ -1,13 +1,14 @@
 import {  IonContent, IonHeader, IonPage, IonTitle,
   IonList, IonToolbar, IonButton, IonToast, IonButtons, 
   IonToggle, IonCard, IonCardContent, IonCardHeader, 
-  IonCardTitle, IonAlert, IonIcon } from '@ionic/react';
+  IonCardTitle, IonAlert, IonIcon, IonItem, IonInput } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Show } from './DatabaseService';
 import { useHistory } from 'react-router-dom';
+import { debounce } from 'lodash';
 import './showList.css';
 import './standard.css';
-import { arrowUpOutline, refreshCircleOutline, timeOutline } from 'ionicons/icons';
+import { filterCircleOutline, timeOutline } from 'ionicons/icons';
 
 const showList: React.FC = () => {
   const [shows, setShows] = useState<Show[]>([]);;
@@ -18,8 +19,14 @@ const showList: React.FC = () => {
   const [isAddingShow, setIsAddingShow] = useState(false);
   const [showToast, setShowToast] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false); 
+  const [searchTerm, setSearchTerm] = useState("");
   const history = useHistory();
+  const [sortOrder, setSortOrder] = useState<string>("asc"); 
+  const [sortAscending, setSortAscending] = useState(true);
+  const [sortField, setSortField] = useState<string>("title");
+
+  const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
+
 
   const now = new Date();
   const showDateToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19, 0, 0); 
@@ -35,13 +42,30 @@ const showList: React.FC = () => {
 
   useEffect(() => {
     const fetchShows = async () => {
-      setIsRefreshing(true); // Set the refreshing state to true
       const fetchedShows = await DatabaseService.getShows();
       setShows(fetchedShows);
-      setIsRefreshing(false); // Reset the refreshing state when data is fetched
     };
     fetchShows();
   }, [location.pathname]);
+
+  const filteredShows = shows.filter(show => {
+    return (
+      (show.title && show.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  });
+
+  const sortShows = () => {
+    const currentSortOrder = sortAscending; 
+    setSortAscending(!currentSortOrder); 
+    const sortedShows = [...filteredShows].sort((a, b) => {
+      if (currentSortOrder) {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
+    });
+    setShows(sortedShows);
+  };
 
   const deleteShow = async (id: number) => {
     await DatabaseService.removeShow(id);
@@ -131,8 +155,25 @@ const showList: React.FC = () => {
           </IonButton>
         </div>
 
+        <IonItem className='searchBox'>
+          <IonInput
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
+          />
+          Sort: 
+          <IonItem>
+          <IonIcon 
+            className="sortIcon"
+            icon={filterCircleOutline}
+            style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
+            onClick={sortShows}></IonIcon>
+          </IonItem>
+        </IonItem>
+
         <IonList class="mainList">
-          {shows.slice().reverse().filter(show => showArchived ? true : !show.archive).map(show => (
+        {filteredShows.map(show => (
             <IonCard key={show.id}>
               <IonCardHeader>
                 <IonCardTitle>
