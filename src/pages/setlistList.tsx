@@ -151,7 +151,7 @@ const setlistList: React.FC = () => {
             type="text"
             placeholder="Search..."
             value={searchTerm}
-            onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
+            onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
           />
           <IonItem>
             <IonIcon 
