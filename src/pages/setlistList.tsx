@@ -1,13 +1,14 @@
 import {  IonContent, IonHeader, IonPage, IonTitle, IonList, 
           IonToolbar, IonButton, IonToast, IonCard, IonCardHeader, 
           IonCardTitle, IonCardContent, IonAlert, IonIcon,
-          IonButtons, IonToggle } from '@ionic/react';
+          IonInput, IonItem } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Setlist } from './DatabaseService';
+import { debounce } from 'lodash';
 import { useHistory, useLocation } from 'react-router-dom';
 import './setlistList.css';
 import './standard.css';
-import { timeOutline, refreshCircleOutline, arrowUpOutline } from 'ionicons/icons';
+import { timeOutline, filterCircleOutline } from 'ionicons/icons';
 
 const setlistList: React.FC = () => {
 
@@ -19,8 +20,9 @@ const setlistList: React.FC = () => {
   const [showToast, setShowToast] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
   const [isAddingSetlist, setIsAddingSetlist] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false); 
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortAscending, setSortAscending] = useState(true);
+  
 
   const history = useHistory();
   const location = useLocation();
@@ -36,13 +38,38 @@ const setlistList: React.FC = () => {
 
   useEffect(() => {
     const fetchShows = async () => {
-      setIsRefreshing(true); // Set the refreshing state to true
       const fetchedSetlists = await DatabaseService.getSetlists();
       setSetlists(fetchedSetlists);
-      setIsRefreshing(false); // Reset the refreshing state when data is fetched
     };
     fetchShows();
   }, [location.pathname]);
+
+  const debouncedSetSearchTerm = debounce((value: string) => setSearchTerm(value), 300);
+
+  const sortSetlists = () => {
+    setSortAscending(!sortAscending);
+    const sortedSetlists = [...setlists].sort((a, b) => {
+      if (sortAscending) {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
+    });
+    setSetlists(sortedSetlists);
+  };
+
+  const filteredSetlists = setlists.filter(setlist => {
+    return setlist.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+  
+  const sortedSetlists = filteredSetlists.sort((a, b) => {
+    if (sortAscending) {
+      return a.title.localeCompare(b.title);
+    } else {
+      return b.title.localeCompare(a.title);
+    }
+  });
+  
 
   const deleteSetlist = (id: number) => {
     setSetlistToDelete(id);
@@ -119,6 +146,21 @@ const setlistList: React.FC = () => {
             {isLoading ? <IonIcon icon={ timeOutline } /> : "Add"} 
           </IonButton>
         </div>
+        <IonItem className='searchBox'>
+          <IonInput
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
+          />
+          <IonItem>
+            <IonIcon 
+              className="sortIcon"
+              style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
+              icon={filterCircleOutline}
+              onClick={sortSetlists}></IonIcon>
+          </IonItem>
+        </IonItem>
 
         <IonList class="mainList">
           {setlists.slice().reverse().map(setlist => (
