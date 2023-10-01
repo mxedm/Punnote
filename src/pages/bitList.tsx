@@ -24,6 +24,8 @@ const bitList: React.FC = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [sortField, setSortField] = useState<string>("created"); 
   const [sortOrder, setSortOrder] = useState<string>("asc"); 
+  const [sortAscending, setSortAscending] = useState(true);
+
 
   const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
 
@@ -51,6 +53,20 @@ const bitList: React.FC = () => {
     setBits(bits => bits.filter(bit => bit.id !== id));
     setBitToDelete(null);
   };
+
+  const sortBits = () => {
+    const currentSortOrder = sortAscending; // Capture the current sort order before changing it
+    setSortAscending(!currentSortOrder); // Toggle the state for the next click
+    const sortedBits = [...filteredBits].sort((a, b) => {
+      if (currentSortOrder) {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
+    });
+    setBits(sortedBits);
+  };
+  
 
   const handleAddBit = (title: string) => {
      if (isAdding) return;
@@ -168,15 +184,18 @@ const bitList: React.FC = () => {
           value={searchTerm}
           onIonInput={e => debouncedSetSearchTerm((e.target as HTMLInputElement).value)} 
         />
+        Sort: 
         <IonItem>
-          <IonIcon 
-            className=""
-            icon={filterCircleOutline}></IonIcon>
+        <IonIcon 
+          className="sortIcon"
+          icon={filterCircleOutline}
+          style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
+          onClick={sortBits}></IonIcon>
         </IonItem>
       </IonItem>
 
       <IonList className='mainList'>
-        {sortedBits.map(bit => (
+        {filteredBits.map(bit => (
           <IonCard key={bit.id}>
             <IonCardHeader>
               <IonCardTitle>{bit.title} {bit.length > 0 ? "(" + formatLength(bit.length) + ")" : ""   }</IonCardTitle>

@@ -53,6 +53,11 @@
     background-color: #202020;
 }
 
+.sortIcon {
+    cursor: pointer;
+    font-size: 24px !important;
+}
+
 .inputWrapper {
     min-height: 95px;
     padding: 16px;
