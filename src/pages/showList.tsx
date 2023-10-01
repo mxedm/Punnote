@@ -21,6 +21,10 @@ const showList: React.FC = () => {
   const [isRefreshing, setIsRefreshing] = useState(false); 
   const history = useHistory();
 
+  const now = new Date();
+  const showDateToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19, 0, 0); 
+
+
   useEffect(() => {
     const fetchShows = async () => {
       const fetchedShows = await DatabaseService.getShows();
@@ -68,7 +72,7 @@ const showList: React.FC = () => {
       title: title,
       venue: "",
       notes: "",
-      showdate: new Date(),
+      showdate: showDateToday,
       setlength: 0,
       compensation: 0,
       mediaurl: "",
@@ -91,21 +95,11 @@ const showList: React.FC = () => {
       <IonHeader>
         <IonToolbar>
 
-          <IonButtons slot="start">
-          <IonButton color="secondary" onClick={() => {
-              if (!isRefreshing) fetchShows(); // Only trigger refresh if not already refreshing
-            }}>
-              <IonIcon icon={refreshCircleOutline}></IonIcon>
-            </IonButton>
-            <IonButton color="secondary">
-              <IonIcon icon={arrowUpOutline}></IonIcon>
-            </IonButton>
-          </IonButtons>
 
           <IonTitle className="titleText">Shows</IonTitle>
 
           <IonButtons slot="end" className="toggleArchiveButton">
-            <span className="archiveLabel">Archives</span>
+            <span className="archiveLabel">Archived</span>
             <IonToggle 
               checked={showArchived} 
               onIonChange={e => setShowArchived(e.detail.checked)} 
@@ -150,8 +144,13 @@ const showList: React.FC = () => {
                 </IonCardTitle>
               </IonCardHeader>
               <IonCardContent>
-              <p>When: {show.showdate && !isNaN(new Date(show.showdate).getTime()) ? new Date(show.showdate).toLocaleString() : "No data."}</p>
-                <div className="rowContainer cardContainer">
+              <p>When:&nbsp;
+                {
+                  show.showdate && !isNaN(new Date(show.showdate).getTime()) 
+                  ? `${new Date(show.showdate).toLocaleDateString()} ${new Date(show.showdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` 
+                  : "No data."
+                }</p>
+          <div className="rowContainer cardContainer">
                   <IonButton 
                     fill="solid"
                     color="primary"
