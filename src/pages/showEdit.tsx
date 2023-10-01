@@ -230,8 +230,6 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
             </div>
-
-
             <div className="flexParent">
               <div className="inputWrapper">
                 <div className="customItem">
@@ -242,6 +240,7 @@ const ShowEdit: React.FC = () => {
                     value={type}
                     onChange={e => setType(e.target.value)}
                   >
+                    <option value="">Not Set</option>
                     <option value="Mic">Mic</option>
                     <option value="Showcase">Showcase</option>
                     <option value="Regular">Regular</option>
@@ -250,8 +249,6 @@ const ShowEdit: React.FC = () => {
                   </select>
                 </div>
               </div>
-
-
               <div className="inputWrapper">
                 <div className='customItem'>
                   <label className="inputLabel">Rating</label>
