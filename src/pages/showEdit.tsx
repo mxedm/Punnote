@@ -345,10 +345,10 @@ const ShowEdit: React.FC = () => {
                     <p className='infoTextModal'>Edits: {revision}</p>
 
                   <h2>Archive?</h2>
-                    <p className='infoTextModal'>This is a toggle for the archive function. 
+                  <p className='infoTextModal'>This is a toggle for the archive function. 
                       This will remove the item from the main list but will not delete it. Archived
-                      items are alaways available by toggling the switch at the top of the respective
-                      type of item list screen(s).
+                      items are always available by toggling the switch at the top of the respective
+                      list screen(s).
                     </p>
                     <IonSegment
                       value={archive ? 'archived' : 'not-archived'}
