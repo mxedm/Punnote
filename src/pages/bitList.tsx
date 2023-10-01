@@ -2,8 +2,7 @@ import {  IonContent, IonHeader, IonItem, IonIcon,
           IonInput, IonPage, IonTitle, 
           IonList, IonToolbar, IonButton, IonToast, 
           IonButtons, IonToggle, IonCard, IonCardContent, 
-          IonCardHeader, IonCardTitle, 
-          IonAlert } from '@ionic/react';
+          IonCardHeader, IonCardTitle, IonAlert } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Bit } from './DatabaseService';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -141,7 +140,7 @@ const bitList: React.FC = () => {
 
     <IonHeader>
       <IonToolbar>
-        <IonTitle slot="start">Bits</IonTitle>
+        <IonTitle className='titleText'>Bits</IonTitle>
         <IonButtons slot="end" className="toggleArchiveButton">
           <span className="archiveLabel">List Archived</span>
           <IonToggle 
