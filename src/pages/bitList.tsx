@@ -22,10 +22,9 @@ const bitList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
-  const [sortField, setSortField] = useState<string>("created"); 
   const [sortOrder, setSortOrder] = useState<string>("asc"); 
   const [sortAscending, setSortAscending] = useState(true);
-
+  const [sortField, setSortField] = useState<string>("title");
 
   const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
 
@@ -35,10 +34,12 @@ const bitList: React.FC = () => {
   useEffect(() => {
     const fetchBits = async () => {
       const fetchedBits = await DatabaseService.getBits();
-      setBits(fetchedBits);
+      const sortedBits = [...fetchedBits].sort((a, b) => a.title.localeCompare(b.title));
+      setBits(sortedBits);
     };
     fetchBits();
   }, [location.pathname]);
+  
 
   const filteredBits = bits.filter(bit => {
     return (
