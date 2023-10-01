@@ -94,10 +94,7 @@ const showList: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-
-
           <IonTitle className="titleText">Shows</IonTitle>
-
           <IonButtons slot="end" className="toggleArchiveButton">
             <span className="archiveLabel">Archived</span>
             <IonToggle 
