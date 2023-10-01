@@ -93,26 +93,10 @@ const setlistList: React.FC = () => {
     <IonPage>
       <IonHeader>
       <IonToolbar>
-
-        <IonButtons slot="start">
-        <IonButton color="secondary" onClick={() => {
-            if (!isRefreshing) fetchSetlists(); // Only trigger refresh if not already refreshing
-          }}>
-            <IonIcon icon={refreshCircleOutline}></IonIcon>
-          </IonButton>
-          <IonButton color="secondary">
-            <IonIcon icon={arrowUpOutline}></IonIcon>
-          </IonButton>
-        </IonButtons>
-
         <IonTitle className="titleText">Setlists</IonTitle>
-
-
-
-        </IonToolbar>
+      </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-
         <div className="inputRow">
           <div className="inputWrapper">
             <div className="customItem">
@@ -126,7 +110,6 @@ const setlistList: React.FC = () => {
               />
             </div>
           </div>
-
           <IonButton
             type="submit"
             className="addButton"
