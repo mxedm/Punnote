@@ -21,24 +21,11 @@ const showList: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const history = useHistory();
-  const [sortOrder, setSortOrder] = useState<string>("asc"); 
   const [sortAscending, setSortAscending] = useState(true);
-  const [sortField, setSortField] = useState<string>("title");
-
   const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
-
 
   const now = new Date();
   const showDateToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19, 0, 0); 
-
-
-  useEffect(() => {
-    const fetchShows = async () => {
-      const fetchedShows = await DatabaseService.getShows();
-      setShows(fetchedShows);
-    };
-    fetchShows();
-  }, [location.pathname]);
 
   useEffect(() => {
     const fetchShows = async () => {
@@ -113,6 +100,7 @@ const showList: React.FC = () => {
   const editShow = (id: number) => {
     history.push(`/showEdit/${id}`);
   };
+
 
   return (
     <IonPage>

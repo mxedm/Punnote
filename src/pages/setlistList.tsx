@@ -22,7 +22,6 @@ const setlistList: React.FC = () => {
   const [isAddingSetlist, setIsAddingSetlist] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortAscending, setSortAscending] = useState(true);
-  
 
   const history = useHistory();
   const location = useLocation();
@@ -33,15 +32,6 @@ const setlistList: React.FC = () => {
       setSetlists(fetchedSetlists);
     };
     fetchSetlists();
-  }, [location.pathname]);
-
-
-  useEffect(() => {
-    const fetchShows = async () => {
-      const fetchedSetlists = await DatabaseService.getSetlists();
-      setSetlists(fetchedSetlists);
-    };
-    fetchShows();
   }, [location.pathname]);
 
   const debouncedSetSearchTerm = debounce((value: string) => setSearchTerm(value), 300);
@@ -61,7 +51,7 @@ const setlistList: React.FC = () => {
   const filteredSetlists = setlists.filter(setlist => {
     return setlist.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
-  
+
   const sortedSetlists = filteredSetlists.sort((a, b) => {
     if (sortAscending) {
       return a.title.localeCompare(b.title);
@@ -69,7 +59,6 @@ const setlistList: React.FC = () => {
       return b.title.localeCompare(a.title);
     }
   });
-  
 
   const deleteSetlist = (id: number) => {
     setSetlistToDelete(id);

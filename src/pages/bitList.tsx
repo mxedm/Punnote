@@ -1,8 +1,7 @@
 import {  IonContent, IonHeader, IonItem, IonIcon, 
-          IonInput, IonPage, IonTitle, 
-          IonList, IonToolbar, IonButton, IonToast, 
-          IonButtons, IonToggle, IonCard, IonCardContent, 
-          IonCardHeader, IonCardTitle, IonAlert } from '@ionic/react';
+          IonInput, IonPage, IonTitle, IonList, IonToolbar, 
+          IonButton, IonToast, IonButtons, IonToggle, IonCard, 
+          IonCardContent, IonCardHeader, IonCardTitle, IonAlert } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import DatabaseService, { Bit } from './DatabaseService';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -21,10 +20,7 @@ const bitList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
-  const [sortOrder, setSortOrder] = useState<string>("asc"); 
   const [sortAscending, setSortAscending] = useState(true);
-  const [sortField, setSortField] = useState<string>("title");
-
   const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
 
   const history = useHistory();
@@ -33,12 +29,10 @@ const bitList: React.FC = () => {
   useEffect(() => {
     const fetchBits = async () => {
       const fetchedBits = await DatabaseService.getBits();
-      const sortedBits = [...fetchedBits].sort((a, b) => a.title.localeCompare(b.title));
-      setBits(sortedBits);
+      setBits(fetchedBits);
     };
     fetchBits();
   }, [location.pathname]);
-  
 
   const filteredBits = bits.filter(bit => {
     return (
@@ -48,12 +42,6 @@ const bitList: React.FC = () => {
     );
   });
   
-  const deleteBit = async (id: number) => {
-    await DatabaseService.removeBit(id);
-    setBits(bits => bits.filter(bit => bit.id !== id));
-    setBitToDelete(null);
-  };
-
   const sortBits = () => {
     const currentSortOrder = sortAscending; // Capture the current sort order before changing it
     setSortAscending(!currentSortOrder); // Toggle the state for the next click
@@ -67,6 +55,13 @@ const bitList: React.FC = () => {
     setBits(sortedBits);
   };
   
+
+  const deleteBit = async (id: number) => {
+    await DatabaseService.removeBit(id);
+    setBits(bits => bits.filter(bit => bit.id !== id));
+    setBitToDelete(null);
+  };
+
 
   const handleAddBit = (title: string) => {
      if (isAdding) return;
@@ -111,30 +106,6 @@ const bitList: React.FC = () => {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const handleSort = (field: string) => {
-    if (sortField === field) {
-      // Toggle the sort order if the same field is clicked again
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      // If a different field is clicked, set it as the new sorting field
-      setSortField(field);
-      setSortOrder("asc"); // Default to ascending order
-    }
-  };
-
-  const sortedBits = filteredBits.slice().sort((a, b) => {
-    const fieldA = a[sortField];
-    const fieldB = b[sortField];
-
-    if (fieldA === fieldB) return 0;
-
-    if (sortOrder === "asc") {
-      return fieldA < fieldB ? -1 : 1;
-    } else {
-      return fieldA > fieldB ? -1 : 1;
-    }
-  });
-
   return (
   <IonPage>
 
@@ -152,8 +123,6 @@ const bitList: React.FC = () => {
     </IonHeader>
 
     <IonContent fullscreen>
-
-      
       <div className="inputRow">
         <div className="inputWrapper">
           <div className="customItem">
