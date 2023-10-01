@@ -132,20 +132,18 @@ const bitEdit: React.FC = () => {
               </div>
 
               <div className="flexParent">
-
                 <div className="inputWrapper">
                   <div className="customItem">
                     <label className="inputLabel">Length (seconds)</label>
                     <input
                       aria-label="Length"
                       className="inputText"
-                      type="text"
+                      type="number"
                       value={length}
                       onChange={e => setLength(Number(e.target.value))}
                     />
                   </div>
                 </div>
-          
                 <div className="inputWrapper">
                   <div className="customItem">
                     <label className="inputLabel">

@@ -152,7 +152,7 @@ const ShowEdit: React.FC = () => {
                 <label className="inputLabel">Date</label>
                 <input
                   aria-label="Date"
-                  className="inputText shortInput"
+                  className="inputText shortInput dateInput"
                   type="text"
                   value={
                     showdate
@@ -211,7 +211,7 @@ const ShowEdit: React.FC = () => {
                   <input
                     aria-label="Set Length"
                     className="inputText"
-                    type="text"
+                    type="number"
                     value={setlength}
                     onChange={e => setSetLength(e.target.value)}
                   />
@@ -223,7 +223,7 @@ const ShowEdit: React.FC = () => {
                   <input
                     aria-label="Compensation"
                     className="inputText"
-                    type="text"
+                    type="number"
                     value={compensation}
                     onChange={e => setCompensation(e.target.value)}
                   />
