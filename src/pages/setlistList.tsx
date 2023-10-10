@@ -97,7 +97,8 @@ const setlistList: React.FC = () => {
       archive: false,
     };
     await DatabaseService.addSetlist(newSetlist as Setlist);
-    setSetlists(prevSetlists => [...prevSetlists, newSetlist as Setlist]);
+    setSetlists(prevSetlists => [newSetlist as Setlist, ...prevSetlists]); 
+    //setSetlists(prevSetlists => [...prevSetlists, newSetlist as Setlist]);
     setSetlistTitle("");
   };
 

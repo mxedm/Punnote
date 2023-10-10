@@ -92,7 +92,8 @@ const bitList: React.FC = () => {
       archive: false
     };
     await DatabaseService.addBit(newBit as Bit);
-    setBits(prevBits => [...prevBits, newBit as Bit]);
+    setBits(prevBits => [newBit as Bit, ...prevBits]); // Add the new bit to the beginning
+    // setBits(prevBits => [...prevBits, newBit as Bit]);
     setBitTitle("");
   }
 

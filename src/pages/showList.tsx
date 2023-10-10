@@ -93,7 +93,8 @@ const showList: React.FC = () => {
       archive: false,
     };
     await DatabaseService.addShow(newShow as Show);
-    setShows(prevShows => [...prevShows, newShow as Show]);
+    setShows(prevShows => [newShow as Show, ...prevShows]); 
+    // setShows(prevShows => [...prevShows, newShow as Show]);
     setShowTitle("");
   };  
 
