@@ -142,6 +142,7 @@ const setlistList: React.FC = () => {
             value={searchTerm}
             onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
           />
+          Sort: 
           <IonItem>
             <IonIcon 
               className="sortIcon"
