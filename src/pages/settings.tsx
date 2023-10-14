@@ -6,6 +6,7 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import DatabaseService from './DatabaseService';
 import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver';
+import { Share } from '@capacitor/share';
 
 
 const Settings: React.FC = () => {
@@ -18,13 +19,21 @@ const Settings: React.FC = () => {
     if (window.Capacitor && window.Capacitor.isNative) {
       // Native device
       try {
-        await Filesystem.writeFile({
-          path: 'backup.csv',
+        const fileName = 'backup.csv';
+        const result = await Filesystem.writeFile({
+          path: fileName,
           data: csv,
-          directory: Directory.Documents,
+          directory: Directory.Cache,  // Use Cache directory for temporary files
           encoding: Encoding.UTF8,
         });
-        alert('Backup completed. Check the download folder.');
+        
+        await Share.share({
+          title: 'Share Backup',
+          text: 'Here is the backup of my data.',
+          url: result.uri,  // This is the path to the saved CSV file
+          dialogTitle: 'Share your backup',
+        });
+  
       } catch (e) {
         alert(`Unable to complete backup: ${e.message}`);
       }
