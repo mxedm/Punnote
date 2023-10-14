@@ -11,6 +11,12 @@
 # production
 /build
 
+# big files
+/caches
+/native
+/wrapper
+/daemon
+
 # misc
 .DS_Store
 .env.local
