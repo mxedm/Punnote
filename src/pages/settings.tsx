@@ -28,10 +28,10 @@ const Settings: React.FC = () => {
         });
         
         await Share.share({
-          title: 'Share Backup',
-          text: 'Here is the backup of my data.',
+          title: 'Punnote Backup Backup',
+          text: 'Here is the backup of the data.',
           url: result.uri,  // This is the path to the saved CSV file
-          dialogTitle: 'Share your backup',
+          dialogTitle: 'Share your backup or save it elsewhere',
         });
   
       } catch (e) {

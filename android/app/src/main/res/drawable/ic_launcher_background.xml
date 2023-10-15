@@ -4,10 +4,10 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-  <group android:scaleX="0.037037037"
-      android:scaleY="0.037037037"
-      android:translateX="-162"
-      android:translateY="-162">
+  <group android:scaleX="0.02962963"
+      android:scaleY="0.02962963"
+      android:translateX="-118.8"
+      android:translateY="-118.8">
       <!-- No paths means a completely transparent background -->
   </group>
 </vector>
