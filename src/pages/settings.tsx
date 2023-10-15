@@ -83,7 +83,7 @@ const Settings: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className="container">
-          <h2>Backup and Restore (IN PROGRESS)</h2>
+          <h2>Backup and Restore</h2>
             <p>Export your data to a CSV file.</p>
               <IonButton 
                 onClick={downloadBackup} 
