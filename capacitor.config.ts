@@ -7,6 +7,10 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https'
   }
+  resources: {
+    icon: 'assets/logo-dark.png',
+    splash: 'assets/splash-dark.png'
+  }
 };
 
 export default config;
