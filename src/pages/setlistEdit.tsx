@@ -75,7 +75,9 @@ const SetlistEdit: React.FC = () => {
       order: maxOrder + 1,
       bitID: bit.id,
       setlistID: Number(id),
-      isPlainText: false,
+      isPlaintext: false,
+      id: 0,
+      plaintext: ''
     };
     await DatabaseService.addSetlistItem(newItem);
     fetchSetlistItems();
