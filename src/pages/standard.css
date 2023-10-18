@@ -100,7 +100,6 @@
     padding: 1% 2% 0 2%;
 }
 
-
 .datePickerModal {
     display: flex;
     flex-direction: column;
@@ -263,8 +262,6 @@
     padding: 0 0 0 2%;
 }
 
-
-
 .customItem {
     display: flex;
     flex-direction: column;
@@ -280,16 +277,6 @@
 
 .inputTextListing {
     width: 80%;
-}
-
-.playElapsedTime {
-    text-align: right;
-    background-color: black;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    padding-right: 10px;
 }
 
 .playWindow {
@@ -362,7 +349,6 @@
 }
 
 .newButton {
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -394,3 +380,17 @@ input[type="number"] {
 .dateInput {
     text-align: left;
 }
+
+.bottom-toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Ensure it's above other content */
+    background-color: #202020;
+  }
+
+.centered-text {
+    text-align: center;
+    background-color: #202020;
+  }
