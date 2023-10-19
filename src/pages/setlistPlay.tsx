@@ -103,7 +103,7 @@ const SetlistPlay: React.FC = () => {
   function formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    console.log(seconds);
+    //console.log(seconds);
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 
