@@ -297,6 +297,7 @@
 
 .playWindow {
     --background: black;
+    padding-bottom: 75px;
 }
 
 .alignRight {
@@ -416,3 +417,4 @@ input[type="number"] {
     margin-right: 2%;
     margin-left: 2%;
 }
+
