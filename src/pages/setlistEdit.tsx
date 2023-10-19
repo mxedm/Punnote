@@ -187,7 +187,6 @@ const SetlistEdit: React.FC = () => {
                     value={formatTime(totalLength)}
                     disabled={true}
                     color='warning'
-
                   />
               </div>
             </div>
@@ -204,10 +203,6 @@ const SetlistEdit: React.FC = () => {
               </div>
             </div>
           </div>
-            
-          
-          
-
           <IonList>
             <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
             {setlistItems.sort((a, b) => a.order - b.order).map((item, index) => {
