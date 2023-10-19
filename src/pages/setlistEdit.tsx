@@ -50,7 +50,8 @@ const SetlistEdit: React.FC = () => {
   const fetchSetlist = async () => {
     const fetchedSetlist = await DatabaseService.getSetlist(Number(id));
     setSetlist(fetchedSetlist);
-    setTitle(fetchedSetlist?.title || '');  // Update the title state here
+    setTitle(fetchedSetlist?.title || '');
+    setGoalLength(fetchedSetlist?.goalLength || 0);  // Update goalLength state variable here
   };
 
   const handleReorder = async (event: CustomEvent<ItemReorderEventDetail>) => {
