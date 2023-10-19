@@ -120,26 +120,26 @@ const SetlistPlay: React.FC = () => {
           {setlistItems
             .sort((a, b) => a.order - b.order)
             .map((item, index) => (
-              <IonItem key={item.id} className={item.isPlaintext ? "playerPlaintext" : "playerBit"}>
+              <IonItem key={item.id} className={item.isPlaintext ? 'playerPlaintext' : 'playerBit'}>
                 <h2>
                   { item.order }:&nbsp; 
                   {item.isPlaintext ? 
                     item.plaintext 
                     : 
-                    `${bits.find(bit => bit.id === item.bitID)?.title} (${isNaN(bits.find(bit => bit.id === item.bitID)?.length) ? "N/A" : formatTime(bits.find(bit => bit.id === item.bitID)?.length)})`
+                    `${bits.find(bit => bit.id === item.bitID)?.title} (${isNaN(bits.find(bit => bit.id === item.bitID)?.length) ? 'N/A' : formatTime(bits.find(bit => bit.id === item.bitID)?.length)})`
                   }
                 </h2>
               </IonItem>
             ))
           }
         <IonToolbar class='bottom-toolbar'>
-          <IonFabButton className="PlayButtons" slot="start" color={playing ? 'warning' : 'primary'} onClick={startTimer}>
+          <IonFabButton className='PlayButtons' slot='start' color={playing ? 'warning' : 'primary'} onClick={startTimer}>
             <IonIcon icon={playing ? pause : play} />
           </IonFabButton>
-          <div className="playElapsedTime">
+          <div className='playElapsedTime'>
             <h3 className='ion-text-center'>Timer: {formatTime(seconds)} / {setlist?.goalLength}:00</h3>
           </div>
-          <IonFabButton className="PlayButtons" color="secondary" slot="end" onClick={resetTimer}>
+          <IonFabButton className='PlayButtons' color='secondary' slot='end' onClick={resetTimer}>
             <IonIcon icon={refresh} />
           </IonFabButton>
         </IonToolbar>
