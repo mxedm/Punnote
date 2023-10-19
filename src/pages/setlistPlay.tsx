@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-          IonContent, IonFab, IonFabButton, useIonViewWillLeave, IonIcon, 
-          IonHeader, IonButton, useIonViewWillEnter, IonPage, IonTitle, 
+          IonContent, IonFabButton, useIonViewWillLeave, IonIcon, 
+          IonHeader, useIonViewWillEnter, IonPage, IonTitle, 
           IonToolbar, IonItem } from '@ionic/react';
 import { play, pause, refresh } from 'ionicons/icons';
 import './setlistPlay.css';
@@ -60,7 +60,7 @@ const SetlistPlay: React.FC = () => {
     }
     setSeconds(0);
     allowSleep();
-    console.log('resetting timer');
+    //console.log('resetting timer');
     setPlaying(false);
   };
 
@@ -75,7 +75,7 @@ const SetlistPlay: React.FC = () => {
       setTimer(null);
     }
     keepAwake();
-    console.log('starting timer');
+    //console.log('starting timer');
     setPlaying(!timer); 
   };
 
@@ -103,6 +103,7 @@ const SetlistPlay: React.FC = () => {
   function formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
+    console.log(seconds);
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 
@@ -111,7 +112,7 @@ const SetlistPlay: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-              Play: {setlist ? setlist.title : 'Loading...'} ({formatTime(totalLength)})
+              Play: {setlist ? setlist.title : 'Loading...'}
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -120,32 +121,29 @@ const SetlistPlay: React.FC = () => {
             .sort((a, b) => a.order - b.order)
             .map((item, index) => (
               <IonItem key={item.id} className={item.isPlaintext ? "playerPlaintext" : "playerBit"}>
-                <h2>{ item.order }:&nbsp; 
+                <h2>
+                  { item.order }:&nbsp; 
                   {item.isPlaintext ? 
                     item.plaintext 
                     : 
-                    bits.find(bit => bit.id === item.bitID)?.title
+                    `${bits.find(bit => bit.id === item.bitID)?.title} (${isNaN(bits.find(bit => bit.id === item.bitID)?.length) ? "N/A" : formatTime(bits.find(bit => bit.id === item.bitID)?.length)})`
                   }
                 </h2>
               </IonItem>
-            ))}
-
-      <IonFab vertical="bottom" horizontal="center" slot="fixed">
-        <IonFabButton color={playing ? 'warning' : 'primary'} onClick={startTimer}>
-          <IonIcon icon={playing ? pause : play} />
-        </IonFabButton>
-      </IonFab>
-      <IonFab vertical="bottom" horizontal="start" slot="fixed">
-        <IonFabButton color="secondary" onClick={resetTimer}>
-          <IonIcon icon={refresh} />
-        </IonFabButton>
-      </IonFab>
-
-      <div className="playElapsedTime">
-        <h3>Timer <br /> {formatTime(seconds)}</h3>
-      </div>
+            ))
+          }
+        <IonToolbar class='bottom-toolbar'>
+          <IonFabButton className="PlayButtons" slot="start" color={playing ? 'warning' : 'primary'} onClick={startTimer}>
+            <IonIcon icon={playing ? pause : play} />
+          </IonFabButton>
+          <div className="playElapsedTime">
+            <h3 className='ion-text-center'>Timer: {formatTime(seconds)} / {setlist?.goalLength}:00</h3>
+          </div>
+          <IonFabButton className="PlayButtons" color="secondary" slot="end" onClick={resetTimer}>
+            <IonIcon icon={refresh} />
+          </IonFabButton>
+        </IonToolbar>
       </IonContent>
-
     </IonPage>
   );
 };
