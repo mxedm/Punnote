@@ -410,3 +410,9 @@ input[type="number"] {
     text-align: center;
     background-color: #202020;
   }
+
+
+.PlayButtons {
+    margin-right: 2%;
+    margin-left: 2%;
+}
