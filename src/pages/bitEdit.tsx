@@ -69,7 +69,7 @@ const bitEdit: React.FC = () => {
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <IonIcon
-          className="goldenStar"
+          className='goldenStar'
           key={i}
           icon={i <= rating ? star : starOutline}
           onClick={() => setRating(i)}
@@ -92,61 +92,61 @@ const bitEdit: React.FC = () => {
       {bit && (
           <>
             <div>
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Title</label>
+              <div className='inputWrapper'>
+                <div className='customItem'>
+                  <label className='inputLabel'>Title</label>
                   <input
-                    aria-label="Title"
-                    className="inputText"
-                    type="text"
+                    aria-label='Title'
+                    className='inputText'
+                    type='text'
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Content</label>
+              <div className='inputWrapper'>
+                <div className='customItem'>
+                  <label className='inputLabel'>Content</label>
                   <textarea
-                    aria-label="Content"
-                    className="inputTextarea" 
-                    rows="15"
+                    aria-label='Content'
+                    className='inputTextarea' 
+                    rows='15'
                     value={content}
                     onChange={e => setContent(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Notes</label>
+              <div className='inputWrapper'>
+                <div className='customItem'>
+                  <label className='inputLabel'>Notes</label>
                   <input
-                    aria-label="Bit Notes"
-                    className="inputText"
-                    type="text"
+                    aria-label='Bit Notes'
+                    className='inputText'
+                    type='text'
                     value={notes}
                     onChange={e => setNotes(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className="flexParent">
-                <div className="inputWrapper">
-                  <div className="customItem">
-                    <label className="inputLabel">Length (seconds)</label>
+              <div className='flexParent'>
+                <div className='inputWrapper'>
+                  <div className='customItem'>
+                    <label className='inputLabel'>Length (seconds)</label>
                     <input
-                      aria-label="Length"
-                      className="inputText"
-                      type="number"
+                      aria-label='Length'
+                      className='inputText'
+                      type='number'
                       value={length}
                       onChange={e => setLength(Number(e.target.value))}
                     />
                   </div>
                 </div>
-                <div className="inputWrapper">
-                  <div className="customItem">
-                    <label className="inputLabel">
+                <div className='inputWrapper'>
+                  <div className='customItem'>
+                    <label className='inputLabel'>
                       Rating
                     </label>
                     <div className='inputText'>{renderRating()}</div>
@@ -155,18 +155,18 @@ const bitEdit: React.FC = () => {
               </div>
 
               <div className='buttonContainer'>
-                <IonButton shape="round" color="success" onClick={updateBit}>Save</IonButton> {/* Save button */}
-                <IonButton shape="round" onClick={() => {
+                <IonButton shape='round' color='success' onClick={updateBit}>Save</IonButton> {/* Save button */}
+                <IonButton shape='round' onClick={() => {
                   setInfoModal(true);
                 }}>Info</IonButton>
 
-                <IonButton shape="round" color="warning" className='hidden' onClick={() => history.push('/bitList')}>Close</IonButton>
+                <IonButton shape='round' color='warning' className='hidden' onClick={() => history.push('/bitList')}>Close</IonButton>
               </div>
 
               <IonModal isOpen={infoModal} 
                 className=''>
-              <div className="inputWrapper">
-                <div className="customItem">
+              <div className='inputWrapper'>
+                <div className='customItem'>
                   <IonText>
                   <h2>Bit Info</h2>
                     <p className='infoTextModal'>Created: {created.toLocaleString()}</p>
@@ -183,10 +183,10 @@ const bitEdit: React.FC = () => {
                       value={archive ? 'archived' : 'not-archived'}
                       onIonChange={(e) => setArchive(e.detail.value === 'archived')}
                     >
-                      <IonSegmentButton value="archived">
+                      <IonSegmentButton value='archived'>
                         <IonLabel>Archived</IonLabel>
                       </IonSegmentButton>
-                      <IonSegmentButton value="not-archived">
+                      <IonSegmentButton value='not-archived'>
                         <IonLabel>Not Archived</IonLabel>
                       </IonSegmentButton>
                     </IonSegment>
@@ -194,7 +194,7 @@ const bitEdit: React.FC = () => {
                 </div>
               </div>
 
-              <IonButton shape="round" onClick={() => {
+              <IonButton shape='round' onClick={() => {
                   setInfoModal(false);
               }}>close</IonButton>
             </IonModal>

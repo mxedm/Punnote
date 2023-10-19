@@ -12,12 +12,12 @@ import { timeOutline, filterCircleOutline } from 'ionicons/icons';
 
 const bitList: React.FC = () => {
   const [bits, setBits] = useState<Bit[]>([]);
-  const [bitTitle, setBitTitle] = useState("");
-  const [toastMessage, setToastMessage] = useState("");
+  const [bitTitle, setBitTitle] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
   const [bitToast, setBitToast] = useState(false);
   const [bitToDelete, setBitToDelete] = useState<number | null>(null);
   const [bitArchived, setBitArchived] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [sortAscending, setSortAscending] = useState(true);
@@ -68,7 +68,7 @@ const bitList: React.FC = () => {
   
     setIsAdding(true);   
     if (title.length === 0) {
-      setToastMessage("Please enter a bit title");
+      setToastMessage('Please enter a bit title');
       setBitToast(true);
       setIsAdding(false);
       return;
@@ -85,8 +85,8 @@ const bitList: React.FC = () => {
     const newBit: Partial<Bit> = {
       id: Date.now(),
       title: title,
-      content: "",
-      notes: "",
+      content: '',
+      notes: '',
       length: 0,
       rating: 0,
       archive: false
@@ -94,7 +94,7 @@ const bitList: React.FC = () => {
     await DatabaseService.addBit(newBit as Bit);
     setBits(prevBits => [newBit as Bit, ...prevBits]); // Add the new bit to the beginning
     // setBits(prevBits => [...prevBits, newBit as Bit]);
-    setBitTitle("");
+    setBitTitle('');
   }
 
   const editBit = (id: number) => {
@@ -113,8 +113,8 @@ const bitList: React.FC = () => {
     <IonHeader>
       <IonToolbar>
         <IonTitle className='titleText'>Bits</IonTitle>
-        <IonButtons slot="end" className="toggleArchiveButton">
-          <span className="archiveLabel">List Archived</span>
+        <IonButtons slot='end' className='toggleArchiveButton'>
+          <span className='archiveLabel'>List Archived</span>
           <IonToggle 
             checked={bitArchived} 
             onIonChange={e => setBitArchived(e.detail.checked)} 
@@ -124,40 +124,40 @@ const bitList: React.FC = () => {
     </IonHeader>
 
     <IonContent fullscreen>
-      <div className="inputRow">
-        <div className="inputWrapper">
-          <div className="customItem">
-            <label className="inputLabel">Bit Name</label>
+      <div className='inputRow'>
+        <div className='inputWrapper'>
+          <div className='customItem'>
+            <label className='inputLabel'>Bit Name</label>
             <input
-              aria-label="Bit Name"
-              className="inputText inputTextListing"
-              placeholder="Enter New Bit Name Here"
+              aria-label='Bit Name'
+              className='inputText inputTextListing'
+              placeholder='Enter New Bit Name Here'
               value={bitTitle}
               onChange={e => setBitTitle(e.target.value)}
             />
           </div>
         </div>
         <IonButton
-          type="submit"
-          className="addButton"
+          type='submit'
+          className='addButton'
           disabled={isLoading || bitTitle.trim() === ''} 
           onClick={() => handleAddBit(bitTitle)}
         >
-          {isLoading ? <IonIcon icon={timeOutline} /> : "Add"} 
+          {isLoading ? <IonIcon icon={timeOutline} /> : 'Add'} 
         </IonButton>
       </div>
 
       <IonItem className='searchBox'>
         <IonInput
-          type="text"
-          placeholder="Search..."
+          type='text'
+          placeholder='Search...'
           value={searchTerm}
           onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
         />
         Sort: 
         <IonItem>
         <IonIcon 
-          className="sortIcon"
+          className='sortIcon'
           icon={filterCircleOutline}
           style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
           onClick={sortBits}></IonIcon>
@@ -168,26 +168,26 @@ const bitList: React.FC = () => {
         {filteredBits.map(bit => (
           <IonCard key={bit.id}>
             <IonCardHeader>
-              <IonCardTitle>{bit.title} {bit.length > 0 ? "(" + formatLength(bit.length) + ")" : ""   }</IonCardTitle>
+              <IonCardTitle>{bit.title} {bit.length > 0 ? '(' + formatLength(bit.length) + ')' : ''   }</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
               {bit.content && (
-                <span className="bitCardContentParagraph">
-                  {bit.content.length > 60 ? bit.content.substr(0, 60) + "..." : bit.content}
+                <span className='bitCardContentParagraph'>
+                  {bit.content.length > 60 ? bit.content.substr(0, 60) + '...' : bit.content}
                 </span>
               )}
-              <div className="rowContainer cardContainer">
+              <div className='rowContainer cardContainer'>
                 <IonButton
-                  className=""
-                  fill="solid"
-                  color="primary"
+                  className=''
+                  fill='solid'
+                  color='primary'
                   onClick={() => editBit(bit.id)}
                 >
                 edit
                 </IonButton>
                 <IonButton
-                  className=""
-                  color="danger"
+                  className=''
+                  color='danger'
                   onClick={() => setBitToDelete(bit.id)} 
                 >
                 delete

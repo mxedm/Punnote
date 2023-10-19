@@ -13,14 +13,14 @@ import { timeOutline, filterCircleOutline } from 'ionicons/icons';
 const setlistList: React.FC = () => {
 
   const [setlists, setSetlists] = useState<Setlist[]>([]);
-  const [setlistTitle, setSetlistTitle] = useState("");
-  const [toastMessage, setToastMessage] = useState(""); 
+  const [setlistTitle, setSetlistTitle] = useState('');
+  const [toastMessage, setToastMessage] = useState(''); 
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [setlistToDelete, setSetlistToDelete] = useState<number | null>(null);
   const [showToast, setShowToast] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
   const [isAddingSetlist, setIsAddingSetlist] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [sortAscending, setSortAscending] = useState(true);
 
   const history = useHistory();
@@ -77,7 +77,7 @@ const setlistList: React.FC = () => {
     if (isAddingSetlist) return;
     setIsAddingSetlist(true); 
     if (title.length === 0) {
-      setToastMessage("Please enter a setlist title");
+      setToastMessage('Please enter a setlist title');
       setShowToast(true); 
       setIsAddingSetlist(false); 
       return;
@@ -99,7 +99,7 @@ const setlistList: React.FC = () => {
     await DatabaseService.addSetlist(newSetlist as Setlist);
     setSetlists(prevSetlists => [newSetlist as Setlist, ...prevSetlists]); 
     //setSetlists(prevSetlists => [...prevSetlists, newSetlist as Setlist]);
-    setSetlistTitle("");
+    setSetlistTitle('');
   };
 
   const editSetlist = (id: number) => {
@@ -110,50 +110,50 @@ const setlistList: React.FC = () => {
     <IonPage>
       <IonHeader>
       <IonToolbar>
-        <IonTitle className="titleText">Setlists</IonTitle>
+        <IonTitle className='titleText'>Setlists</IonTitle>
       </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <div className="inputRow">
-          <div className="inputWrapper">
-            <div className="customItem">
-              <label className="inputLabel">Setlist Name</label>
+        <div className='inputRow'>
+          <div className='inputWrapper'>
+            <div className='customItem'>
+              <label className='inputLabel'>Setlist Name</label>
               <input
-                aria-label="Setlist Name"
-                className="inputText inputTextListing"
-                placeholder="Enter Setlist Name Here"
+                aria-label='Setlist Name'
+                className='inputText inputTextListing'
+                placeholder='Enter Setlist Name Here'
                 value={setlistTitle}
                 onChange={e => setSetlistTitle(e.target.value)}
               />
             </div>
           </div>
           <IonButton
-            type="submit"
-            className="addButton"
+            type='submit'
+            className='addButton'
             disabled={isLoading || setlistTitle.trim() === ''} 
             onClick={() => handleAddSetlist(setlistTitle)}
           >
-            {isLoading ? <IonIcon icon={ timeOutline } /> : "Add"} 
+            {isLoading ? <IonIcon icon={ timeOutline } /> : 'Add'} 
           </IonButton>
         </div>
         <IonItem className='searchBox'>
           <IonInput
-            type="text"
-            placeholder="Search..."
+            type='text'
+            placeholder='Search...'
             value={searchTerm}
             onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
           />
           Sort: 
           <IonItem>
             <IonIcon 
-              className="sortIcon"
+              className='sortIcon'
               style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
               icon={filterCircleOutline}
               onClick={sortSetlists}></IonIcon>
           </IonItem>
         </IonItem>
 
-        <IonList class="mainList">
+        <IonList class='mainList'>
           {setlists.slice().reverse().map(setlist => (
             <IonCard key={setlist.id}>
               <IonCardHeader>
@@ -162,18 +162,18 @@ const setlistList: React.FC = () => {
                 </IonCardTitle>
               </IonCardHeader>
               <IonCardContent>
-              <div className="rowContainer cardContainer">
+              <div className='rowContainer cardContainer'>
                 <IonButton 
-                  className=""
-                  color="primary"
-                  slot="end"
+                  className=''
+                  color='primary'
+                  slot='end'
                   onClick={() => editSetlist(setlist.id)}
                 >
                   Edit
                 </IonButton>
                 <IonButton 
-                  className=""
-                  color="danger"
+                  className=''
+                  color='danger'
                   onClick={() => deleteSetlist(setlist.id)} 
                   >
                   delete
