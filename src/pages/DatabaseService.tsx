@@ -26,6 +26,7 @@ export interface SetlistItem {
 export interface Setlist {
   id: number;
   title: string;
+  goalLength?: number;
   archive: boolean;
   created: Date;
   modified: Date;
@@ -148,6 +149,7 @@ class DatabaseService {
       setlist.archive = false;
       setlist.created = new Date();
       setlist.modified = new Date();
+      setlist.goalLength = 0;
       setlist.revision = 0;
       setlists.push(setlist); 
     }

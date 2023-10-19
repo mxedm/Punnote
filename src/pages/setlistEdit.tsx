@@ -20,6 +20,7 @@ const SetlistEdit: React.FC = () => {
   const [bits, setBits] = useState<Bit[]>([]);
   const [showBitList, setShowBitList] = useState(false);
   const [title, setTitle] = useState('');
+  const [goalLength, setGoalLength] = useState(0)
   const [setlist, setSetlist] = useState<Setlist | null>(null);
   const [presentToast] = useIonToast();
 
@@ -126,12 +127,12 @@ const SetlistEdit: React.FC = () => {
     history.push(`/SetlistPlay/${id}`);
   };
 
-
   const updateSetlist = async () => {
     if (setlist) {
       const updatedSetlist = {
         ...setlist,
-        title
+        title,
+        goalLength
       };
       await DatabaseService.editSetlist(updatedSetlist);
       setSetlist(updatedSetlist); // Update the state
@@ -143,7 +144,7 @@ const SetlistEdit: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>{setlist?.title || 'Setlist Edit' } ({formatTime(totalLength)})</IonTitle>
+          <IonTitle>{setlist?.title || 'Setlist Edit' } </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -152,7 +153,7 @@ const SetlistEdit: React.FC = () => {
           <div className="inputRow">
             <div className="inputWrapper">
               <div className="customItem">
-                <label className="inputLabel">Title:</label>
+                <label className="inputLabel">Title</label>
                 <input
                   aria-label="Title"
                   className="inputText inputTextListing"
@@ -162,15 +163,50 @@ const SetlistEdit: React.FC = () => {
                 />
               </div>
             </div>
-            <div>
-              <IonButton
-                shape='round'
-                onClick={updateSetlist}
-                >
-                Update
-              </IonButton>
+          </div>
+          <div className="flexParent">
+            <div className="inputWrapper">
+              <div className="customItem">
+                <label className="inputLabel">Goal Length (Min)</label>
+                  <input
+                    aria-label="Goal Length (Min)"
+                    className="inputTextRight"
+                    type="number"
+                    value={goalLength}
+                    onChange={e => setGoalLength(e.target.value)}
+                  />
+              </div>
+            </div>
+            <div className="inputWrapper">
+              <div className='customItem'>
+                <label className="inputLabel">Bit Time Total</label>
+                  <input
+                    aria-label="Current Joke Time Sum"
+                    className="inputTextRight grayText"
+                    type="text"
+                    value={formatTime(totalLength)}
+                    disabled={true}
+                    color='warning'
+
+                  />
+              </div>
+            </div>
+            <div className='inputWrapper'>
+            <div className='customItem'>
+              <div>
+                <IonButton
+                  shape='round'
+                  onClick={updateSetlist}
+                  >
+                  Update
+                </IonButton>
+              </div>
+              </div>
             </div>
           </div>
+            
+          
+          
 
           <IonList>
             <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
