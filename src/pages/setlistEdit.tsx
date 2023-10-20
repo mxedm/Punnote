@@ -110,8 +110,15 @@ const SetlistEdit: React.FC = () => {
 
   const removeSetlistItem = async (itemId: number) => {
     await DatabaseService.removeSetlistItem(itemId);
-    fetchSetlistItems();
+    const updatedSetlistItems = setlistItems.filter(item => item.id !== itemId);
+    // Renumber the remaining items
+    for (let i = 0; i < updatedSetlistItems.length; i++) {
+      updatedSetlistItems[i].order = i + 1;
+      await DatabaseService.updateSetlistItemOrder(updatedSetlistItems[i].id, i + 1);
+    }
+    setSetlistItems(updatedSetlistItems);
   };
+  
 
   const totalLength = setlistItems.reduce((total, item) => {
     const correspondingBit = bits.find(bit => bit.id === item.bitID);
