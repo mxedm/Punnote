@@ -109,9 +109,7 @@ const SetlistPlay: React.FC = () => {
             clearInterval(scrollInterval.current!);
             return;
           }
-  
           // console.log("Scrolling step:", currentInterval);
-  
           scrollElement.scrollBy(0, scrollStep);
           currentInterval++;
         }, timeInterval * 1000);
@@ -130,8 +128,6 @@ const SetlistPlay: React.FC = () => {
     keepAwake();
     setPlaying(!timer);
   };
-  
-  
 
   const fetchBits = async () => {
     const fetchedBits = await DatabaseService.getBits();
