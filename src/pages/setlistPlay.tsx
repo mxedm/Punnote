@@ -20,6 +20,8 @@ const SetlistPlay: React.FC = () => {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [playing, setPlaying] = useState(false);
   const interval = useRef<NodeJS.Timeout | null>(null);
+  const itemListRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
     return () => {
@@ -29,6 +31,10 @@ const SetlistPlay: React.FC = () => {
     };
   }, []);
   
+  if (itemListRef.current) {
+    const height = itemListRef.current.offsetHeight;
+  }
+
   useEffect(() => {
     return () => {
       if(timer !== null) {
@@ -64,20 +70,68 @@ const SetlistPlay: React.FC = () => {
     setPlaying(false);
   };
 
-  const startTimer = () => {
+  const scrollInterval = useRef<NodeJS.Timeout | null>(null);
+
+
+  const startTimer = async () => {
     if (!timer) {
       const newTimer = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
       }, 1000);
       setTimer(newTimer);
+  
+      if (contentRef.current && setlist?.goalLength) {
+        const goalLengthInSeconds = Number(setlist.goalLength) * 60;
+        const numberOfIntervals = 100;
+        const timeInterval = goalLengthInSeconds / numberOfIntervals;
+  
+        // Await the scroll element
+        const scrollElement = await contentRef.current.getScrollElement();
+  
+        const distanceToBottom = scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight;
+        const scrollStep = distanceToBottom / numberOfIntervals;
+  
+        /* 
+        console.log("Starting scroll with:", {
+          goalLengthInSeconds,
+          numberOfIntervals,
+          timeInterval,
+          distanceToBottom,
+          scrollStep,
+        }); 
+        */
+
+        let currentInterval = 0;
+  
+        // Store the interval ID in the ref
+        scrollInterval.current = setInterval(() => {
+          if (currentInterval >= numberOfIntervals) {
+            clearInterval(scrollInterval.current!);
+            return;
+          }
+  
+          // console.log("Scrolling step:", currentInterval);
+  
+          scrollElement.scrollBy(0, scrollStep);
+          currentInterval++;
+        }, timeInterval * 1000);
+      }
     } else {
       clearInterval(timer);
       setTimer(null);
+  
+      // Clear the scrolling interval if it exists
+      if (scrollInterval.current) {
+        clearInterval(scrollInterval.current);
+        scrollInterval.current = null;
+      }
     }
+  
     keepAwake();
-    //console.log('starting timer');
-    setPlaying(!timer); 
+    setPlaying(!timer);
   };
+  
+  
 
   const fetchBits = async () => {
     const fetchedBits = await DatabaseService.getBits();
@@ -116,22 +170,24 @@ const SetlistPlay: React.FC = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className='playWindow'>
-          {setlistItems
-            .sort((a, b) => a.order - b.order)
-            .map((item, index) => (
-              <IonItem key={item.id} className={item.isPlaintext ? 'playerPlaintext' : 'playerBit'}>
-                <h2>
-                  { item.order }:&nbsp; 
-                  {item.isPlaintext ? 
-                    item.plaintext 
-                    : 
-                    `${bits.find(bit => bit.id === item.bitID)?.title} (${isNaN(bits.find(bit => bit.id === item.bitID)?.length) ? 'N/A' : formatTime(bits.find(bit => bit.id === item.bitID)?.length)})`
-                  }
-                </h2>
-              </IonItem>
-            ))
-          }
+      <IonContent fullscreen className='playWindow' ref={contentRef}>
+        <div id='itemList' ref={itemListRef}>
+            {setlistItems
+              .sort((a, b) => a.order - b.order)
+              .map((item, index) => (
+                <IonItem key={item.id} className={item.isPlaintext ? 'playerPlaintext' : 'playerBit'}>
+                  <h2>
+                    { item.order }:&nbsp; 
+                    {item.isPlaintext ? 
+                      item.plaintext 
+                      : 
+                      `${bits.find(bit => bit.id === item.bitID)?.title} (${isNaN(bits.find(bit => bit.id === item.bitID)?.length) ? 'N/A' : formatTime(bits.find(bit => bit.id === item.bitID)?.length)})`
+                    }
+                  </h2>
+                </IonItem>
+              ))
+            }
+          </div>
         <IonToolbar class='bottom-toolbar'>
           <IonFabButton className='PlayButtons' slot='start' color={playing ? 'warning' : 'primary'} onClick={startTimer}>
             <IonIcon icon={playing ? pause : play} />
