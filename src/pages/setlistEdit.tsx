@@ -158,56 +158,44 @@ const SetlistEdit: React.FC = () => {
       <IonContent fullscreen>
         <div>
         <div className='editWindow'>
-          <div className="inputRow">
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Title</label>
+          <div className='inputRow'>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>Title</label>
                 <input
-                  aria-label="Title"
-                  className="inputText inputTextListing"
-                  type="text"
+                  aria-label='Title'
+                  className='inputText inputTextListing'
+                  type='text'
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                 />
               </div>
             </div>
           </div>
-          <div className="flexParent">
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Goal Length (Min)</label>
+          <div className='flexParent'>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>Goal Length (Min)</label>
                   <input
-                    aria-label="Goal Length (Min)"
-                    className="inputTextRight"
-                    type="number"
+                    aria-label='Goal Length (Min)'
+                    className='inputTextRight'
+                    type='number'
                     value={goalLength}
                     onChange={e => setGoalLength(e.target.value)}
                   />
               </div>
             </div>
-            <div className="inputWrapper">
+            <div className='inputWrapper'>
               <div className='customItem'>
-                <label className="inputLabel">Bit Time Total</label>
+                <label className='inputLabel'>Bit Time Total</label>
                   <input
-                    aria-label="Current Joke Time Sum"
-                    className="inputTextRight grayText"
-                    type="text"
+                    aria-label='Current Joke Time Sum'
+                    className='inputTextRight grayText'
+                    type='text'
                     value={formatTime(totalLength)}
                     disabled={true}
                     color='warning'
                   />
-              </div>
-            </div>
-            <div className='inputWrapper'>
-            <div className='customItem'>
-              <div>
-                <IonButton
-                  shape='round'
-                  onClick={updateSetlist}
-                  >
-                  Update
-                </IonButton>
-              </div>
               </div>
             </div>
           </div>
@@ -217,31 +205,31 @@ const SetlistEdit: React.FC = () => {
               if (item.isPlaintext) {
                 return (
                   <IonItem key={index} className='setlistTextItem'>
-                    <IonButton onClick={() => removeSetlistItem(item.id)} color="danger" className='removeButton' shape='round'>
+                    <IonButton onClick={() => removeSetlistItem(item.id)} color='danger' className='removeButton' shape='round'>
                     <IonIcon icon={closeCircle} />
                     </IonButton>
                       [ {item.plaintext} ]
-                    <IonReorder slot="end" />
+                    <IonReorder slot='end' />
                   </IonItem>
                 );
               }
               const correspondingBit = bits.find(bit => bit.id === item.bitID);
               return (
                 <IonItem key={index}>
-                  <IonButton onClick={() => removeSetlistItem(item.id)} color="danger" className='removeButton' shape='round'>
+                  <IonButton onClick={() => removeSetlistItem(item.id)} color='danger' className='removeButton' shape='round'>
                     <IonIcon icon={closeCircle} />
                   </IonButton>
-                    {correspondingBit?.title || "No title found"} ({isNaN(correspondingBit?.length) ? "N/A" : formatTime(correspondingBit?.length)})
-                  <IonReorder slot="end" />
+                    {correspondingBit?.title || 'No title found'} ({isNaN(correspondingBit?.length) ? 'N/A' : formatTime(correspondingBit?.length)})
+                  <IonReorder slot='end' />
                 </IonItem>
               );
             })}
             </IonReorderGroup>
           </IonList>
 
-          <div className="rowContainer">
-            <IonInput value={inputValue} placeholder="Insert freeform text" onIonChange={e => setInputValue(e.detail.value!)} />
-            <IonButton onClick={addPlaintextItem} shape="round">
+          <div className='rowContainer'>
+            <IonInput value={inputValue} placeholder='Insert freeform text' onIonChange={e => setInputValue(e.detail.value!)} />
+            <IonButton onClick={addPlaintextItem} shape='round'>
               Add Text
             </IonButton>
           </div>
@@ -269,26 +257,35 @@ const SetlistEdit: React.FC = () => {
         </div>
 
 
-      <div className='buttonContainer'>
-        <IonButton 
-          shape="round" 
-          className="playButton" 
-          color={'tertiary'}
-          onClick={goToSetlistPlay}
-        >
-          play
-        </IonButton>
-        <IonButton 
-          shape="round" 
-          className="newButton" 
+        <div className='buttonContainer'>
+          <IonButton
+            shape='round'
+            onClick={updateSetlist}
+            slot='start'
+          >
+            Save
+          </IonButton>
 
-          color={bits.every(bit => setlistItems.some(item => item.bitID === bit.id)) ? "danger" : "primary"} 
-          disabled={bits.every(bit => setlistItems.some(item => item.bitID === bit.id))}
-          onClick={() => setShowBitList(!showBitList)}
-        >
-          Add Joke
-        </IonButton>
-      </div>
+          <IonButton 
+            shape='round' 
+            className='playButton' 
+            color={'tertiary'}
+            onClick={goToSetlistPlay}
+          >
+            play
+          </IonButton>
+          <IonButton 
+            shape='round' 
+            className='newButton' 
+
+            color={bits.every(bit => setlistItems.some(item => item.bitID === bit.id)) ? 'danger' : 'primary'} 
+            disabled={bits.every(bit => setlistItems.some(item => item.bitID === bit.id))}
+            onClick={() => setShowBitList(!showBitList)}
+          >
+            Add Joke
+          </IonButton>
+        </div>
+          <p className='ion-text-center'>(List changes are automatically saved.)</p>
       </div>
       </IonContent>
     </IonPage>
