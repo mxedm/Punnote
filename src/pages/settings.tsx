@@ -84,29 +84,16 @@ const Settings: React.FC = () => {
       <IonContent fullscreen>
         <div className="container">
           <h2>Backup and Restore</h2>
-            <p>Export your data to a CSV file.</p>
+            <p>Export your data to a CSV file. Do this regularly.</p>
               <IonButton 
                 onClick={downloadBackup} 
                 className='settingsButtons'
                 >
                   Backup Data
-                </IonButton>
+              </IonButton>
             <p>Restore your data from a CSV file.</p>
-          <input 
-            type="file" 
-            accept=".csv" 
-            ref={fileInputRef} 
-            className='hidden'
-            onChange={handleFileChange}
-          />
-          <div className='rowContainer'>
-          <input 
-            type="file" 
-            accept=".csv" 
-            ref={fileInputRef} 
-            className='hidden'
-            onChange={handleFileChange}
-          />
+
+
           <div className='rowContainer'>
             <IonButton 
               onClick={triggerFileInput} 
@@ -122,7 +109,7 @@ const Settings: React.FC = () => {
             >
               Restore Data
             </IonButton>
-          </div>
+
         </div>
         <div className='statusLine'>
           {restoreStatus && <p>{restoreStatus}</p>} 
@@ -132,7 +119,7 @@ const Settings: React.FC = () => {
           <p>To Do</p>          
         <h3>About</h3>
           <p>Punnote is an app. Duh. Use it for any performance. IDC. Do what you want.</p>
-
+          <p>If you want, find ways to support development at <a href="http://punnote.queercoded.com">punnote.queercoded.com</a>.</p>
         </div>
       </IonContent>
     </IonPage>
