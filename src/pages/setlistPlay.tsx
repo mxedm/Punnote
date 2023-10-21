@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
           IonContent, IonFabButton, useIonViewWillLeave, IonIcon, 
           IonHeader, useIonViewWillEnter, IonPage, IonTitle, 
-          IonToolbar, IonItem } from '@ionic/react';
+          IonToolbar, IonItem, IonButtons, IonToggle } from '@ionic/react';
 import { play, pause, refresh } from 'ionicons/icons';
 import './setlistPlay.css';
 import './standard.css';
@@ -17,11 +17,13 @@ const SetlistPlay: React.FC = () => {
   const [bits, setBits] = useState<Bit[]>([]);
   const [setlist, setSetlist] = useState<Setlist | null>(null);
   const [seconds, setSeconds] = useState(0);
+  const [autoScroll, setAutoScroll] = useState(true);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [playing, setPlaying] = useState(false);
   const interval = useRef<NodeJS.Timeout | null>(null);
   const itemListRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef(null);
+  
 
   useEffect(() => {
     return () => {
@@ -80,40 +82,33 @@ const SetlistPlay: React.FC = () => {
       }, 1000);
       setTimer(newTimer);
   
-      if (contentRef.current && setlist?.goalLength) {
-        const goalLengthInSeconds = Number(setlist.goalLength) * 60;
-        const numberOfIntervals = 100;
-        const timeInterval = goalLengthInSeconds / numberOfIntervals;
+      // Only proceed with auto-scrolling if autoScroll is true
+      if (autoScroll) {
+        if (contentRef.current && setlist?.goalLength) {
+          const goalLengthInSeconds = Number(setlist.goalLength) * 60;
+          const numberOfIntervals = 100;
+          const timeInterval = goalLengthInSeconds / numberOfIntervals;
   
-        // Await the scroll element
-        const scrollElement = await contentRef.current.getScrollElement();
+          // Await the scroll element
+          const scrollElement = await contentRef.current.getScrollElement();
   
-        const distanceToBottom = scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight;
-        const scrollStep = distanceToBottom / numberOfIntervals;
+          const distanceToBottom = scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight;
+          const scrollStep = distanceToBottom / numberOfIntervals;
   
-        /* 
-        console.log("Starting scroll with:", {
-          goalLengthInSeconds,
-          numberOfIntervals,
-          timeInterval,
-          distanceToBottom,
-          scrollStep,
-        }); 
-        */
-
-        let currentInterval = 0;
+          let currentInterval = 0;
   
-        // Store the interval ID in the ref
-        scrollInterval.current = setInterval(() => {
-          if (currentInterval >= numberOfIntervals) {
-            clearInterval(scrollInterval.current!);
-            return;
-          }
-          // console.log("Scrolling step:", currentInterval);
-          scrollElement.scrollBy(0, scrollStep);
-          currentInterval++;
-        }, timeInterval * 1000);
+          // Store the interval ID in the ref
+          scrollInterval.current = setInterval(() => {
+            if (currentInterval >= numberOfIntervals) {
+              clearInterval(scrollInterval.current!);
+              return;
+            }
+            scrollElement.scrollBy(0, scrollStep);
+            currentInterval++;
+          }, timeInterval * 1000);
+        }
       }
+  
     } else {
       clearInterval(timer);
       setTimer(null);
@@ -127,7 +122,7 @@ const SetlistPlay: React.FC = () => {
   
     keepAwake();
     setPlaying(!timer);
-  };
+  };  
 
   const fetchBits = async () => {
     const fetchedBits = await DatabaseService.getBits();
@@ -164,7 +159,14 @@ const SetlistPlay: React.FC = () => {
           <IonTitle>
               Play: {setlist ? setlist.title : 'Loading...'}
           </IonTitle>
-        </IonToolbar>
+          <IonButtons slot='end' className='toggleArchiveButton'>
+          <span className='archiveLabel'>Auto-Scroll</span>
+          <IonToggle 
+            checked={autoScroll} 
+            onIonChange={e => setAutoScroll(e.detail.checked)} 
+          />
+        </IonButtons>
+      </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='playWindow' ref={contentRef}>
         <div id='itemList' ref={itemListRef}>
