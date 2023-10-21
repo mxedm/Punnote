@@ -8,21 +8,17 @@ const Home: React.FC = () => {
 
   const lines = [
     "Awe man, that is bogus!",
-    "Ahh there is going to be a bunch of these.",
-    "I'm not sure if I can think of any more.",
-    "I'm not sure if I can think of any more, again.",
+    "Oh, make sure you backup your jokes!",
     "OUCH! WHAT DO YOU DO?",
     "Oh no! My heel. -- Achilles",
     "This app will save lives.",
     "Nini. I love you.",
     "You're funny.",
+    "Did you remember to backup your data?",
     "No. I won't poop your pants.",
-    "SHIFT UNITS!",
-    "Trust women.",
-    "Remember. Have fun out there.",
-    "UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START",
-    "Sometimes the add button doesn't work...",
-    "BUY BUY BUY."
+    "Make jokes!",
+    "Remember. Be safe out there.",
+    "UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START"
   ];
 
   const lineCount = Number(lines.length) + 1;
