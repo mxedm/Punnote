@@ -7,23 +7,25 @@ import './Home.css';
 const Home: React.FC = () => {
 
   const lines = [
-    "Awe man, that is bogus!",
-    "Oh, make sure you backup your jokes!",
-    "OUCH! WHAT DO YOU DO?",
-    "Oh no! My heel. -- Achilles",
-    "This app will save lives.",
-    "Nini. I love you.",
-    "You're funny.",
-    "Did you remember to backup your data?",
-    "No. I won't poop your pants.",
-    "Make jokes!",
-    "Remember. Be safe out there.",
-    "UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START"
+    'Awe man, that is bogus!',
+    'Oh, make sure you backup your jokes!',
+    'OUCH! WHAT DO YOU DO?',
+    'Oh no! My heel. -- Achilles',
+    'This app will save lives.',
+    'There\'s only one rule that I know of, babies-"God damn it, you\'ve got to be kind."―Kurt Vonnegut',
+    'Nini. I love you.',
+    'You\'re funny.',
+    'Trust women.',
+    'Did you remember to backup your data?',
+    'No. I won\'t poop your pants.',
+    'Make jokes!',
+    'Remember. Be safe out there.',
+    'UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START'
   ];
 
-  const lineCount = Number(lines.length) + 1;
-  const newLineToAdd = "There are " + lineCount + " lines in this array."
-  lines.push(newLineToAdd);
+  //const lineCount = Number(lines.length) + 1;
+  //const newLineToAdd = 'There are ' + lineCount + ' lines in this array.'
+  //lines.push(newLineToAdd);
 
   const [loading, setLoading] = useState(true);
   const [randomLine, setRandomLine] = useState('');
@@ -42,7 +44,7 @@ const Home: React.FC = () => {
         const shows = await DatabaseService.getShows();
         setLoading(false);
       } catch (error) {
-        console.error("Data fetching error:", error);
+        console.error('Data fetching error:', error);
       }
     };
     fetchData();
@@ -62,7 +64,7 @@ const Home: React.FC = () => {
             <>
             <div>
               {loading ? (
-                <IonSpinner name="lines"></IonSpinner>
+                <IonSpinner name='lines'></IonSpinner>
               ) : (
                 <span className='homeSplashtext'>{randomLine}</span>
               )}
