@@ -213,6 +213,7 @@
 
 .settingsButtons {
     width: 35%;
+    min-height: 45px ;
 }
 
 .filenameDescription {
