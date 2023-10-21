@@ -177,7 +177,11 @@ const SetlistPlay: React.FC = () => {
                     {item.isPlaintext ? 
                       item.plaintext 
                       : 
-                      `${bits.find(bit => bit.id === item.bitID)?.title} (${isNaN(bits.find(bit => bit.id === item.bitID)?.length) ? 'N/A' : formatTime(bits.find(bit => bit.id === item.bitID)?.length)})`
+                      `${bits.find(bit => bit.id === item.bitID)?.title} ${
+                        (bits.find(bit => bit.id === item.bitID)?.length > 0) 
+                          ? `(${formatTime(bits.find(bit => bit.id === item.bitID)?.length)})` 
+                          : ''
+                      }`
                     }
                   </h2>
                 </IonItem>
@@ -189,7 +193,9 @@ const SetlistPlay: React.FC = () => {
             <IonIcon icon={playing ? pause : play} />
           </IonFabButton>
           <div className='playElapsedTime'>
-            <h3 className='ion-text-center'>Timer: {formatTime(seconds)} / {setlist?.goalLength}:00</h3>
+            <h3 className='ion-text-center'>
+              Timer: {formatTime(seconds)} {setlist?.goalLength ? `/ ${setlist?.goalLength}:00` : ''}
+            </h3>
           </div>
           <IonFabButton className='PlayButtons' color='secondary' slot='end' onClick={resetTimer}>
             <IonIcon icon={refresh} />
