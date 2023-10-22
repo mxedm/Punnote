@@ -99,6 +99,13 @@ const Settings: React.FC = () => {
             >
               {selectedFileName || 'Select File'}
             </IonButton>
+            {/* This is required for the input to work correctly */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              className='hidden'
+              onChange={handleFileChange}
+            />
             <IonButton 
               onClick={handleRestore} 
               className='settingsButtons'
