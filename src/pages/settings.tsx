@@ -92,8 +92,6 @@ const Settings: React.FC = () => {
                   Backup Data
               </IonButton>
             <p>Restore your data from a CSV file.</p>
-
-
           <div className='rowContainer'>
             <IonButton 
               onClick={triggerFileInput} 
@@ -109,17 +107,15 @@ const Settings: React.FC = () => {
             >
               Restore Data
             </IonButton>
-
         </div>
         <div className='statusLine'>
           {restoreStatus && <p>{restoreStatus}</p>} 
         </div>
-
         <h3>Stats!</h3>
           <p>To Do</p>          
         <h3>About</h3>
           <p>Punnote is an app. Duh. Use it for any performance. IDC. Do what you want.</p>
-          <p>If you want, find ways to support development at <a href="http://punnote.queercoded.com">punnote.queercoded.com</a>.</p>
+          <p>If you want, find ways to support development at <a href="http://punnote.queercoded.com">punnote.queercoded.com</a>. The program is open source, too!</p>
         </div>
       </IonContent>
     </IonPage>
