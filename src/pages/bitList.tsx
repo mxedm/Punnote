@@ -36,9 +36,10 @@ const bitList: React.FC = () => {
 
   const filteredBits = bits.filter(bit => {
     return (
-      (bit.title && bit.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      ((bit.title && bit.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (bit.content && bit.content.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (bit.notes && bit.notes.toLowerCase().includes(searchTerm.toLowerCase()))
+      (bit.notes && bit.notes.toLowerCase().includes(searchTerm.toLowerCase()))) &&
+      (bitArchived ? true : !bit.archive)
     );
   });
   

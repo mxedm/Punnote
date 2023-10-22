@@ -37,9 +37,11 @@ const showList: React.FC = () => {
 
   const filteredShows = shows.filter(show => {
     return (
-      (show.title && show.title.toLowerCase().includes(searchTerm.toLowerCase()))
+      (show.title && show.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (showArchived ? true : !show.archive)
     );
   });
+  
 
   const sortShows = () => {
     const currentSortOrder = sortAscending; 
@@ -102,7 +104,6 @@ const showList: React.FC = () => {
     history.push(`/showEdit/${id}`);
   };
 
-
   return (
     <IonPage>
       <IonHeader>
@@ -115,7 +116,6 @@ const showList: React.FC = () => {
               onIonChange={e => setShowArchived(e.detail.checked)} 
             />
           </IonButtons>
-
         </IonToolbar>
       </IonHeader>
 
@@ -177,7 +177,7 @@ const showList: React.FC = () => {
                   ? `${new Date(show.showdate).toLocaleDateString()} ${new Date(show.showdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` 
                   : "No data."
                 }</p>
-          <div className="rowContainer cardContainer">
+                <div className="rowContainer cardContainer">
                   <IonButton 
                     fill="solid"
                     color="primary"
