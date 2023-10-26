@@ -23,7 +23,28 @@ const SetlistPlay: React.FC = () => {
   const interval = useRef<NodeJS.Timeout | null>(null);
   const itemListRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef(null);
+
+  const fetchDataFromStorage = async () => {
+    // Fetch your data from storage here, for example, using your fetch functions.
+    await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);
+  };
+
   
+  useEffect(() => {
+    const fetchDataFromStorage = async () => {
+      try {
+        await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Call the data fetching function when the component mounts
+    fetchDataFromStorage();
+
+    return () => {
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
