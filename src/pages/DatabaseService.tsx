@@ -285,12 +285,6 @@ class DatabaseService {
     shows[showIndex] = showToEdit; 
     await StorageService.setObject('shows', shows);
   }
-
-  async editSetlistItem(itemToEdit: SetlistItem): Promise<void> {
-    const setlistItems = await this.getSetlistItems();
-    const updatedSetlistItems = setlistItems.map(item => item.id === itemToEdit.id ? itemToEdit : item);
-    await StorageService.setObject('setlistItems', updatedSetlistItems);
-  }
   
   async updateSetlistItemOrder(itemId: number, newOrder: number): Promise<void> {
     const setlistItems = await this.getSetlistItems();
