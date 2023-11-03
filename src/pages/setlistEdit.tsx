@@ -44,7 +44,8 @@ const SetlistEdit: React.FC = () => {
   const fetchSetlistItems = async () => {
     const allSetlistItems = await DatabaseService.getSetlistItems();
     const filteredItems = allSetlistItems.filter(item => item.setlistID === Number(id));
-    setSetlistItems(filteredItems);
+    const sortedFilteredItems = filteredItems.sort((a, b) => a.order - b.order);
+    setSetlistItems(sortedFilteredItems);
   };
 
   const fetchSetlist = async () => {
@@ -58,13 +59,21 @@ const SetlistEdit: React.FC = () => {
     const items = setlistItems.slice();
     const from = event.detail.from;
     const to = event.detail.to;
+    // Reorder the item
     items.splice(to, 0, items.splice(from, 1)[0]);
-    setSetlistItems(items);
+    // Sort items based on the updated order
+    const sortedItems = items.map((item, index) => ({ ...item, order: index + 1 }));
+    // Update the state with the sorted items
+    setSetlistItems(sortedItems);
     event.detail.complete();
-    for (let i = 0; i < items.length; i++) {
-      await DatabaseService.updateSetlistItemOrder(items[i].id, i + 1);
+    // Wait for the next render to finish before updating the database
+    await new Promise(resolve => setTimeout(resolve, 0));
+    // Update the order in the database
+    for (let item of sortedItems) {
+      await DatabaseService.updateSetlistItemOrder(item.id, item.order);
     }
   };
+  
 
   const handleBitSelection = async (bit: Bit) => {
     await addBitToSetlist(bit);
@@ -200,31 +209,32 @@ const SetlistEdit: React.FC = () => {
             </div>
           </div>
           <IonList>
-            <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
-            {setlistItems.sort((a, b) => a.order - b.order).map((item, index) => {
+          <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
+            {setlistItems.map((item) => {
               if (item.isPlaintext) {
                 return (
-                  <IonItem key={index} className='setlistTextItem'>
+                  <IonItem key={item.id} className='setlistTextItem'>
                     <IonButton onClick={() => removeSetlistItem(item.id)} color='danger' className='removeButton' shape='round'>
-                    <IonIcon icon={closeCircle} />
+                      <IonIcon icon={closeCircle} />
                     </IonButton>
-                      [ {item.plaintext} ]
+                    [ {item.plaintext} ]
                     <IonReorder slot='end' />
                   </IonItem>
                 );
               }
               const correspondingBit = bits.find(bit => bit.id === item.bitID);
               return (
-                <IonItem key={index}>
+                <IonItem key={item.id}>
                   <IonButton onClick={() => removeSetlistItem(item.id)} color='danger' className='removeButton' shape='round'>
                     <IonIcon icon={closeCircle} />
                   </IonButton>
-                    {correspondingBit?.title || 'No title found'} ({isNaN(correspondingBit?.length) ? 'N/A' : formatTime(correspondingBit?.length)})
+                  {correspondingBit?.title || 'No title found'} ({isNaN(correspondingBit?.length) ? 'N/A' : formatTime(correspondingBit?.length)})
                   <IonReorder slot='end' />
                 </IonItem>
               );
             })}
-            </IonReorderGroup>
+          </IonReorderGroup>
+
           </IonList>
 
           <div className='rowContainer'>
@@ -240,16 +250,19 @@ const SetlistEdit: React.FC = () => {
                 <IonItem>
                   <strong>Click to Add:</strong>
                 </IonItem>
-                {bits
-                  .filter(bit => !setlistItems.some(item => item.bitID === bit.id) && bit.archive !== true)
-                  .map((bit, index) => {
-                    return (
-                      <IonItem key={index} onClick={() => handleBitSelection(bit)}>
-                        {bit.title}
-                      </IonItem>
-                    );
-                  })
+                {
+                  bits
+                    .filter(bit => !setlistItems.some(item => item.bitID === bit.id) && bit.archive !== true)
+                    .sort((a, b) => a.title.localeCompare(b.title)) // This will sort the bits by title
+                    .map((bit) => { // Removed index from here because key should be unique and stable
+                      return (
+                        <IonItem key={bit.id} onClick={() => handleBitSelection(bit)}>
+                          {bit.title}
+                        </IonItem>
+                      );
+                    })
                 }
+
               </IonList>
               <IonButton onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
             </IonModal>
