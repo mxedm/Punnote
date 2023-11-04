@@ -7,15 +7,17 @@ import './Home.css';
 const Home: React.FC = () => {
 
   const lines = [
-    'Awe man, that is bogus!',
+    'Aww man, that is bogus!',
     'Oh, make sure you backup your jokes!',
     'OUCH! WHAT DO YOU DO?',
     'Oh no! My heel. -- Achilles',
     'This app will save lives.',
+    'If you like this app, tell your boss to I want a comedy writing job. Works best when you work in a bank.',
     'There\'s only one rule that I know of, babies-"God damn it, you\'ve got to be kind."―Kurt Vonnegut',
     'Nini. I love you.',
     'You\'re funny.',
     'Trust women.',
+    'Can I have a comedy writing job?',
     'Did you remember to backup your data?',
     'No. I won\'t poop your pants.',
     'Make jokes!',
