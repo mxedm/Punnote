@@ -12,14 +12,14 @@ import { filterCircleOutline, timeOutline } from 'ionicons/icons';
 
 const showList: React.FC = () => {
   const [shows, setShows] = useState<Show[]>([]);;
-  const [showTitle, setShowTitle] = useState("");
+  const [showTitle, setShowTitle] = useState('');
   const [showToDelete, setShowToDelete] = useState<number | null>(null); 
   const [showArchived, setShowArchived] = useState(false);
-  const [toastMessage, setToastMessage] = useState(""); 
+  const [toastMessage, setToastMessage] = useState(''); 
   const [isAddingShow, setIsAddingShow] = useState(false);
   const [showToast, setShowToast] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const history = useHistory();
   const [sortAscending, setSortAscending] = useState(true);
   const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
@@ -66,7 +66,7 @@ const showList: React.FC = () => {
     if (isAddingShow) return;
     setIsAddingShow(true); 
     if (title.length === 0) {
-      setToastMessage("Please enter a show title");
+      setToastMessage('Please enter a show title');
       setShowToast(true); 
       setIsAddingShow(false);
       return;
@@ -83,13 +83,13 @@ const showList: React.FC = () => {
     const newShow: Partial<Show> = {
       id: Date.now(),
       title: title,
-      venue: "",
-      notes: "",
+      venue: '',
+      notes: '',
       showdate: showDateToday,
       setlength: 0,
       compensation: 0,
-      mediaurl: "",
-      type: "",
+      mediaurl: '',
+      type: '',
       setlistID: 0,
       rating: 0, 
       archive: false,
@@ -97,7 +97,7 @@ const showList: React.FC = () => {
     await DatabaseService.addShow(newShow as Show);
     setShows(prevShows => [newShow as Show, ...prevShows]); 
     // setShows(prevShows => [...prevShows, newShow as Show]);
-    setShowTitle("");
+    setShowTitle('');
   };  
 
   const editShow = (id: number) => {
@@ -108,9 +108,9 @@ const showList: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className="titleText">Shows</IonTitle>
-          <IonButtons slot="end" className="toggleArchiveButton">
-            <span className="archiveLabel">Archived</span>
+          <IonTitle className='titleText'>Shows</IonTitle>
+          <IonButtons slot='end' className='toggleArchiveButton'>
+            <span className='archiveLabel'>Archived</span>
             <IonToggle 
               checked={showArchived} 
               onIonChange={e => setShowArchived(e.detail.checked)} 
@@ -120,14 +120,14 @@ const showList: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
-        <div className="inputRow">
-          <div className="inputWrapper">
-            <div className="customItem">
-              <label className="inputLabel">Show Name</label>
+        <div className='inputRow'>
+          <div className='inputWrapper'>
+            <div className='customItem'>
+              <label className='inputLabel'>Show Name</label>
               <input
-                aria-label="Show Name"
-                className="inputText inputTextListing"
-                placeholder="Enter Show Name Here"
+                aria-label='Show Name'
+                className='inputText inputTextListing'
+                placeholder='Enter Show Name Here'
                 value={showTitle}
                 onChange={e => setShowTitle(e.target.value)}
               />
@@ -135,33 +135,34 @@ const showList: React.FC = () => {
           </div>
 
           <IonButton
-            type="submit"
-            className="addButton"
+            type='submit'
+            className='addButton'
             disabled={isLoading || showTitle.trim() === ''} 
             onClick={() => handleAddShow(showTitle)}
           >
-            {isLoading ? <IonIcon icon={ timeOutline } /> : "Add"}
+            {isLoading ? <IonIcon icon={ timeOutline } /> : 'Add'}
           </IonButton>
         </div>
 
         <IonItem className='searchBox'>
           <IonInput
-            type="text"
-            placeholder="Search..."
+            type='text'
+            className=''
+            placeholder='Search...'
             value={searchTerm}
             onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
           />
           Sort: 
           <IonItem>
           <IonIcon 
-            className="sortIcon"
+            className='sortIcon'
             icon={filterCircleOutline}
             style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
             onClick={sortShows}></IonIcon>
           </IonItem>
         </IonItem>
 
-        <IonList class="mainList">
+        <IonList class='mainList'>
         {filteredShows.map(show => (
             <IonCard key={show.id}>
               <IonCardHeader>
@@ -175,20 +176,20 @@ const showList: React.FC = () => {
                 {
                   show.showdate && !isNaN(new Date(show.showdate).getTime()) 
                   ? `${new Date(show.showdate).toLocaleDateString()} ${new Date(show.showdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` 
-                  : "No data."
+                  : 'No data.'
                 }</p>
-                <div className="rowContainer cardContainer">
+                <div className='rowContainer cardContainer'>
                   <IonButton 
-                    fill="solid"
-                    color="primary"
-                    slot=""
+                    fill='solid'
+                    color='primary'
+                    slot=''
                     onClick={() => editShow(show.id)}
                   >
                     edit
                   </IonButton>
                   <IonButton 
-                      className=""
-                      color="danger"
+                      className=''
+                      color='danger'
                       onClick={() => setShowToDelete(show.id)} 
                       >
                       delete
