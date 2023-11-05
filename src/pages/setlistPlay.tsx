@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
           IonContent, IonFabButton, useIonViewWillLeave, IonIcon, 
           IonHeader, useIonViewWillEnter, IonPage, IonTitle, 
-          IonToolbar, IonItem, IonButtons, IonToggle } from '@ionic/react';
+          IonToolbar, IonItem, IonButtons, IonToggle, IonText } from '@ionic/react';
 import { play, pause, refresh } from 'ionicons/icons';
 import './setlistPlay.css';
 import './standard.css';
@@ -194,7 +194,7 @@ const SetlistPlay: React.FC = () => {
             {setlistItems
               .sort((a, b) => a.order - b.order)
               .map((item, index) => (
-                <IonItem key={item.id} className={item.isPlaintext ? 'playerPlaintext' : 'playerBit'}>
+                <IonItem><IonText key={item.id} color={item.isPlaintext ? 'tertiary' : 'dark'}>
                   <h2>
                     { item.order }:&nbsp; 
                     {item.isPlaintext ? 
@@ -207,6 +207,7 @@ const SetlistPlay: React.FC = () => {
                       }`
                     }
                   </h2>
+                  </IonText>
                 </IonItem>
               ))
             }
