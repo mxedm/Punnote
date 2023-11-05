@@ -338,9 +338,7 @@
     align-items: center;
 }
 
-.goldenStar {
-    color: gold;
-  }
+
 
 .shortInput {
     width: 75%;
@@ -423,3 +421,13 @@ input[type="number"] {
 .creditList {
     padding-bottom: 80px !important;
 }
+
+.goldenStar {
+    color: darkgoldenrod;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .goldenStar {
+      color: gold;
+    }
+  }
