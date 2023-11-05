@@ -237,12 +237,30 @@ const SetlistEdit: React.FC = () => {
 
           </IonList>
 
-          <div className='rowContainer'>
-            <IonInput value={inputValue} placeholder='Insert freeform text' onIonChange={e => setInputValue(e.detail.value!)} />
-            <IonButton onClick={addPlaintextItem} shape='round'>
-              Add Text
+          <div className='inputRow'>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>Freeform Text</label>
+                <input
+                  aria-label='Freeform Text'
+                  className='inputText inputTextListing'
+                  placeholder='Insert freeform text'
+                  value={inputValue}
+                  onChange={e => setInputValue(e.target.value)}
+                />
+              </div>
+            </div>
+            <IonButton
+              className='addButton'
+              shape='round'
+              onClick={addPlaintextItem}
+              // Disabled condition here if needed, similar to isLoading or empty check
+              // disabled={isLoading || inputValue.trim() === ''}
+            >
+              Add
             </IonButton>
           </div>
+
 
           <IonList>
             <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)}>
@@ -290,7 +308,6 @@ const SetlistEdit: React.FC = () => {
           <IonButton 
             shape='round' 
             className='newButton' 
-
             color={bits.every(bit => setlistItems.some(item => item.bitID === bit.id)) ? 'danger' : 'primary'} 
             disabled={bits.every(bit => setlistItems.some(item => item.bitID === bit.id))}
             onClick={() => setShowBitList(!showBitList)}
