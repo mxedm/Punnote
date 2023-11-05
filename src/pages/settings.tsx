@@ -102,8 +102,8 @@ const Settings: React.FC = () => {
           <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <div className="container">
+      <IonContent className='' fullscreen>
+        <div className="container settingsScreen">
           <h2>Backup and Restore</h2>
             <p>Export your data to a CSV file. Do this regularly.</p>
               <IonButton 
@@ -135,18 +135,20 @@ const Settings: React.FC = () => {
             >
               Restore Data
             </IonButton>
-        </div>
-        <div className='statusLine'>
-          {restoreStatus && <p>{restoreStatus}</p>} 
-        </div>
-        <h3>Basic Stats</h3>          
-          <p>Number of Setlists: {setlistCount}</p>
-          <p>Number of Bits: {bitCount}</p>
-          <p>Number of Shows: {showCount}</p>
-        <h3>About</h3>
-          <p>Punnote is an app. Duh. Use it for any performance. IDC. Do what you want.</p>
-          <p>If you want, find ways to support development at <a href="http://punnote.queercoded.com">punnote.queercoded.com</a>. The program is open source, too!</p>
-          <p>Icon by <a href='https://linktr.ee/doomsdayllc'>DoomsdayLLC</a>.</p>
+          </div>
+          <div className='statusLine'>
+            {restoreStatus && <p>{restoreStatus}</p>} 
+          </div>
+          <h3>Basic Stats</h3>          
+            <p>Number of Setlists: {setlistCount}</p>
+            <p>Number of Bits: {bitCount}</p>
+            <p>Number of Shows: {showCount}</p>
+          <h3>About</h3>
+            <p>Punnote is an app. Duh. Use it for any performance. IDC. Do what you want.</p>
+            <p>If you want, find ways to support development at <a href="http://punnote.queercoded.com">punnote.queercoded.com</a>. The program is open source, too! Find it on Github.</p>
+          <h3>Credits</h3>
+            <p>Code by Eris Maurer & Jen Durbent, 2023.</p>
+            <p className='creditList'>Punnote icon by <a href='https://linktr.ee/doomsdayllc'>DoomsdayLLC</a>.</p>
         </div>
       </IonContent>
     </IonPage>
