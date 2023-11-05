@@ -5,7 +5,7 @@
 }
 
 .inputWrapper:focus-within .inputLabel {
-    color: white !important;
+    text-decoration: underline;
 }
 
 .hidden, .hiddenSecrets {
@@ -410,13 +410,14 @@ input[type="number"] {
 
 .centered-text {
     text-align: center;
-    background-color: #202020;
-  }
+}
 
 
 .PlayButtons {
     margin-right: 2%;
     margin-left: 2%;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 .creditList {
