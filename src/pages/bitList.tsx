@@ -131,7 +131,7 @@ const bitList: React.FC = () => {
             <label className='inputLabel'>Bit Name</label>
             <input
               aria-label='Bit Name'
-              className='inputText inputTextListing'
+              className='inputText inputTextListing inlineTextInput'
               placeholder='Enter New Bit Name Here'
               value={bitTitle}
               onChange={e => setBitTitle(e.target.value)}
@@ -140,7 +140,7 @@ const bitList: React.FC = () => {
         </div>
         <IonButton
           type='submit'
-          className='addButton'
+          className='addButton inlineButton'
           disabled={isLoading || bitTitle.trim() === ''} 
           onClick={() => handleAddBit(bitTitle)}
         >

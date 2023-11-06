@@ -116,7 +116,7 @@ const setlistList: React.FC = () => {
       <IonContent fullscreen>
         <div className='inputRow'>
           <div className='inputWrapper'>
-            <div className='customItem'>
+            <div className='customItem inlineTextInput'>
               <label className='inputLabel'>Setlist Name</label>
               <input
                 aria-label='Setlist Name'
@@ -129,7 +129,7 @@ const setlistList: React.FC = () => {
           </div>
           <IonButton
             type='submit'
-            className='addButton'
+            className='addButton inlineButton'
             disabled={isLoading || setlistTitle.trim() === ''} 
             onClick={() => handleAddSetlist(setlistTitle)}
           >

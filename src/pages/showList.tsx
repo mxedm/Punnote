@@ -121,8 +121,8 @@ const showList: React.FC = () => {
 
       <IonContent fullscreen>
         <div className='inputRow'>
-          <div className='inputWrapper'>
-            <div className='customItem'>
+          <div className='inputWrapper '>
+            <div className='customItem inlineTextInput'>
               <label className='inputLabel'>Show Name</label>
               <input
                 aria-label='Show Name'
@@ -131,12 +131,12 @@ const showList: React.FC = () => {
                 value={showTitle}
                 onChange={e => setShowTitle(e.target.value)}
               />
-            </div>
+            </div> 
           </div>
 
           <IonButton
             type='submit'
-            className='addButton'
+            className='inlineButton'
             disabled={isLoading || showTitle.trim() === ''} 
             onClick={() => handleAddShow(showTitle)}
           >

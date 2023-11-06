@@ -103,7 +103,7 @@ const Settings: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className='' fullscreen>
-        <div className="container settingsScreen">
+        <div className='container settingsScreen'>
           <h2>Backup and Restore</h2>
             <p>Export your data to a CSV file. Do this regularly.</p>
               <IonButton 
@@ -122,7 +122,7 @@ const Settings: React.FC = () => {
             </IonButton>
             {/* This is required for the input to work correctly */}
             <input
-              type="file"
+              type='file'
               ref={fileInputRef}
               className='hidden'
               onChange={handleFileChange}
@@ -145,7 +145,7 @@ const Settings: React.FC = () => {
             <p>Number of Shows: {showCount}</p>
           <h3>About</h3>
             <p>Punnote is an app. Duh. Use it for any performance. IDC. Do what you want.</p>
-            <p>If you want, find ways to support development at <a href="http://punnote.queercoded.com">punnote.queercoded.com</a>. The program is open source, too! Find it on Github.</p>
+            <p>If you want, find ways to support development at <a href='http://punnote.queercoded.com'>punnote.queercoded.com</a>. The program is open source, too! Find it on Github.</p>
           <h3>Credits</h3>
             <p>Code by Eris Maurer & Jen Durbent, 2023.</p>
             <p className='creditList'>Punnote icon by <a href='https://linktr.ee/doomsdayllc'>DoomsdayLLC</a>.</p>

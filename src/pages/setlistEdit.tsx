@@ -234,12 +234,11 @@ const SetlistEdit: React.FC = () => {
               );
             })}
           </IonReorderGroup>
-
           </IonList>
 
           <div className='inputRow'>
             <div className='inputWrapper'>
-              <div className='customItem'>
+              <div className='customItem inlineTextInput'>
                 <label className='inputLabel'>Freeform Text</label>
                 <input
                   aria-label='Freeform Text'
@@ -248,17 +247,16 @@ const SetlistEdit: React.FC = () => {
                   value={inputValue}
                   onChange={e => setInputValue(e.target.value)}
                 />
-              </div>
             </div>
-            <IonButton
-              className='addButton'
-              shape='round'
-              onClick={addPlaintextItem}
-              // Disabled condition here if needed, similar to isLoading or empty check
-              // disabled={isLoading || inputValue.trim() === ''}
-            >
-              Add
-            </IonButton>
+          </div>
+          <IonButton
+            className='addButton inlineTextInput'
+            onClick={addPlaintextItem}
+            // Disabled condition here if needed, similar to isLoading or empty check
+            // disabled={isLoading || inputValue.trim() === ''}
+          >
+            Add
+          </IonButton>
           </div>
 
 

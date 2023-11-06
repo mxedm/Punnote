@@ -134,175 +134,174 @@ const ShowEdit: React.FC = () => {
         {show && (
           <>
           <div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Title</label>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>Title</label>
                 <input
-                  aria-label="Show Title"
-                  className="inputText"
-                  type="text"
+                  aria-label='Show Title'
+                  className='inputText'
+                  type='text'
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                 />
               </div>
             </div>
             <div className='inputRow'>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Date</label>
-                <input
-                  aria-label="Date"
-                  className="inputText shortInput dateInput"
-                  type="text"
-                  value={
-                    showdate
-                      ? new Intl.DateTimeFormat('en-US', {
-                          day: 'numeric',
-                          month: 'numeric',
-                          year: '2-digit',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                          hour12: true
-                        }).format(new Date(showdate))
-                      : "N/A" 
-                  }
-                  readOnly
-                />
+              <div className='inputWrapper'>
+                <div className='customItem inlineTextInput'>
+                  <label className='inputLabel'>Date</label>
+                  <input
+                    aria-label='Date' 
+                    className='inputText dateInput'
+                    type='text'
+                    value={
+                      showdate
+                        ? new Intl.DateTimeFormat('en-US', {
+                            day: 'numeric',
+                            month: 'numeric',
+                            year: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                          }).format(new Date(showdate))
+                        : 'N/A' 
+                    }
+                    readOnly
+                  />
+                </div>
+                <IonButton
+                    className='inlineButton'
+                    onClick={() => {
+                    setShowModal(true);
+                }}>
+                  <IonIcon 
+                    icon={calendar}
+                    >
+                  </IonIcon>
+                </IonButton>
               </div>
-              <IonButton shape="round" onClick={() => {
-                  setShowModal(true);
-              }}>
-                <IonIcon 
-                  icon={calendar}
-                  >
-                </IonIcon>
-              </IonButton>
-            </div>
             </div>
 
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Venue</label>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>Venue</label>
                 <input
-                  aria-label="Show Venue"
-                  className="inputText"
-                  type="text"
+                  aria-label='Show Venue'
+                  className='inputText'
+                  type='text'
                   value={venue}
                   onChange={e => setVenue(e.target.value)}
                 />
               </div>
             </div>
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">Notes</label>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>Notes</label>
                 <input
-                  aria-label="Show Notes"
-                  className="inputText"
-                  type="text"
+                  aria-label='Show Notes'
+                  className='inputText'
+                  type='text'
                   value={notes}
                   onChange={e => setNotes(e.target.value)}
                 />
               </div>
             </div>
-            <div className="flexParent">
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Set Length</label>
+            <div className='flexParent'>
+              <div className='inputWrapper halfWidth'>
+                <div className='customItem'>
+                  <label className='inputLabel'>Set Length</label>
                   <input
-                    aria-label="Set Length"
-                    className="inputText"
-                    type="number"
+                    aria-label='Set Length'
+                    className='inputText'
+                    type='number'
                     value={setlength}
                     onChange={e => setSetLength(e.target.value)}
                   />
                 </div>
               </div>
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Compensation</label>
+              <div className='inputWrapper halfWidth'>
+                <div className='customItem'>
+                  <label className='inputLabel'>Compensation</label>
                   <input
-                    aria-label="Compensation"
-                    className="inputText"
-                    type="number"
+                    aria-label='Compensation'
+                    className='inputText'
+                    type='number'
                     value={compensation}
                     onChange={e => setCompensation(e.target.value)}
                   />
                 </div>
               </div>
             </div>
-            <div className="flexParent">
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Show Type</label>
+            <div className='flexParent'>
+              <div className='inputWrapper halfWidth'>
+                <div className='customItem'>
+                  <label className='inputLabel'>Show Type</label>
                   <select
-                    aria-label="Show Type"
-                    className="inputText"
+                    aria-label='Show Type'
+                    className='inputText'
                     value={type}
                     onChange={e => setType(e.target.value)}
                   >
-                    <option value="">Not Set</option>
-                    <option value="Mic">Mic</option>
-                    <option value="Showcase">Showcase</option>
-                    <option value="Regular">Regular</option>
-                    <option value="Drop In">Drop In</option>
-                    <option value="Other">Other</option>
+                    <option value=''>Not Set</option>
+                    <option value='Mic'>Mic</option>
+                    <option value='Showcase'>Showcase</option>
+                    <option value='Regular'>Regular</option>
+                    <option value='Drop In'>Drop In</option>
+                    <option value='Other'>Other</option>
                   </select>
                 </div>
               </div>
-              <div className="inputWrapper">
+              <div className='inputWrapper halfWidth'>
                 <div className='customItem'>
-                  <label className="inputLabel">Rating</label>
+                  <label className='inputLabel'>Rating</label>
                   <div className='inputText goldenStar'>
                     {renderRating()}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flexParent">
 
-              <div className="inputWrapper">
-                <div className="customItem">
-                  <label className="inputLabel">Setlist</label>
+            <div className='flexParent'>
+              <div className='inputWrapper inlineTextInput'>
+                <div className='customItem '>
+                  <label className='inputLabel'>Setlist</label>
                   <select
-                    aria-label="Setlist"
-                    className="inputText"
+                    aria-label='Setlist'
+                    className='inputText'
                     value={setlistID}
                     onChange={e => setSetlistID(Number(e.target.value))}
                   >
-                    <option value={0}>
-                      None
-                    </option>
+                    <option value={0}>None</option>
                     {setlists.map(setlist => (
                       <option key={setlist.id} value={setlist.id}>
                         {setlist.title}
                       </option>
                     ))}
                   </select>
-
                 </div>
               </div>
 
-              <div className="inputWrapper">
-                <div className='customItem playSetlistDiv'>
+              <div className='inputWrapper inlineButton'>
+                <div className='customItem '>
                   <IonButton
-                    className='playSetlistButton'
+                    className=''
                     onClick={goToSetlistPlay}
-                    >
-                      Play Setlist
+                  >
+                    <IonIcon 
+                      icon={playCircle}>
+                    </IonIcon>
                   </IonButton>
                 </div>
               </div>
             </div>
-  
 
-        
-            <div className="inputWrapper">
-              <div className="customItem">
-                <label className="inputLabel">URL</label>
+            <div className='inputWrapper'>
+              <div className='customItem'>
+                <label className='inputLabel'>URL</label>
                 <input
-                  aria-label="Show URL"
-                  className="inputText"
-                  type="text"
+                  aria-label='Show URL'
+                  className='inputText'
+                  type='text'
                   value={mediaurl}
                   onChange={e => setMediaURL(e.target.value)}
                 />
@@ -310,23 +309,23 @@ const ShowEdit: React.FC = () => {
             </div>
 
             <div className='buttonContainer'>
-              <IonButton shape="round" color="success" onClick={updateShow}>Save</IonButton>
-              <IonButton shape="round" onClick={() => {
+              <IonButton shape='round' color='success' onClick={updateShow}>Save</IonButton>
+              <IonButton shape='round' onClick={() => {
                   setInfoModal(true);
               }}>Info</IonButton>
-              <IonButton shape="round" className='hidden' color="warning" onClick={() => history.push('/showList')}>Close</IonButton>
+              <IonButton shape='round' className='hidden' color='warning' onClick={() => history.push('/showList')}>Close</IonButton>
             </div>
 
             <IonModal isOpen={showModal} 
                 className='my-datetime-class'>
               <div className='datePickerModal'>
                 <IonDatetime
-                  displayFormat="MM DD YYYY"
+                  displayFormat='MM DD YYYY'
                   value={showdate}
                   onIonChange={e => setShowDate(e.detail.value)}
                 />
-                <div className="modalButtons">
-                  <IonButton shape="round" onClick={() => {
+                <div className='modalButtons'>
+                  <IonButton shape='round' onClick={() => {
                     setShowModal(false);
                   }}>Save</IonButton>
                 </div>
@@ -336,8 +335,8 @@ const ShowEdit: React.FC = () => {
 
             <IonModal isOpen={infoModal} 
                 className=''>
-              <div className="inputWrapper">
-                <div className="customItem">
+              <div className='inputWrapper'>
+                <div className='customItem'>
                   <IonText>
                   <h2>Show Info</h2>
                     <p className='infoTextModal'>Created: {created.toLocaleString()}</p>
@@ -354,10 +353,10 @@ const ShowEdit: React.FC = () => {
                       value={archive ? 'archived' : 'not-archived'}
                       onIonChange={(e) => setArchive(e.detail.value === 'archived')}
                     >
-                      <IonSegmentButton value="archived">
+                      <IonSegmentButton value='archived'>
                         <IonLabel>Archived</IonLabel>
                       </IonSegmentButton>
-                      <IonSegmentButton value="not-archived">
+                      <IonSegmentButton value='not-archived'>
                         <IonLabel>Not Archived</IonLabel>
                       </IonSegmentButton>
                     </IonSegment>
@@ -365,7 +364,7 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
 
-              <IonButton shape="round" onClick={() => {
+              <IonButton shape='round' onClick={() => {
                   setInfoModal(false);
               }}>close</IonButton>
             </IonModal>

@@ -1,5 +1,5 @@
 import StorageService from './StorageService';
-import Papa from "papaparse";
+import Papa from 'papaparse';
 
 export interface Bit {
   id: number;
@@ -297,7 +297,7 @@ class DatabaseService {
   }
 
   async updateSetlistItem(itemToUpdate: SetlistItem): Promise<void> {
-    // console.log("updateSetlistItem", itemToUpdate);
+    // console.log('updateSetlistItem', itemToUpdate);
     const setlists = await this.getSetlists();
     const setlist = setlists.find(s => s.id === itemToUpdate.setlistId);
 

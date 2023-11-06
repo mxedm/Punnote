@@ -26,7 +26,7 @@
     padding: 8px;
     /* border: 1px solid #202020; */
     /* background-color: #202020; */
-    width: 100%;
+
     padding-left: 1%;
     padding-right: 50px; /* provide space for the button */
     order: 2;
@@ -39,7 +39,7 @@
     padding: 8px;
     /* border: 1px solid #202020; */
     /* background-color: #202020; */
-    width: 100%;
+
     text-align: right;
     padding-left: 1%;
     padding-right: 1%;
@@ -51,7 +51,6 @@
 .grayText {
     /* color: gray; */
 }
-
 
 .inputSelect {
     padding-left: 1% !important;
@@ -293,10 +292,6 @@
     /* background-color: #202020; */
 }
 
-.inputTextListing {
-    width: 80%;
-}
-
 .playWindow {
     padding-bottom: 75px;
 }
@@ -327,7 +322,6 @@
     text-align: left;    
 }
 
-
 .flexParent {
     display: flex;
     justify-content: space-between;
@@ -337,8 +331,6 @@
 .archiveItem {
     align-items: center;
 }
-
-
 
 .shortInput {
     width: 75%;
@@ -410,7 +402,6 @@ input[type="number"] {
     text-align: center;
 }
 
-
 .PlayButtons {
     margin-right: 2%;
     margin-left: 2%;
@@ -420,6 +411,18 @@ input[type="number"] {
 
 .creditList {
     padding-bottom: 80px !important;
+}
+
+.inlineButton {
+    max-width: 20%;
+}
+
+.inlineTextInput {
+    max-width: 80%;
+}
+
+.halfWidth {
+    max-width: 50%;
 }
 
 .goldenStar {

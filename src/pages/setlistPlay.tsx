@@ -35,7 +35,7 @@ const SetlistPlay: React.FC = () => {
       try {
         await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
