@@ -288,6 +288,7 @@ const ShowEdit: React.FC = () => {
                     onClick={goToSetlistPlay}
                   >
                     <IonIcon 
+                      className='largeIcon'
                       icon={playCircle}>
                     </IonIcon>
                   </IonButton>

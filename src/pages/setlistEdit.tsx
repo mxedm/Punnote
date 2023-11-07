@@ -182,7 +182,7 @@ const SetlistEdit: React.FC = () => {
             </div>
           </div>
           <div className='flexParent'>
-            <div className='inputWrapper'>
+            <div className='inputWrapper halfWidth'>
               <div className='customItem'>
                 <label className='inputLabel'>Goal Length (Min)</label>
                   <input
@@ -194,7 +194,7 @@ const SetlistEdit: React.FC = () => {
                   />
               </div>
             </div>
-            <div className='inputWrapper'>
+            <div className='inputWrapper halfWidth'>
               <div className='customItem'>
                 <label className='inputLabel'>Bit Time Total</label>
                   <input
@@ -261,8 +261,8 @@ const SetlistEdit: React.FC = () => {
 
 
           <IonList>
-            <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)}>
-              <IonList>
+            <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)} className='addBitListModal'>
+              <IonList class='modal-content'>
                 <IonItem>
                   <strong>Click to Add:</strong>
                 </IonItem>

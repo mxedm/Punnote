@@ -132,7 +132,7 @@ const bitEdit: React.FC = () => {
               </div>
 
               <div className='flexParent'>
-                <div className='inputWrapper'>
+                <div className='inputWrapper halfWidth'>
                   <div className='customItem'>
                     <label className='inputLabel'>Length (seconds)</label>
                     <input
@@ -144,7 +144,7 @@ const bitEdit: React.FC = () => {
                     />
                   </div>
                 </div>
-                <div className='inputWrapper'>
+                <div className='inputWrapper halfWidth'>
                   <div className='customItem'>
                     <label className='inputLabel'>
                       Rating
