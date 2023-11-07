@@ -1,6 +1,5 @@
 .inputLabel {
-    font-size: small !important; /* adjust as necessary */
-    /* color: lightblue !important; */
+    font-size: small !important;
     order: 1;
 }
 
@@ -14,21 +13,26 @@
 
 .inputTextarea{
     padding-left: 1% !important;
-    padding-right: 50px; /* provide space for the button */
+    padding-right: 50px; 
     padding-top: 2% !important;
-    /* border: 1px solid #202020; */
-    /* background-color: #202020; */
+    padding-bottom: 8px;
+    min-height: 39px;
+    height: 39px;
+    resize: none;
+    overflow: visible;
     order: 2;
 }
+
+.notesTextarea{
+    min-height: 96px;
+}
+
 
 .inputText {
     font-size: 16px;
     padding: 8px;
-    /* border: 1px solid #202020; */
-    /* background-color: #202020; */
-
     padding-left: 1%;
-    padding-right: 50px; /* provide space for the button */
+    padding-right: 1%; 
     order: 2;
     white-space: nowrap;
     overflow: hidden;
@@ -37,9 +41,6 @@
 .inputTextRight {
     font-size: 16px;
     padding: 8px;
-    /* border: 1px solid #202020; */
-    /* background-color: #202020; */
-
     text-align: right;
     padding-left: 1%;
     padding-right: 1%;
@@ -48,13 +49,9 @@
     overflow: hidden;
 }
 
-.grayText {
-    /* color: gray; */
-}
-
 .inputSelect {
     padding-left: 1% !important;
-    padding-right: 50px; /* provide space for the button */
+    padding-right: 50px; 
     padding-top: 5% !important;
     order: 2;
 }
@@ -65,7 +62,6 @@
     flex-direction: column;
     flex: 1;
     border-bottom: 1px solid #ccc;
-    /* background-color: #202020; */
 }
 
 .sortIcon {
@@ -79,7 +75,6 @@
 
 }
 
-/* for all pages */
 .inputRow {
     display: flex;
     align-items: center;
@@ -94,7 +89,6 @@
     z-index: 10;
 }
 
-/* for edit pages */
 .rowContainer {
     display: flex;
     justify-content: space-between; 
@@ -125,7 +119,7 @@
     vertical-align: middle;
     height: 100%;
 }
-  
+
 .modalButtons {
     display: flex;
     justify-content: space-between;
@@ -134,9 +128,9 @@
 }
 
 .inputLabelContainer {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .rowContainer {
@@ -173,14 +167,6 @@
     margin-right: 15px;
     min-width: 60px;
     height: 65%;
-}
-
-.playerPlaintext {
-    /* color: yellow; */
-}
-
-.playerBit {
-    /* color: white; */
 }
 
 .timerContainer {
@@ -222,13 +208,6 @@
     font-style: italic;
 }
 
-/* 
-.yellowButton {
-  --background: yellow;
-  --background-activated: #d4d400;
-} 
-*/
-
 .archiveLabel {
     padding-right: 15px;
 }
@@ -248,10 +227,9 @@
 
 .loader {
     display: flex;
-    align-items: center; /* Vertically center the content */
-    height: 100%; /* Take up the full height of the container */
-    width: 100%; /* Take up the full width of the container */
-    /* border: none !important; */
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }
 
 .homeSplashtext {
@@ -284,14 +262,11 @@
 .customItem {
     display: flex;
     flex-direction: column;
-    /* background-color: #202020; */
 }
 
 .inputLabel {
     font-size: 14px;
-    /* color: #999; */
     padding-bottom: 8px;
-    /* background-color: #202020; */
 }
 
 .playWindow {
@@ -355,7 +330,7 @@
 }
 
 .playIcon {
-    font-size: 30px; /* Adjust the size as needed */
+    font-size: 30px; 
 }
 
 .newButton {
@@ -365,7 +340,7 @@
 }
 
 .newIcon {
-    font-size: 30px; /* Adjust the size as needed */
+    font-size: 30px;
 }
 
 .infoTextModal {
@@ -396,7 +371,7 @@ input[type="number"] {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 100; /* Ensure it's above other content */
+    z-index: 100; 
     background-color: #202020;
   }
 
@@ -431,7 +406,6 @@ input[type="number"] {
     overflow-y: auto;
     max-height: 90vh;
 }
-
 
 .goldenStar {
     color: darkgoldenrod;

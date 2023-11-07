@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {
           IonContent, IonHeader, IonIcon, IonPage, IonTitle,
@@ -25,8 +25,18 @@ const bitEdit: React.FC = () => {
   const [infoModal, setInfoModal] = useState(false);
   const history = useHistory();
 
+  const titleRef = useRef<HTMLTextAreaElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const notesRef = useRef<HTMLTextAreaElement>(null);
+
   useEffect(() => {
   }, [bit]);
+
+  useEffect(() => {
+    autoResizeTextarea(titleRef.current);
+    autoResizeTextarea(contentRef.current);
+    autoResizeTextarea(notesRef.current);
+  }, [title, content, notes]);
 
   useEffect(() => {
     const fetchBit = async () => {
@@ -45,7 +55,7 @@ const bitEdit: React.FC = () => {
         setRevision(fetchedBit.revision);
       }
     };
-    fetchBit(); // call the function
+    fetchBit(); 
   }, [id]);
   
 
@@ -79,6 +89,18 @@ const bitEdit: React.FC = () => {
     return stars;
   };
 
+  const autoGrow = (event) => {
+    event.target.style.height = '35px'; // temporarily shrink to get the scroll height
+    event.target.style.height = event.target.scrollHeight + 'px';
+  };
+
+  const autoResizeTextarea = (textarea: HTMLTextAreaElement | null) => {
+    if (textarea) {
+      textarea.style.height = 'auto'; // Reset height to recalculate
+      textarea.style.height = textarea.scrollHeight + 'px'; // Set new height
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -93,13 +115,15 @@ const bitEdit: React.FC = () => {
             <div>
               <div className='inputWrapper'>
                 <div className='customItem'>
-                  <label className='inputLabel'>Title</label>
-                  <input
+                <label className='inputLabel'>Title</label>
+                  <textarea
+                    ref={titleRef}
                     aria-label='Title'
-                    className='inputText'
-                    type='text'
+                    className='inputTextarea'
                     value={title}
                     onChange={e => setTitle(e.target.value)}
+                    onInput={autoGrow}
+                    style={{ resize: 'none' }} // Prevent manual resizing
                   />
                 </div>
               </div>
@@ -107,23 +131,26 @@ const bitEdit: React.FC = () => {
                 <div className='customItem'>
                   <label className='inputLabel'>Content</label>
                   <textarea
+                    ref={contentRef}
                     aria-label='Content'
-                    className='inputTextarea' 
-                    rows='15'
+                    className='inputTextarea'
                     value={content}
                     onChange={e => setContent(e.target.value)}
+                    onInput={autoGrow}
                   />
                 </div>
               </div>
               <div className='inputWrapper'>
                 <div className='customItem'>
                   <label className='inputLabel'>Notes</label>
-                  <input
+                  <textarea
+                    ref={notesRef}
                     aria-label='Bit Notes'
-                    className='inputText'
-                    type='text'
+                    className='inputTextarea'
                     value={notes}
                     onChange={e => setNotes(e.target.value)}
+                    onInput={autoGrow}
+                    style={{ resize: 'none' }} // Prevent manual resizing
                   />
                 </div>
               </div>
