@@ -22,8 +22,7 @@ const showList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const history = useHistory();
   const [sortAscending, setSortAscending] = useState(true);
-  const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
-
+  const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); 
   const now = new Date();
   const showDateToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19, 0, 0); 
 
@@ -41,7 +40,6 @@ const showList: React.FC = () => {
       (showArchived ? true : !show.archive)
     );
   });
-  
 
   const sortShows = () => {
     const currentSortOrder = sortAscending; 
@@ -118,7 +116,6 @@ const showList: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-
       <IonContent fullscreen>
         <div className='inputRow'>
           <div className='inputWrapper '>
@@ -133,7 +130,6 @@ const showList: React.FC = () => {
               />
             </div> 
           </div>
-
           <IonButton
             type='submit'
             className='inlineButton'
@@ -143,7 +139,6 @@ const showList: React.FC = () => {
             {isLoading ? <IonIcon icon={ timeOutline } /> : 'Add'}
           </IonButton>
         </div>
-
         <IonItem className='searchBox'>
           <IonInput
             type='text'
@@ -161,7 +156,6 @@ const showList: React.FC = () => {
             onClick={sortShows}></IonIcon>
           </IonItem>
         </IonItem>
-
         <IonList class='mainList'>
         {filteredShows.map(show => (
             <IonCard key={show.id}>
@@ -199,7 +193,6 @@ const showList: React.FC = () => {
             </IonCard>
           ))}
         </IonList>
-
         <IonAlert
           isOpen={showToDelete !== null}
           header={'Delete Show'}
@@ -217,7 +210,6 @@ const showList: React.FC = () => {
             }
           ]}
         />
-
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}

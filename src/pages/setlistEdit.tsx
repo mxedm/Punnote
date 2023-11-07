@@ -12,7 +12,6 @@ import DatabaseService, { Setlist } from './DatabaseService';
 import { SetlistItem, Bit } from './DatabaseService';
 
 const SetlistEdit: React.FC = () => {
-
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const [setlistItems, setSetlistItems] = useState<SetlistItem[]>([]);
@@ -52,28 +51,22 @@ const SetlistEdit: React.FC = () => {
     const fetchedSetlist = await DatabaseService.getSetlist(Number(id));
     setSetlist(fetchedSetlist);
     setTitle(fetchedSetlist?.title || '');
-    setGoalLength(fetchedSetlist?.goalLength || 0);  // Update goalLength state variable here
+    setGoalLength(fetchedSetlist?.goalLength || 0); 
   };
 
   const handleReorder = async (event: CustomEvent<ItemReorderEventDetail>) => {
     const items = setlistItems.slice();
     const from = event.detail.from;
     const to = event.detail.to;
-    // Reorder the item
     items.splice(to, 0, items.splice(from, 1)[0]);
-    // Sort items based on the updated order
     const sortedItems = items.map((item, index) => ({ ...item, order: index + 1 }));
-    // Update the state with the sorted items
     setSetlistItems(sortedItems);
     event.detail.complete();
-    // Wait for the next render to finish before updating the database
     await new Promise(resolve => setTimeout(resolve, 0));
-    // Update the order in the database
     for (let item of sortedItems) {
       await DatabaseService.updateSetlistItemOrder(item.id, item.order);
     }
   };
-  
 
   const handleBitSelection = async (bit: Bit) => {
     await addBitToSetlist(bit);
@@ -127,7 +120,6 @@ const SetlistEdit: React.FC = () => {
     }
     setSetlistItems(updatedSetlistItems);
   };
-  
 
   const totalLength = setlistItems.reduce((total, item) => {
     const correspondingBit = bits.find(bit => bit.id === item.bitID);
@@ -155,7 +147,6 @@ const SetlistEdit: React.FC = () => {
       setSetlist(updatedSetlist); // Update the state
     }
   };
-  
 
   return (
     <IonPage>
@@ -235,7 +226,6 @@ const SetlistEdit: React.FC = () => {
             })}
           </IonReorderGroup>
           </IonList>
-
           <div className='inputRow'>
             <div className='inputWrapper'>
               <div className='customItem inlineTextInput'>
@@ -252,13 +242,10 @@ const SetlistEdit: React.FC = () => {
           <IonButton
             className='addButton inlineTextInput'
             onClick={addPlaintextItem}
-            // Disabled condition here if needed, similar to isLoading or empty check
-            // disabled={isLoading || inputValue.trim() === ''}
           >
             Add
           </IonButton>
           </div>
-
           <IonList>
             <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)} className='addBitListModal'>
               <IonList class='modal-content'>
@@ -282,8 +269,6 @@ const SetlistEdit: React.FC = () => {
             </IonModal>
           </IonList>
         </div>
-
-
         <div className='buttonContainer'>
           <IonButton
             shape='round'
@@ -292,7 +277,6 @@ const SetlistEdit: React.FC = () => {
           >
             Save
           </IonButton>
-
           <IonButton 
             shape='round' 
             className='playButton' 

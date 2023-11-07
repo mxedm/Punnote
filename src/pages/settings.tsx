@@ -8,30 +8,23 @@ import React, { useState, useRef, useEffect } from 'react';
 import { saveAs } from 'file-saver';
 import { Share } from '@capacitor/share';
 
-
 const Settings: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [restoreStatus, setRestoreStatus] = useState<string | null>(null); 
-
-
-  // For statistics:
-
   const [setlistCount, setSetlistCount] = useState<number>(0);
   const [bitCount, setBitCount] = useState<number>(0);
   const [showCount, setShowCount] = useState<number>(0);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const setlists = await DatabaseService.getSetlists(); 
       const bits = await DatabaseService.getBits(); 
       const shows = await DatabaseService.getShows(); 
-
       setSetlistCount(setlists.length);
       setBitCount(bits.length);
       setShowCount(shows.length);
     };
-
     fetchData();
   }, []);
 
@@ -44,14 +37,14 @@ const Settings: React.FC = () => {
         const result = await Filesystem.writeFile({
           path: fileName,
           data: csv,
-          directory: Directory.Cache,  // Use Cache directory for temporary files
+          directory: Directory.Cache,  
           encoding: Encoding.UTF8,
         });
         
         await Share.share({
           title: 'Punnote Backup Backup',
           text: 'Here is the backup of the data.',
-          url: result.uri,  // This is the path to the saved CSV file
+          url: result.uri, 
           dialogTitle: 'Share your backup or save it elsewhere',
         });
   
@@ -120,7 +113,7 @@ const Settings: React.FC = () => {
             >
               {selectedFileName || 'Select File'}
             </IonButton>
-            {/* This is required for the input to work correctly */}
+            {/* This hidden input is required for the input to work correctly */}
             <input
               type='file'
               ref={fileInputRef}

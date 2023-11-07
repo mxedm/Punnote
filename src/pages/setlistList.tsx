@@ -22,7 +22,6 @@ const setlistList: React.FC = () => {
   const [isAddingSetlist, setIsAddingSetlist] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortAscending, setSortAscending] = useState(true);
-
   const history = useHistory();
   const location = useLocation();
 
@@ -109,9 +108,9 @@ const setlistList: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-      <IonToolbar>
-        <IonTitle className='titleText'>Setlists</IonTitle>
-      </IonToolbar>
+        <IonToolbar>
+          <IonTitle className='titleText'>Setlists</IonTitle>
+        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <div className='inputRow'>
@@ -152,7 +151,6 @@ const setlistList: React.FC = () => {
               onClick={sortSetlists}></IonIcon>
           </IonItem>
         </IonItem>
-
         <IonList class='mainList'>
           {sortedSetlists.map(setlist => (
             <IonCard key={setlist.id}>
@@ -183,7 +181,6 @@ const setlistList: React.FC = () => {
             </IonCard>
           ))}
         </IonList>
-
         <IonAlert
             isOpen={showDeleteAlert}
             onDidDismiss={() => setShowDeleteAlert(false)}
@@ -204,7 +201,6 @@ const setlistList: React.FC = () => {
               }
             ]}
           />
-        
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}

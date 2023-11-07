@@ -78,7 +78,6 @@ const bitEdit: React.FC = () => {
     }
     return stars;
   };
-  
 
   return (
     <IonPage>
@@ -104,7 +103,6 @@ const bitEdit: React.FC = () => {
                   />
                 </div>
               </div>
-
               <div className='inputWrapper'>
                 <div className='customItem'>
                   <label className='inputLabel'>Content</label>
@@ -117,7 +115,6 @@ const bitEdit: React.FC = () => {
                   />
                 </div>
               </div>
-
               <div className='inputWrapper'>
                 <div className='customItem'>
                   <label className='inputLabel'>Notes</label>
@@ -130,7 +127,6 @@ const bitEdit: React.FC = () => {
                   />
                 </div>
               </div>
-
               <div className='flexParent'>
                 <div className='inputWrapper halfWidth'>
                   <div className='customItem'>
@@ -153,16 +149,13 @@ const bitEdit: React.FC = () => {
                   </div>
                 </div>
               </div>
-
               <div className='buttonContainer'>
                 <IonButton shape='round' color='success' onClick={updateBit}>Save</IonButton> {/* Save button */}
                 <IonButton shape='round' onClick={() => {
                   setInfoModal(true);
                 }}>Info</IonButton>
-
                 <IonButton shape='round' color='warning' className='hidden' onClick={() => history.push('/bitList')}>Close</IonButton>
               </div>
-
               <IonModal isOpen={infoModal} 
                 className=''>
               <div className='inputWrapper'>
@@ -172,7 +165,6 @@ const bitEdit: React.FC = () => {
                     <p className='infoTextModal'>Created: {created.toLocaleString()}</p>
                     <p className='infoTextModal'>Modified: {modified.toLocaleString()}</p>
                     <p className='infoTextModal'>Edits: {revision}</p>
-
                   <h2>Archive?</h2>
                     <p className='infoTextModal'>This is a toggle for the archive function. 
                       This will remove the item from the main list but will not delete it. Archived
@@ -193,20 +185,14 @@ const bitEdit: React.FC = () => {
                   </IonText>
                 </div>
               </div>
-
               <IonButton shape='round' onClick={() => {
                   setInfoModal(false);
               }}>close</IonButton>
             </IonModal>
-
-
-
-
             </div>
           </>
         )}
         </div>
-
       </IonContent>
     </IonPage>
   );

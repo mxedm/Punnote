@@ -29,7 +29,6 @@ const ShowEdit: React.FC = () => {
   const [revision, setRevision] = useState(0)
   const [showModal, setShowModal] = useState(false);
   const [infoModal, setInfoModal] = useState(false);
-
   const history = useHistory();
 
   useEffect(() => {
@@ -55,8 +54,6 @@ const ShowEdit: React.FC = () => {
         setCreated(fetchedShow.created);
         setModified(fetchedShow.modified);
         setRevision(fetchedShow.revision);
-
-
       }
     };
     fetchShow(); 
@@ -74,7 +71,6 @@ const ShowEdit: React.FC = () => {
     };
     fetchData();
   }, [id]);
-  
 
   const renderRating = () => {
     let stars = [];
@@ -120,7 +116,6 @@ const ShowEdit: React.FC = () => {
   const goToSetlistPlay = () => {
     history.push(`/SetlistPlay/${setlistID}`);
   };
-
 
   return (
     <IonPage>
@@ -181,7 +176,6 @@ const ShowEdit: React.FC = () => {
                 </IonButton>
               </div>
             </div>
-
             <div className='inputWrapper'>
               <div className='customItem'>
                 <label className='inputLabel'>Venue</label>
@@ -260,7 +254,6 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
             </div>
-
             <div className='flexParent'>
               <div className='inputWrapper inlineTextInput'>
                 <div className='customItem '>
@@ -280,7 +273,6 @@ const ShowEdit: React.FC = () => {
                   </select>
                 </div>
               </div>
-
               <div className='inputWrapper inlineButton'>
                 <div className='customItem '>
                   <IonButton
@@ -295,7 +287,6 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
             </div>
-
             <div className='inputWrapper'>
               <div className='customItem'>
                 <label className='inputLabel'>URL</label>
@@ -308,7 +299,6 @@ const ShowEdit: React.FC = () => {
                 />
               </div>
             </div>
-
             <div className='buttonContainer'>
               <IonButton shape='round' color='success' onClick={updateShow}>Save</IonButton>
               <IonButton shape='round' onClick={() => {
@@ -316,7 +306,6 @@ const ShowEdit: React.FC = () => {
               }}>Info</IonButton>
               <IonButton shape='round' className='hidden' color='warning' onClick={() => history.push('/showList')}>Close</IonButton>
             </div>
-
             <IonModal isOpen={showModal} 
                 className='my-datetime-class'>
               <div className='datePickerModal'>
@@ -332,8 +321,6 @@ const ShowEdit: React.FC = () => {
                 </div>
               </div>
             </IonModal>
-
-
             <IonModal isOpen={infoModal} 
                 className=''>
               <div className='inputWrapper'>
@@ -343,7 +330,6 @@ const ShowEdit: React.FC = () => {
                     <p className='infoTextModal'>Created: {created.toLocaleString()}</p>
                     <p className='infoTextModal'>Modified: {modified.toLocaleString()}</p>
                     <p className='infoTextModal'>Edits: {revision}</p>
-
                   <h2>Archive?</h2>
                   <p className='infoTextModal'>This is a toggle for the archive function. 
                       This will remove the item from the main list but will not delete it. Archived
@@ -364,12 +350,10 @@ const ShowEdit: React.FC = () => {
                   </IonText>
                 </div>
               </div>
-
               <IonButton shape='round' onClick={() => {
                   setInfoModal(false);
               }}>close</IonButton>
             </IonModal>
-
           </div>
           </>
         )}

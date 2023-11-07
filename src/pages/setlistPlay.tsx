@@ -25,11 +25,9 @@ const SetlistPlay: React.FC = () => {
   const contentRef = useRef(null);
 
   const fetchDataFromStorage = async () => {
-    // Fetch your data from storage here, for example, using your fetch functions.
     await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);
   };
 
-  
   useEffect(() => {
     const fetchDataFromStorage = async () => {
       try {
@@ -38,10 +36,7 @@ const SetlistPlay: React.FC = () => {
         console.error('Error fetching data:', error);
       }
     };
-
-    // Call the data fetching function when the component mounts
     fetchDataFromStorage();
-
     return () => {
     };
   }, []);
@@ -53,7 +48,6 @@ const SetlistPlay: React.FC = () => {
       }
     };
   }, []);
-  
   if (itemListRef.current) {
     const height = itemListRef.current.offsetHeight;
   }
@@ -95,30 +89,21 @@ const SetlistPlay: React.FC = () => {
 
   const scrollInterval = useRef<NodeJS.Timeout | null>(null);
 
-
   const startTimer = async () => {
     if (!timer) {
       const newTimer = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
       }, 1000);
       setTimer(newTimer);
-  
-      // Only proceed with auto-scrolling if autoScroll is true
       if (autoScroll) {
         if (contentRef.current && setlist?.goalLength) {
           const goalLengthInSeconds = Number(setlist.goalLength) * 60;
           const numberOfIntervals = 100;
           const timeInterval = goalLengthInSeconds / numberOfIntervals;
-  
-          // Await the scroll element
           const scrollElement = await contentRef.current.getScrollElement();
-  
           const distanceToBottom = scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight;
           const scrollStep = distanceToBottom / numberOfIntervals;
-  
           let currentInterval = 0;
-  
-          // Store the interval ID in the ref
           scrollInterval.current = setInterval(() => {
             if (currentInterval >= numberOfIntervals) {
               clearInterval(scrollInterval.current!);
@@ -129,12 +114,9 @@ const SetlistPlay: React.FC = () => {
           }, timeInterval * 1000);
         }
       }
-  
     } else {
       clearInterval(timer);
       setTimer(null);
-  
-      // Clear the scrolling interval if it exists
       if (scrollInterval.current) {
         clearInterval(scrollInterval.current);
         scrollInterval.current = null;
@@ -169,7 +151,6 @@ const SetlistPlay: React.FC = () => {
   function formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    //console.log(seconds);
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 

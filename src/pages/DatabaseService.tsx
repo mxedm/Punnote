@@ -67,7 +67,6 @@ class DatabaseService {
     this.refreshListeners = this.refreshListeners.filter(l => l !== listener);
   }
 
-
   updateBits = async (bits: Bit[]): Promise<void> => {
     await StorageService.setObject('bits', bits);
   };
@@ -117,7 +116,6 @@ class DatabaseService {
   }
 
   async deleteALL() {
-    //force the data to refresh
     await StorageService.setObject('bits', []);
     await StorageService.setObject('setlists', []);
     await StorageService.setObject('setlistItems', []);
@@ -127,7 +125,6 @@ class DatabaseService {
   async addBit(bit: Bit): Promise<void> {
     const bits = await this.getBits();
     const existingBitIndex = bits.findIndex(b => b.id === bit.id);
-  
     if (existingBitIndex !== -1) {
       bits[existingBitIndex] = bit; 
     } else {

@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 
   const lines = [
     'Aww man, that is bogus!',
-    'Oh, make sure you backup your jokes!',
+    'Oh, make sure you back up your jokes!',
     'OUCH! WHAT DO YOU DO?',
     'Oh no! My heel. -- Achilles',
     'This app will save lives.',
@@ -24,10 +24,6 @@ const Home: React.FC = () => {
     'Remember. Be safe out there.',
     'UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START'
   ];
-
-  //const lineCount = Number(lines.length) + 1;
-  //const newLineToAdd = 'There are ' + lineCount + ' lines in this array.'
-  //lines.push(newLineToAdd);
 
   const [loading, setLoading] = useState(true);
   const [randomLine, setRandomLine] = useState('');

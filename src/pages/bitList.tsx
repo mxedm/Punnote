@@ -21,11 +21,10 @@ const bitList: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [sortAscending, setSortAscending] = useState(true);
-  const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); // 300ms delay
-
+  const debouncedSetSearchTerm = debounce((value: React.SetStateAction<string>) => setSearchTerm(value), 300); 
   const history = useHistory();
   const location = useLocation();
-  
+
   useEffect(() => {
     const fetchBits = async () => {
       const fetchedBits = await DatabaseService.getBits();
@@ -44,8 +43,8 @@ const bitList: React.FC = () => {
   });
   
   const sortBits = () => {
-    const currentSortOrder = sortAscending; // Capture the current sort order before changing it
-    setSortAscending(!currentSortOrder); // Toggle the state for the next click
+    const currentSortOrder = sortAscending; 
+    setSortAscending(!currentSortOrder); 
     const sortedBits = [...filteredBits].sort((a, b) => {
       if (currentSortOrder) {
         return a.title.localeCompare(b.title);
@@ -55,7 +54,6 @@ const bitList: React.FC = () => {
     });
     setBits(sortedBits);
   };
-  
 
   const deleteBit = async (id: number) => {
     await DatabaseService.removeBit(id);
@@ -63,10 +61,8 @@ const bitList: React.FC = () => {
     setBitToDelete(null);
   };
 
-
   const handleAddBit = (title: string) => {
-     if (isAdding) return;
-  
+    if (isAdding) return;
     setIsAdding(true);   
     if (title.length === 0) {
       setToastMessage('Please enter a bit title');
@@ -93,15 +89,14 @@ const bitList: React.FC = () => {
       archive: false
     };
     await DatabaseService.addBit(newBit as Bit);
-    setBits(prevBits => [newBit as Bit, ...prevBits]); // Add the new bit to the beginning
-    // setBits(prevBits => [...prevBits, newBit as Bit]);
+    setBits(prevBits => [newBit as Bit, ...prevBits]); 
     setBitTitle('');
   }
 
   const editBit = (id: number) => {
     history.push(`/BitEdit/${id}`);
   };
-  
+
   const formatLength = (length: number) => {
     const minutes = Math.floor(length / 60);
     const seconds = length % 60;
@@ -110,7 +105,6 @@ const bitList: React.FC = () => {
 
   return (
   <IonPage>
-
     <IonHeader>
       <IonToolbar>
         <IonTitle className='titleText'>Bits</IonTitle>
@@ -123,7 +117,6 @@ const bitList: React.FC = () => {
         </IonButtons>
       </IonToolbar>
     </IonHeader>
-
     <IonContent fullscreen>
       <div className='inputRow'>
         <div className='inputWrapper'>
@@ -147,7 +140,6 @@ const bitList: React.FC = () => {
           {isLoading ? <IonIcon icon={timeOutline} /> : 'Add'} 
         </IonButton>
       </div>
-
       <IonItem className='searchBox'>
         <IonInput
           type='text'
@@ -164,7 +156,6 @@ const bitList: React.FC = () => {
           onClick={sortBits}></IonIcon>
         </IonItem>
       </IonItem>
-
       <IonList className='mainList'>
         {filteredBits.map(bit => (
           <IonCard key={bit.id}>
@@ -198,7 +189,6 @@ const bitList: React.FC = () => {
           </IonCard>
         ))}
       </IonList>
-
       <IonAlert
         isOpen={bitToDelete !== null}
         header={'Delete Bit'}
@@ -216,7 +206,6 @@ const bitList: React.FC = () => {
           }
         ]}
       />
-
       <IonToast
         isOpen={bitToast}
         onDidDismiss={() => setBitToast(false)}
