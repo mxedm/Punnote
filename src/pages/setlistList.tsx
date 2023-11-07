@@ -154,7 +154,7 @@ const setlistList: React.FC = () => {
         </IonItem>
 
         <IonList class='mainList'>
-          {setlists.slice().reverse().map(setlist => (
+          {sortedSetlists.map(setlist => (
             <IonCard key={setlist.id}>
               <IonCardHeader>
                 <IonCardTitle>
