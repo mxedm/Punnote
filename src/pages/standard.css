@@ -438,6 +438,10 @@ input[type="number"] {
   }
 
 
+.closeBitListButton{
+    min-height: 40px;
+}
+
   .largeIcon {
     font-size: 20px;
     width: 20px; 

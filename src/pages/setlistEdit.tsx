@@ -259,7 +259,6 @@ const SetlistEdit: React.FC = () => {
           </IonButton>
           </div>
 
-
           <IonList>
             <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)} className='addBitListModal'>
               <IonList class='modal-content'>
@@ -278,9 +277,8 @@ const SetlistEdit: React.FC = () => {
                       );
                     })
                 }
-
               </IonList>
-              <IonButton onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
+              <IonButton className='closeBitListButton' onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
             </IonModal>
           </IonList>
         </div>
