@@ -185,8 +185,8 @@
 
 .timerActive {
     color: yellow;
-  }
-  
+}
+
 .container {
     display: flex;
     flex-direction: column;
