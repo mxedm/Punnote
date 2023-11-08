@@ -33,12 +33,6 @@ const bitEdit: React.FC = () => {
   }, [bit]);
 
   useEffect(() => {
-    autoResizeTextarea(titleRef.current);
-    autoResizeTextarea(contentRef.current);
-    autoResizeTextarea(notesRef.current);
-  }, [title, content, notes]);
-
-  useEffect(() => {
     const fetchBit = async () => {
       const fetchedBits = await DatabaseService.getBits();
       const fetchedBit = fetchedBits.find(bit => bit.id === Number(id));
@@ -57,7 +51,18 @@ const bitEdit: React.FC = () => {
     };
     fetchBit(); 
   }, [id]);
-  
+
+  useEffect(() => {
+    if (titleRef.current) {
+      titleRef.current.rows = calculateRowsBasedOnContentLength(titleRef, 1); 
+    }
+    if (contentRef.current) {
+      contentRef.current.rows = calculateRowsBasedOnContentLength(contentRef, 4);
+    }
+    if (notesRef.current) {
+      notesRef.current.rows = calculateRowsBasedOnContentLength(notesRef, 1); 
+    }
+  }, [title, content, notes]); 
 
   const updateBit = async () => {
     if (bit) {
@@ -89,16 +94,27 @@ const bitEdit: React.FC = () => {
     return stars;
   };
 
-  const autoGrow = (event) => {
-    event.target.style.height = '35px'; // temporarily shrink to get the scroll height
-    event.target.style.height = event.target.scrollHeight + 'px';
+  const calculateCharsPerLine = (element) => {
+    if (!element) return 80; // Provide a default value
+  
+    const style = window.getComputedStyle(element);
+    const fontSize = parseFloat(style.fontSize);
+    const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    const availableWidth = element.offsetWidth - padding;
+    const charWidth = fontSize * 0.55; // Estimate the width of one character
+    const charsPerLine = Math.floor(availableWidth / charWidth);
+    return charsPerLine;
   };
-
-  const autoResizeTextarea = (textarea: HTMLTextAreaElement | null) => {
-    if (textarea) {
-      textarea.style.height = 'auto'; // Reset height to recalculate
-      textarea.style.height = textarea.scrollHeight + 'px'; // Set new height
+  
+  // Then, use this function within calculateRowsBasedOnContentLength
+  const calculateRowsBasedOnContentLength = (textareaRef, minRows = 4) => {
+    if (textareaRef.current) {
+      const charsPerLine = calculateCharsPerLine(textareaRef.current);
+      const textLength = textareaRef.current.value.length;
+      const numberOfLines = Math.ceil(textLength / charsPerLine);
+      return Math.max(numberOfLines, minRows); // Add one extra row for padding
     }
+    return minRows; // Default if the textarea isn't rendered yet
   };
 
   return (
@@ -122,9 +138,9 @@ const bitEdit: React.FC = () => {
                     className='inputTextarea'
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    onInput={autoGrow}
                     style={{ resize: 'none' }} // Prevent manual resizing
-                  />
+                    rows={titleRef.current ? calculateRowsBasedOnContentLength(titleRef, 1) : 1}
+                    />
                 </div>
               </div>
               <div className='inputWrapper'>
@@ -136,8 +152,8 @@ const bitEdit: React.FC = () => {
                     className='inputTextarea'
                     value={content}
                     onChange={e => setContent(e.target.value)}
-                    onInput={autoGrow}
-                  />
+                    rows={contentRef.current ? calculateRowsBasedOnContentLength(contentRef, 4) : 4}
+                    />
                 </div>
               </div>
               <div className='inputWrapper'>
@@ -149,8 +165,8 @@ const bitEdit: React.FC = () => {
                     className='inputTextarea'
                     value={notes}
                     onChange={e => setNotes(e.target.value)}
-                    onInput={autoGrow}
                     style={{ resize: 'none' }} // Prevent manual resizing
+                    rows={notesRef.current ? calculateRowsBasedOnContentLength(notesRef, 1) : 1}
                   />
                 </div>
               </div>

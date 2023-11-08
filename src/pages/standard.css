@@ -14,12 +14,10 @@
 .inputTextarea{
     padding-left: 1% !important;
     padding-right: 50px; 
-    padding-top: 2% !important;
+    padding-top: 1% !important;
     padding-bottom: 8px;
     min-height: 39px;
-    height: 39px;
     resize: none;
-    overflow: visible;
     order: 2;
 }
 
@@ -356,6 +354,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
   text-align: right;
