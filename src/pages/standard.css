@@ -231,12 +231,12 @@
   }
 
 .homeSplashtext {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: normal;
     border: none !important;
-    text-align: center;
+    text-align: left;
     margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    padding: 0 0 1.5% 0;
 }
 
 .floating-button {

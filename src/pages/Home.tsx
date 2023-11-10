@@ -6,32 +6,19 @@ import './Home.css';
 
 const Home: React.FC = () => {
 
-  const lines = [
-    'Aww man, that is bogus!',
-    'Oh, make sure you back up your jokes!',
-    'OUCH! WHAT DO YOU DO?',
-    'Oh no! My heel. -- Achilles',
-    'This app will save lives.',
-    'If you like this app, tell your boss to I want a comedy writing job. Works best when you work in a bank.',
-    'There\'s only one rule that I know of, babies-"God damn it, you\'ve got to be kind."―Kurt Vonnegut',
-    'Nini. I love you.',
-    'You\'re funny.',
-    'Trust women.',
-    'Can I have a comedy writing job?',
-    'Did you remember to backup your data?',
-    'No. I won\'t poop your pants.',
-    'Make jokes!',
-    'Remember. Be safe out there.',
-    'UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A B A SELECT START'
-  ];
-
   const [loading, setLoading] = useState(true);
   const [randomLine, setRandomLine] = useState('');
 
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * lines.length);
-    setRandomLine(lines[randomIndex]);
-  }, []);
+  const lines = [
+    'Oh, make sure you back up your jokes!',
+    'OUCH! WHAT DO YOU DO?',
+    'If you like this app, tell your boss to I want a comedy writing job. Works best when you work in a bank.',
+    'There\'s only one rule that I know of, babies-"God damn it, you\'ve got to be kind."<br />--Kurt Vonnegut',
+    'No. I won\'t poop your pants.',
+    'Make jokes!',
+    'Be safe out there.',
+    'YOUR JOKE HERE!<br /> <a href="http://www.patreon.com/queer_coded/">patreon.com/queer_coded</a>'
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +35,28 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
+  function sanitizeHtml(html) {
+    // First, remove all tags except <a> and <br>
+    html = html.replace(/<(?!\/?a(?=>|\s.*>))\/?.*?>/gims, '');
+  
+    // Then remove any attributes from <a> tags except for href
+    html = html.replace(/<a\s+([^>]*?)(href="[^"]+")[^>]*?>/gims, '<a $2>');
+  
+    // Finally, make sure <br> tags are self-closed to be XHTML compliant
+    html = html.replace(/<br\s*([^\/>]*)(?<!\/)>/gims, '<br $1/>');
+  
+    return html;
+  }
+  
+  // Usage
+  useEffect(() => {
+    const sanitizedLines = lines.map(line => sanitizeHtml(line));
+    const randomIndex = Math.floor(Math.random() * sanitizedLines.length);
+    setRandomLine(sanitizedLines[randomIndex]);
+  }, []);
+  
+  
+
   return (
     <IonPage>
       <IonHeader>
@@ -59,15 +68,14 @@ const Home: React.FC = () => {
         <IonHeader>
         </IonHeader>
         <IonItem className='loader' color='black'>
-            <>
-            <div>
+            <div className='homeSplashtext'>
               {loading ? (
                 <IonSpinner name='lines'></IonSpinner>
               ) : (
-                <span className='homeSplashtext'>{randomLine}</span>
+                <div className='homeSplashtext' dangerouslySetInnerHTML={{ __html: randomLine }} />
               )}
             </div>
-          </>
+          
         </IonItem>
       </IonContent>
     </IonPage>
