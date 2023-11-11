@@ -38,24 +38,20 @@ const Home: React.FC = () => {
   function sanitizeHtml(html) {
     // First, remove all tags except <a> and <br>
     html = html.replace(/<(?!\/?a(?=>|\s.*>))\/?.*?>/gims, '');
-  
     // Then remove any attributes from <a> tags except for href
     html = html.replace(/<a\s+([^>]*?)(href="[^"]+")[^>]*?>/gims, '<a $2>');
-  
     // Finally, make sure <br> tags are self-closed to be XHTML compliant
     html = html.replace(/<br\s*([^\/>]*)(?<!\/)>/gims, '<br $1/>');
-  
     return html;
   }
-  
+
   // Usage
   useEffect(() => {
     const sanitizedLines = lines.map(line => sanitizeHtml(line));
     const randomIndex = Math.floor(Math.random() * sanitizedLines.length);
     setRandomLine(sanitizedLines[randomIndex]);
   }, []);
-  
-  
+
 
   return (
     <IonPage>
@@ -75,7 +71,6 @@ const Home: React.FC = () => {
                 <div className='homeSplashtext' dangerouslySetInnerHTML={{ __html: randomLine }} />
               )}
             </div>
-          
         </IonItem>
       </IonContent>
     </IonPage>
