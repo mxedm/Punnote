@@ -30,10 +30,16 @@ const Settings: React.FC = () => {
 
   const downloadBackup = async () => {
     const csv = await DatabaseService.exportDataToCSV();
+    
+    // Get current date and format it
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0]; // Formats to 'YYYY-MM-DD'
+  
+    const fileName = `${formattedDate}--Punnote Backup.csv`;
+  
     if (window.Capacitor && window.Capacitor.isNative) {
       // Native device
       try {
-        const fileName = 'backup.csv';
         const result = await Filesystem.writeFile({
           path: fileName,
           data: csv,
@@ -42,21 +48,25 @@ const Settings: React.FC = () => {
         });
         
         await Share.share({
-          title: 'Punnote Backup Backup',
+          title: fileName,
           text: 'Here is the backup of the data.',
           url: result.uri, 
           dialogTitle: 'Share your backup or save it elsewhere',
         });
-  
       } catch (e) {
-        alert(`Unable to complete backup: ${e.message}`);
+        if (e instanceof Error) {
+          alert(`Unable to complete backup: ${e.message}`);
+        } else {
+          alert(`Unable to complete backup: Unknown error occurred`);
+        }
       }
     } else {
       // Web browser
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-      saveAs(blob, 'backup.csv');
+      saveAs(blob, fileName);
     }
   };
+  
 
   const handleRestore = async () => {
     const file = fileInputRef.current?.files?.[0];
