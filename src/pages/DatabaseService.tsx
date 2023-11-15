@@ -99,18 +99,20 @@ class DatabaseService {
   };
 
   restoreDataFromCSV = async (csv: string): Promise<void> => {
-    const parsedData = Papa.parse(csv, { header: true });
+    const parsedData = Papa.parse(csv, { header: true, dynamicTyping: true });
+  
     const bits = parsedData.data.filter((item: any) => item.type === 'bit');
     const setlists = parsedData.data.filter((item: any) => item.type === 'setlist');
     const setlistItems = parsedData.data.filter((item: any) => item.type === 'setlistItem');
     const shows = parsedData.data.filter((item: any) => item.type === 'show');
-
+  
     await this.updateBits(bits);
     await this.updateSetlists(setlists);
     await this.updateSetlistItems(setlistItems);
     await this.updateShows(shows);
   };
-
+  
+  
   async refresh() {
     this.refreshListeners.forEach(listener => listener());
   }
