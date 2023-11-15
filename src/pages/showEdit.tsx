@@ -136,7 +136,7 @@ const ShowEdit: React.FC = () => {
                   aria-label='Show Title'
                   className='inputText'
                   type='text'
-                  value={title}
+                  value={title !== null ? title : ''}
                   onChange={e => setTitle(e.target.value)}
                 />
               </div>
@@ -183,7 +183,7 @@ const ShowEdit: React.FC = () => {
                   aria-label='Show Venue'
                   className='inputText'
                   type='text'
-                  value={venue}
+                  value={venue !== null ? venue : ''}
                   onChange={e => setVenue(e.target.value)}
                 />
               </div>
@@ -195,7 +195,7 @@ const ShowEdit: React.FC = () => {
                   aria-label='Show Notes'
                   className='inputText'
                   type='text'
-                  value={notes}
+                  value={notes !== null ? notes : ''}
                   onChange={e => setNotes(e.target.value)}
                 />
               </div>

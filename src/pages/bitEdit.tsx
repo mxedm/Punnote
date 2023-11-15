@@ -136,7 +136,7 @@ const bitEdit: React.FC = () => {
                     ref={titleRef}
                     aria-label='Title'
                     className='inputTextarea'
-                    value={title}
+                    value={title !== null ? title : ''}
                     onChange={e => setTitle(e.target.value)}
                     style={{ resize: 'none' }} // Prevent manual resizing
                     rows={titleRef.current ? calculateRowsBasedOnContentLength(titleRef, 1) : 1}
@@ -150,7 +150,7 @@ const bitEdit: React.FC = () => {
                     ref={contentRef}
                     aria-label='Content'
                     className='inputTextarea'
-                    value={content}
+                    value={content !== null ? content : ''}
                     onChange={e => setContent(e.target.value)}
                     rows={contentRef.current ? calculateRowsBasedOnContentLength(contentRef, 4) : 4}
                     />
@@ -163,7 +163,7 @@ const bitEdit: React.FC = () => {
                     ref={notesRef}
                     aria-label='Bit Notes'
                     className='inputTextarea'
-                    value={notes}
+                    value={notes !== null ? notes : ''}
                     onChange={e => setNotes(e.target.value)}
                     style={{ resize: 'none' }} // Prevent manual resizing
                     rows={notesRef.current ? calculateRowsBasedOnContentLength(notesRef, 1) : 1}

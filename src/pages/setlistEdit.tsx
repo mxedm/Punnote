@@ -166,7 +166,7 @@ const SetlistEdit: React.FC = () => {
                   aria-label='Title'
                   className='inputText inputTextListing'
                   type='text'
-                  value={title}
+                  value={title !== null ? title : ''}
                   onChange={e => setTitle(e.target.value)}
                 />
               </div>
