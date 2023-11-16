@@ -88,13 +88,11 @@ class DatabaseService {
     const setlists = await this.getSetlists(); 
     const setlistItems = await this.getSetlistItems();
     const shows = await this.getShows();
-  
-    // Utility function to convert date fields
+
     const convertDate = (date) => {
       return date instanceof Date ? date.toISOString() : date;
     };
-  
-    // Mapping functions
+
     const mapBit = (bit: Bit) => ({
       id: bit.id,
       title: bit.title,
@@ -155,8 +153,6 @@ class DatabaseService {
       ...shows.map(mapShow)
     ];
   
-   // console.log(JSON.stringify(allData, null, 2));
-  
     const csv = Papa.unparse(allData, {
       columns: ["id", "title", "content", "notes", "length", "rating", "archive", 
                 "created", "modified", "revision", "type", "order", "bitID", "plaintext", 
@@ -179,7 +175,6 @@ class DatabaseService {
     await this.updateSetlistItems(setlistItems);
     await this.updateShows(shows);
   };
-  
   
   async refresh() {
     this.refreshListeners.forEach(listener => listener());
