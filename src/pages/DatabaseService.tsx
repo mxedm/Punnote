@@ -88,15 +88,83 @@ class DatabaseService {
     const setlists = await this.getSetlists(); 
     const setlistItems = await this.getSetlistItems();
     const shows = await this.getShows();
+  
+    // Utility function to convert date fields
+    const convertDate = (date) => {
+      return date instanceof Date ? date.toISOString() : date;
+    };
+  
+    // Mapping functions
+    const mapBit = (bit: Bit) => ({
+      id: bit.id,
+      title: bit.title,
+      content: bit.content,
+      notes: bit.notes,
+      length: bit.length,
+      rating: bit.rating,
+      archive: bit.archive,
+      created: convertDate(bit.created),
+      modified: convertDate(bit.modified),
+      revision: bit.revision,
+      type: 'bit'
+    });
+  
+    const mapSetlistItem = (item: SetlistItem) => ({
+      id: item.id,
+      order: item.order,
+      bitID: item.bitID,
+      plaintext: item.plaintext,
+      setlistID: item.setlistID,
+      isPlaintext: item.isPlaintext,
+      type: 'setlistItem'
+    });
+  
+    const mapSetlist = (setlist: Setlist) => ({
+      id: setlist.id,
+      title: setlist.title,
+      goalLength: setlist.goalLength,
+      archive: setlist.archive,
+      created: convertDate(setlist.created),
+      modified: convertDate(setlist.modified),
+      revision: setlist.revision,
+      type: 'setlist'
+    });
+  
+    const mapShow = (show: Show) => ({
+      id: show.id,
+      title: show.title,
+      venue: show.venue,
+      notes: show.notes,
+      showdate: convertDate(show.showdate),
+      setlength: show.setlength,
+      compensation: show.compensation,
+      mediaurl: show.mediaurl,
+      type: 'show',
+      setlistID: show.setlistID,
+      rating: show.rating,
+      archive: show.archive,
+      created: convertDate(show.created),
+      modified: convertDate(show.modified),
+      revision: show.revision
+    });
+  
     const allData = [
-      ...bits.map(item => ({ ...item, type: 'bit' })),
-      ...setlists.map(item => ({ ...item, type: 'setlist' })),
-      ...setlistItems.map(item => ({ ...item, type: 'setlistItem' })),
-      ...shows.map(item => ({ ...item, type: 'show' }))
+      ...bits.map(mapBit),
+      ...setlists.map(mapSetlist),
+      ...setlistItems.map(mapSetlistItem),
+      ...shows.map(mapShow)
     ];
-    const csv = Papa.unparse(allData);
+  
+   // console.log(JSON.stringify(allData, null, 2));
+  
+    const csv = Papa.unparse(allData, {
+      columns: ["id", "title", "content", "notes", "length", "rating", "archive", 
+                "created", "modified", "revision", "type", "order", "bitID", "plaintext", 
+                "setlistID", "isPlaintext", "goalLength", "venue", "showdate", 
+                "setlength", "compensation", "mediaurl", "type"]
+    });
     return csv;
-  };
+  };  
 
   restoreDataFromCSV = async (csv: string): Promise<void> => {
     const parsedData = Papa.parse(csv, { header: true, dynamicTyping: true });
