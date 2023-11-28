@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-          IonContent, IonFabButton, useIonViewWillLeave, IonIcon, 
-          IonHeader, useIonViewWillEnter, IonPage, IonTitle, 
-          IonToolbar, IonItem, IonButtons, IonToggle, IonText } from '@ionic/react';
+import {
+  IonContent, IonFabButton, useIonViewWillLeave, IonIcon,
+  IonHeader, IonPage, IonTitle,
+  IonToolbar, IonItem, IonButtons, IonToggle, IonText
+} from '@ionic/react';
 import { play, pause, refresh } from 'ionicons/icons';
 import './setlistPlay.css';
 import './standard.css';
@@ -20,49 +21,27 @@ const SetlistPlay: React.FC = () => {
   const [autoScroll, setAutoScroll] = useState(true);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [playing, setPlaying] = useState(false);
-  const interval = useRef<NodeJS.Timeout | null>(null);
   const itemListRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef(null);
 
-  const fetchDataFromStorage = async () => {
-    await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);
+  const fetchData = async (currentId: string) => {
+    try {
+      const fetchedBits = await DatabaseService.getBits();
+      const allSetlistItems = await DatabaseService.getSetlistItems();
+      const fetchedSetlist = await DatabaseService.getSetlist(Number(currentId));
+      const filteredItems = allSetlistItems.filter(item => item.setlistID === Number(currentId));
+      setBits(fetchedBits);
+      setSetlistItems(filteredItems);
+      setSetlist(fetchedSetlist);
+      resetTimer();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   useEffect(() => {
-    const fetchDataFromStorage = async () => {
-      try {
-        await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchDataFromStorage();
-    return () => {
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (interval.current) {
-        clearInterval(interval.current);
-      }
-    };
-  }, []);
-  if (itemListRef.current) {
-    const height = itemListRef.current.offsetHeight;
-  }
-
-  useEffect(() => {
-    return () => {
-      if(timer !== null) {
-        clearInterval(timer);
-      }
-    };
-  }, [timer]);
-
-  useIonViewWillEnter(async () => {  
-    await Promise.all([fetchBits(), fetchSetlistItems(), fetchSetlist()]);  
-  });
+    fetchData(id);
+  }, [id]);
 
   useIonViewWillLeave(() => {
     allowSleep();
@@ -122,31 +101,9 @@ const SetlistPlay: React.FC = () => {
         scrollInterval.current = null;
       }
     }
-  
     keepAwake();
     setPlaying(!timer);
   };  
-
-  const fetchBits = async () => {
-    const fetchedBits = await DatabaseService.getBits();
-    setBits(fetchedBits);
-  };
-
-  const fetchSetlist = async () => {
-    const fetchedSetlist = await DatabaseService.getSetlist(Number(id));
-    setSetlist(fetchedSetlist);
-  };
-
-  const fetchSetlistItems = async () => {
-    const allSetlistItems = await DatabaseService.getSetlistItems();
-    const filteredItems = allSetlistItems.filter(item => item.setlistID === Number(id));
-    setSetlistItems(filteredItems);
-  };
-
-  const totalLength = setlistItems.reduce((total, item) => {
-    const correspondingBit = bits.find(bit => bit.id === item.bitId);
-    return total + (Number(correspondingBit?.length) || 0);
-  }, 0);
 
   function formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60);
@@ -159,7 +116,7 @@ const SetlistPlay: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-              Play: {setlist ? setlist.title : 'Loading...'}
+              Play: {setlist ? setlist.title : 'Loading...'} ({id})
           </IonTitle>
           <IonButtons slot='end' className='toggleArchiveButton'>
           <span className='archiveLabel'>Auto-Scroll</span>
