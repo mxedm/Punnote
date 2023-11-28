@@ -175,8 +175,8 @@ const SetlistPlay: React.FC = () => {
             {setlistItems
               .sort((a, b) => a.order - b.order)
               .map((item, index) => (
-                <IonItem><IonText key={item.id} color={item.isPlaintext ? 'tertiary' : 'dark'}>
-                  <h2>
+                <IonItem key={item.id}>  {/* Move key here */}
+                  <IonText color={item.isPlaintext ? 'tertiary' : 'dark'}> <h2>
                     { item.order }:&nbsp; 
                     {item.isPlaintext ? 
                       item.plaintext 
