@@ -33,4 +33,6 @@ yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
-????-??-??--Punnote Backup*
+
+# To prevent accidentally comitting our backups
+*????-??-??--Punnote Backup*
