@@ -116,7 +116,7 @@ const SetlistPlay: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-              Play: {setlist ? setlist.title : 'Loading...'} ({id})
+              Play: {setlist ? setlist.title : 'Loading...'}
           </IonTitle>
           <IonButtons slot='end' className='toggleArchiveButton'>
           <span className='archiveLabel'>Auto-Scroll</span>
