@@ -30,11 +30,8 @@ const Settings: React.FC = () => {
 
   const downloadBackup = async () => {
     const csv = await DatabaseService.exportDataToCSV();
-    
-    // Get current date and format it
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0]; // Formats to 'YYYY-MM-DD'
-  
     const fileName = `${formattedDate}--Punnote Backup.csv`;
   
     if (window.Capacitor && window.Capacitor.isNative) {
