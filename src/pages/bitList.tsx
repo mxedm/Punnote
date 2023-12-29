@@ -175,14 +175,14 @@ const bitList: React.FC = () => {
                   color='primary'
                   onClick={() => editBit(bit.id)}
                 >
-                edit
+                Edit
                 </IonButton>
                 <IonButton
                   className=''
                   color='danger'
                   onClick={() => setBitToDelete(bit.id)} 
                 >
-                delete
+                Delete
                 </IonButton>
               </div>
             </IonCardContent>

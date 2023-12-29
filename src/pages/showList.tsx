@@ -179,14 +179,14 @@ const showList: React.FC = () => {
                     slot=''
                     onClick={() => editShow(show.id)}
                   >
-                    edit
+                    Edit
                   </IonButton>
                   <IonButton 
                       className=''
                       color='danger'
                       onClick={() => setShowToDelete(show.id)} 
                       >
-                      delete
+                      Delete
                     </IonButton>                
                 </div>
               </IonCardContent>
