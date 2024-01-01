@@ -12,7 +12,6 @@ const Home: React.FC = () => {
   const lines = [
     'Oh, make sure you back up your jokes!',
     'OUCH! WHAT DO YOU DO?',
-    'If you like this app, tell your boss to I want a comedy writing job. Works best when you work in a bank.',
     'There\'s only one rule that I know of, babies-"God damn it, you\'ve got to be kind."<br />--Kurt Vonnegut',
     'No. I won\'t poop your pants.',
     'Make jokes!',
