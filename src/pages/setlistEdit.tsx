@@ -275,7 +275,7 @@ const SetlistEdit: React.FC = () => {
             onClick={updateSetlist}
             slot='start'
           >
-            Save
+            save
           </IonButton>
           <IonButton 
             shape='round' 
@@ -292,7 +292,7 @@ const SetlistEdit: React.FC = () => {
             disabled={bits.every(bit => setlistItems.some(item => item.bitID === bit.id))}
             onClick={() => setShowBitList(!showBitList)}
           >
-            Add Joke
+            add joke
           </IonButton>
         </div>
           <p className='ion-text-center'>(List changes are automatically saved.)</p>

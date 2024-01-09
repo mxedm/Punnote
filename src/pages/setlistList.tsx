@@ -166,14 +166,14 @@ const setlistList: React.FC = () => {
                   slot='end'
                   onClick={() => editSetlist(setlist.id)}
                 >
-                  Edit
+                  edit
                 </IonButton>
                 <IonButton 
                   className=''
                   color='danger'
                   onClick={() => deleteSetlist(setlist.id)} 
                   >
-                  Delete
+                  delete
                 </IonButton>
                 </div>
               </IonCardContent>
