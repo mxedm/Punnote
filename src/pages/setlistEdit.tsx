@@ -243,7 +243,7 @@ const SetlistEdit: React.FC = () => {
             className='addButton inlineTextInput'
             onClick={addPlaintextItem}
           >
-            Add
+            add
           </IonButton>
           </div>
           <IonList>

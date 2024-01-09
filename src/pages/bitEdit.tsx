@@ -193,10 +193,10 @@ const bitEdit: React.FC = () => {
                 </div>
               </div>
               <div className='buttonContainer'>
-                <IonButton shape='round' color='success' onClick={updateBit}>Save</IonButton> {/* Save button */}
+                <IonButton shape='round' color='success' onClick={updateBit}>save</IonButton> {/* Save button */}
                 <IonButton shape='round' onClick={() => {
                   setInfoModal(true);
-                }}>Info</IonButton>
+                }}>info</IonButton>
                 <IonButton shape='round' color='warning' className='hidden' onClick={() => history.push('/bitList')}>Close</IonButton>
               </div>
               <IonModal isOpen={infoModal} 

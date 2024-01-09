@@ -158,39 +158,39 @@ const showList: React.FC = () => {
         </IonItem>
         <IonList class='mainList'>
         {filteredShows.map(show => (
-            <IonCard key={show.id}>
-              <IonCardHeader>
-                <IonCardTitle>
-                  {show.title} 
-                  {show.venue ? ` at ${show.venue}` : ''}
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-              <p>When:&nbsp;
-                {
-                  show.showdate && !isNaN(new Date(show.showdate).getTime()) 
-                  ? `${new Date(show.showdate).toLocaleDateString()} ${new Date(show.showdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` 
-                  : 'No data.'
-                }</p>
-                <div className='rowContainer cardContainer'>
-                  <IonButton 
-                    fill='solid'
-                    color='primary'
-                    slot=''
-                    onClick={() => editShow(show.id)}
-                  >
-                    Edit
-                  </IonButton>
-                  <IonButton 
-                      className=''
-                      color='danger'
-                      onClick={() => setShowToDelete(show.id)} 
-                      >
-                      Delete
-                    </IonButton>                
-                </div>
-              </IonCardContent>
-            </IonCard>
+          <IonCard key={show.id}>
+            <IonCardHeader>
+              <IonCardTitle>
+                {show.title} 
+                {show.venue ? ` at ${show.venue}` : ''}
+              </IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
+            <p>When:&nbsp;
+              {
+                show.showdate && !isNaN(new Date(show.showdate).getTime()) 
+                ? `${new Date(show.showdate).toLocaleDateString()} ${new Date(show.showdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` 
+                : 'No data.'
+              }</p>
+              <div className='rowContainer cardContainer'>
+                <IonButton 
+                  fill='solid'
+                  color='primary'
+                  slot=''
+                  onClick={() => editShow(show.id)}
+                >
+                  edit
+                </IonButton>
+                <IonButton 
+                    className=''
+                    color='danger'
+                    onClick={() => setShowToDelete(show.id)} 
+                    >
+                    delete
+                  </IonButton>                
+              </div>
+            </IonCardContent>
+          </IonCard>
           ))}
         </IonList>
         <IonAlert

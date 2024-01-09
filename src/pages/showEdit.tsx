@@ -300,10 +300,10 @@ const ShowEdit: React.FC = () => {
               </div>
             </div>
             <div className='buttonContainer'>
-              <IonButton shape='round' color='success' onClick={updateShow}>Save</IonButton>
+              <IonButton shape='round' color='success' onClick={updateShow}>save</IonButton>
               <IonButton shape='round' onClick={() => {
                   setInfoModal(true);
-              }}>Info</IonButton>
+              }}>info</IonButton>
               <IonButton shape='round' className='hidden' color='warning' onClick={() => history.push('/showList')}>Close</IonButton>
             </div>
             <IonModal isOpen={showModal} 

@@ -173,7 +173,7 @@ const setlistList: React.FC = () => {
                   color='danger'
                   onClick={() => deleteSetlist(setlist.id)} 
                   >
-                  delete
+                  delete 
                 </IonButton>
                 </div>
               </IonCardContent>
