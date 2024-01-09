@@ -131,7 +131,7 @@ const setlistList: React.FC = () => {
             disabled={isLoading || setlistTitle.trim() === ''} 
             onClick={() => handleAddSetlist(setlistTitle)}
           >
-            {isLoading ? <IonIcon icon={ timeOutline } /> : 'Add'} 
+            {isLoading ? <IonIcon icon={ timeOutline } /> : 'add'} 
           </IonButton>
         </div>
         <IonItem className='searchBox'>

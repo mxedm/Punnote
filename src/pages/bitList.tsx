@@ -137,7 +137,7 @@ const bitList: React.FC = () => {
           disabled={isLoading || bitTitle.trim() === ''} 
           onClick={() => handleAddBit(bitTitle)}
         >
-          {isLoading ? <IonIcon icon={timeOutline} /> : 'Add'} 
+          {isLoading ? <IonIcon icon={timeOutline} /> : 'add'} 
         </IonButton>
       </div>
       <IonItem className='searchBox'>

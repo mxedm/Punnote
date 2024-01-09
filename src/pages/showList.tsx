@@ -136,7 +136,7 @@ const showList: React.FC = () => {
             disabled={isLoading || showTitle.trim() === ''} 
             onClick={() => handleAddShow(showTitle)}
           >
-            {isLoading ? <IonIcon icon={ timeOutline } /> : 'Add'}
+            {isLoading ? <IonIcon icon={ timeOutline } /> : 'add'}
           </IonButton>
         </div>
         <IonItem className='searchBox'>
