@@ -187,7 +187,7 @@ const setlistList: React.FC = () => {
             message={'Are you sure you want to delete this setlist?'}
             buttons={[
               {
-                text: 'Cancel',
+                text: 'cancel',
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: () => {
