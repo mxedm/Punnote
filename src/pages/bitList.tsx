@@ -25,6 +25,10 @@ const bitList: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
+  const [sortCycle, setSortCycle] = useState(0); 
+  const [sortField, setSortField] = useState('title'); 
+
+
   useEffect(() => {
     const fetchBits = async () => {
       const fetchedBits = await DatabaseService.getBits();
@@ -41,20 +45,68 @@ const bitList: React.FC = () => {
       (bitArchived ? true : !bit.archive)
     );
   });
-  
+
   const sortBits = () => {
-    const currentSortOrder = sortAscending; 
-    setSortAscending(!currentSortOrder); 
+    let nextSortField = sortField;
+    let nextSortAscending = sortAscending;
+  
+    // Update sort field and order based on the current cycle
+    switch (sortCycle) {
+      case 0:
+        nextSortField = 'title';
+        nextSortAscending = true;
+        break;
+      case 1:
+        nextSortField = 'title';
+        nextSortAscending = false;
+        break;
+      case 2:
+        nextSortField = 'created';
+        nextSortAscending = true;
+        break;
+      case 3:
+        nextSortField = 'created';
+        nextSortAscending = false;
+        break;
+      case 4:
+        nextSortField = 'modified';
+        nextSortAscending = true;
+        break;
+      case 5:
+        nextSortField = 'modified';
+        nextSortAscending = false;
+        break;
+      default:
+        // Reset the cycle
+        nextSortField = 'title';
+        nextSortAscending = true;
+        setSortCycle(0);
+        return;
+    }
+  
     const sortedBits = [...filteredBits].sort((a, b) => {
-      if (currentSortOrder) {
-        return a.title.localeCompare(b.title);
+      const valueA = a[nextSortField];
+      const valueB = b[nextSortField];
+  
+      if (nextSortField === 'title') {
+        return nextSortAscending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
       } else {
-        return b.title.localeCompare(a.title);
+        if (valueA < valueB) {
+          return nextSortAscending ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return nextSortAscending ? 1 : -1;
+        }
+        return 0;
       }
     });
+  
     setBits(sortedBits);
+    setSortField(nextSortField);
+    setSortAscending(nextSortAscending);
+    setSortCycle(sortCycle + 1);
   };
-
+  
   const deleteBit = async (id: number) => {
     await DatabaseService.removeBit(id);
     setBits(bits => bits.filter(bit => bit.id !== id));
@@ -147,7 +199,8 @@ const bitList: React.FC = () => {
           value={searchTerm}
           onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
         />
-        Sort: 
+          Sort ({sortField}, {sortAscending ? 'Ascending' : 'Descending'}):
+
         <IonItem>
         <IonIcon 
           className='sortIcon'
