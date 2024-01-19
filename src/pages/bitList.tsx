@@ -199,14 +199,13 @@ const bitList: React.FC = () => {
           value={searchTerm}
           onIonInput={e => debouncedSetSearchTerm((e.target as unknown as HTMLInputElement).value)} 
         />
-          Sort ({sortField}, {sortAscending ? 'Ascending' : 'Descending'}):
-
+        Sort ({sortField}):
         <IonItem>
-        <IonIcon 
-          className='sortIcon'
-          icon={filterCircleOutline}
-          style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
-          onClick={sortBits}></IonIcon>
+          <IonIcon 
+            className='sortIcon'
+            icon={filterCircleOutline}
+            style={{ transform: sortAscending ? 'none' : 'rotate(180deg)' }}
+            onClick={sortBits}></IonIcon>
         </IonItem>
       </IonItem>
       <IonList className='mainList'>
