@@ -36,3 +36,4 @@ yarn-error.log*
 
 # To prevent accidentally comitting our backups
 *????-??-??--Punnote Backup*
+ios/App/App.xcodeproj/project.pbxproj
