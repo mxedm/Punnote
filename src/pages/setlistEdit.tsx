@@ -268,19 +268,17 @@ const SetlistEdit: React.FC = () => {
                   ))
               }
             </IonList>
-              <IonItem lines="full">
+              <IonItem className='closeBitListButton'>
                 <input
-                  className="native-input sc-ion-input-md"
                   type="text"
                   placeholder="Search bits..."
-                  className="inputText inputTextBigSearch"
+                  className="native-input sc-ion-input-md inputText inputTextBigSearch"
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                 />
               </IonItem>
             <IonButton className='closeBitListButton' onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
           </IonModal>
-
           </IonList>
         </div>
         <div className='buttonContainer'>
