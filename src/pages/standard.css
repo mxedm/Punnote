@@ -35,6 +35,10 @@
     overflow: hidden;
 }
 
+.inputTextBigSearch{
+    width: 80%;
+}
+
 .inputTextRight {
     font-size: 16px;
     padding: 8px;

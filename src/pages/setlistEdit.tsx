@@ -22,6 +22,7 @@ const SetlistEdit: React.FC = () => {
   const [goalLength, setGoalLength] = useState(0)
   const [setlist, setSetlist] = useState<Setlist | null>(null);
   const [presentToast] = useIonToast();
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchBits();
@@ -247,26 +248,39 @@ const SetlistEdit: React.FC = () => {
           </IonButton>
           </div>
           <IonList>
-            <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)} className='addBitListModal'>
-              <IonList class='modal-content'>
-                <IonItem>
-                  <strong>Click to Add:</strong>
-                </IonItem>
-                {
-                  bits
-                    .filter(bit => !setlistItems.some(item => item.bitID === bit.id) && bit.archive !== true)
-                    .sort((a, b) => a.title.localeCompare(b.title)) // This will sort the bits by title
-                    .map((bit) => { // Removed index from here because key should be unique and stable
-                      return (
-                        <IonItem key={bit.id} onClick={() => handleBitSelection(bit)}>
-                          {bit.title}
-                        </IonItem>
-                      );
-                    })
-                }
-              </IonList>
-              <IonButton className='closeBitListButton' onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
-            </IonModal>
+          <IonModal isOpen={showBitList} onDidDismiss={() => setShowBitList(false)} className='addBitListModal'>
+            <IonList class='modal-content'>
+              <IonItem lines="full">
+                <h4>Add Bit</h4>
+              </IonItem>
+              {
+                bits
+                  .filter(bit => 
+                    bit.title.toLowerCase().includes(searchQuery.toLowerCase()) && 
+                    !setlistItems.some(item => item.bitID === bit.id) && 
+                    bit.archive !== true
+                  )
+                  .sort((a, b) => a.title.localeCompare(b.title))
+                  .map((bit) => (
+                    <IonItem key={bit.id} onClick={() => handleBitSelection(bit)}>
+                      {bit.title}
+                    </IonItem>
+                  ))
+              }
+            </IonList>
+              <IonItem lines="full">
+                <input
+                  className="native-input sc-ion-input-md"
+                  type="text"
+                  placeholder="Search bits..."
+                  className="inputText inputTextBigSearch"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                />
+              </IonItem>
+            <IonButton className='closeBitListButton' onClick={() => setShowBitList(false)}>Close Bit List</IonButton>
+          </IonModal>
+
           </IonList>
         </div>
         <div className='buttonContainer'>
