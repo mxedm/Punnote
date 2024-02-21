@@ -11,7 +11,7 @@ import { Share } from '@capacitor/share';
 const Settings: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
-  const [restoreStatus, setRestoreStatus] = useState<string | null>(null); 
+  const [restoreStatus, setRestoreStatus] = useState<string | null>(null);
   const [setlistCount, setSetlistCount] = useState<number>(0);
   const [bitCount, setBitCount] = useState<number>(0);
   const [showCount, setShowCount] = useState<number>(0);
@@ -40,7 +40,7 @@ const Settings: React.FC = () => {
         const result = await Filesystem.writeFile({
           path: fileName,
           data: csv,
-          directory: Directory.Cache,  
+          directory: Directory.Documents,
           encoding: Encoding.UTF8,
         });
         
@@ -126,7 +126,11 @@ const Settings: React.FC = () => {
               ref={fileInputRef}
               className='hidden'
               onChange={handleFileChange}
+              accept='.csv' // Accept only CSV files
+              style={{ display: 'none' }} // Ensure the input is not visible
             />
+
+
             <IonButton 
               onClick={handleRestore} 
               className='settingsButtons'
